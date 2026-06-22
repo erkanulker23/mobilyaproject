@@ -1,6 +1,7 @@
 @extends('frontend.layout')
 
-@section('title', ($active ? $pick($active->tr, $active->en) : 'Koleksiyon') . ' — AWA Mobilya')
+@section('title', ($active ? ($pick($active->seo_title_tr, $active->seo_title_en) ?: $pick($active->tr, $active->en)) : 'Koleksiyon') . ' — AWA Mobilya')
+@if($active)@section('description', \Illuminate\Support\Str::limit(strip_tags($pick($active->seo_desc_tr, $active->seo_desc_en) ?: $pick($active->d_tr, $active->d_en)), 155))@endif
 
 @section('content')
 <div class="page">

@@ -26,6 +26,7 @@ class AdminPanelSmokeTest extends TestCase
             'admin/leads', 'admin/leads/create',
             'admin/subscribers', 'admin/subscribers/create',
             'admin/menu-items', 'admin/menu-items/create',
+            'admin/faqs', 'admin/faqs/create',
             'admin/manage-general', 'admin/manage-seo', 'admin/manage-email', 'admin/manage-homepage',
         ];
 

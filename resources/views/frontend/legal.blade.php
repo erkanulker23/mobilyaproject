@@ -1,6 +1,7 @@
 @extends('frontend.layout')
 
-@section('title', $pick($page->t_tr, $page->t_en) . ' — AWA Mobilya')
+@section('title', ($pick($page->seo_title_tr, $page->seo_title_en) ?: $pick($page->t_tr, $page->t_en)) . ' — AWA Mobilya')
+@if($pick($page->seo_desc_tr, $page->seo_desc_en))@section('description', strip_tags($pick($page->seo_desc_tr, $page->seo_desc_en)))@endif
 
 @php
     $body = collect(preg_split('/\r?\n/', (string) $pick($page->b_tr, $page->b_en)))->map(fn ($p) => trim($p))->filter();

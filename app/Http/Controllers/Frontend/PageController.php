@@ -100,7 +100,24 @@ class PageController extends FrontendController
     {
         $this->boot();
 
-        return view('frontend.faq');
+        $faqs = \App\Models\Faq::where('is_active', true)->orderBy('sort')->get();
+
+        return view('frontend.faq', compact('faqs'));
+    }
+
+    public function search(Request $request)
+    {
+        $this->boot();
+
+        $q = trim((string) $request->get('q', ''));
+        $results = collect();
+        if ($q !== '') {
+            $results = Product::with('category')
+                ->where(fn ($w) => $w->where('tr', 'like', "%$q%")->orWhere('en', 'like', "%$q%"))
+                ->orderBy('sort')->get();
+        }
+
+        return view('frontend.search', compact('q', 'results'));
     }
 
     public function legal(string $slug)

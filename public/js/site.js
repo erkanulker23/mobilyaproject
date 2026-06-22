@@ -59,6 +59,38 @@
     });
   }
 
+  /* Çerez banner */
+  var cookie = document.querySelector('[data-cookie]');
+  if (cookie) {
+    var seen = null;
+    try { seen = localStorage.getItem('awa_cookie'); } catch (e) {}
+    if (!seen) cookie.hidden = false;
+    var dismiss = function (val) {
+      try { localStorage.setItem('awa_cookie', val); } catch (e) {}
+      cookie.hidden = true;
+    };
+    var acc = cookie.querySelector('[data-cookie-accept]');
+    var rej = cookie.querySelector('[data-cookie-reject]');
+    if (acc) acc.addEventListener('click', function () { dismiss('accepted'); });
+    if (rej) rej.addEventListener('click', function () { dismiss('rejected'); });
+  }
+
+  /* Lightbox (görsel büyütme) */
+  var lb = document.querySelector('[data-lightbox]');
+  if (lb) {
+    var lbImg = lb.querySelector('[data-lightbox-img]');
+    var lbClose = lb.querySelector('[data-lightbox-close]');
+    var openLb = function (src, alt) { lbImg.src = src; lbImg.alt = alt || ''; lb.hidden = false; document.body.style.overflow = 'hidden'; };
+    var closeLb = function () { lb.hidden = true; lbImg.src = ''; document.body.style.overflow = ''; };
+    var mainImg = document.querySelector('[data-gallery-main]');
+    if (mainImg && mainImg.tagName === 'IMG') {
+      mainImg.addEventListener('click', function () { openLb(mainImg.src, mainImg.alt); });
+    }
+    if (lbClose) lbClose.addEventListener('click', closeLb);
+    lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) closeLb(); });
+  }
+
   /* Reveal on scroll */
   var reveals = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && reveals.length) {

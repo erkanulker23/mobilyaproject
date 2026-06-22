@@ -1,7 +1,8 @@
 @extends('frontend.layout')
 
-@section('title', $pick($article->tr, $article->en) . ' — AWA Mobilya')
-@section('description', \Illuminate\Support\Str::limit(strip_tags($pick($article->ex_tr, $article->ex_en)), 155))
+@section('title', ($pick($article->seo_title_tr, $article->seo_title_en) ?: $pick($article->tr, $article->en)) . ' — AWA Mobilya')
+@section('description', \Illuminate\Support\Str::limit(strip_tags($pick($article->seo_desc_tr, $article->seo_desc_en) ?: $pick($article->ex_tr, $article->ex_en)), 155))
+@if($article->img)@section('og_image', asset($article->img))@endif
 
 @php
     $body = collect(preg_split('/\r?\n/', (string) $pick($article->body_tr, $article->body_en)))->map(fn ($p) => trim($p))->filter();

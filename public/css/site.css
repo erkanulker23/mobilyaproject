@@ -327,3 +327,20 @@ details[open] .accordion__icon { transform: rotate(45deg); }
 
 /* ===== Ürün galeri ana görseli: tam görünür (kırpılmaz) ===== */
 .gallery__main { width: 100%; height: auto; display: block; aspect-ratio: auto; background: var(--bg-card); border: 1px solid var(--line); }
+
+/* ===== Çerez banner ===== */
+.cookie-banner { position: fixed; left: 50%; transform: translateX(-50%); bottom: 20px; z-index: 300; max-width: 760px; width: calc(100% - 40px); background: var(--bg-dark); color: #e9e2d5; border-radius: 16px; padding: 18px 22px; display: flex; align-items: center; gap: 20px; box-shadow: 0 24px 60px -20px rgba(0,0,0,.5); flex-wrap: wrap; }
+.cookie-banner__text { margin: 0; font-size: 14px; line-height: 1.6; flex: 1; min-width: 240px; }
+.cookie-banner__text a { color: var(--gold); text-decoration: underline; }
+.cookie-banner__actions { display: flex; gap: 10px; }
+.cookie-banner .btn--ghost { color: #cabfae; border-color: #3a352e; }
+.cookie-banner .btn--solid { background: var(--gold); color: #1a1610; }
+
+/* ===== Lightbox ===== */
+.gallery__main { cursor: zoom-in; }
+.lightbox { position: fixed; inset: 0; z-index: 400; background: rgba(15,12,9,.92); display: flex; align-items: center; justify-content: center; padding: 5vw; }
+.lightbox__img { max-width: 92vw; max-height: 88vh; border-radius: 8px; }
+.lightbox__close { position: absolute; top: 24px; right: 28px; width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,.3); background: transparent; color: #fff; font-size: 20px; }
+
+/* hidden attribute her zaman gizlesin (class display'ini ezer) */
+[hidden] { display: none !important; }

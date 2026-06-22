@@ -9,14 +9,23 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="AWA Mobilya">
     <meta property="og:title" content="@yield('title', 'AWA Mobilya')">
-    @if(!empty($settings['ogImage']))<meta property="og:image" content="{{ asset($settings['ogImage']) }}">@endif
+    @hasSection('og_image')
+        <meta property="og:image" content="@yield('og_image')">
+    @elseif(!empty($settings['ogImage']))
+        <meta property="og:image" content="{{ asset($settings['ogImage']) }}">
+    @endif
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Dancing+Script:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/site.css') }}">
     @if(!empty($settings['favicon']))<link rel="icon" href="{{ asset($settings['favicon']) }}">@endif
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="sitemap" type="application/xml" href="{{ url('/sitemap.xml') }}">
     @if(!empty($settings['custom_css']))<style>{!! $settings['custom_css'] !!}</style>@endif
+    @if(!empty($settings['ga_id']))
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $settings['ga_id'] }}"></script>
+        <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','{{ $settings['ga_id'] }}');</script>
+    @endif
     @stack('head')
 </head>
 <body>
@@ -69,6 +78,9 @@
         </nav>
 
         <div class="header-actions">
+            <a href="{{ url('/arama') }}" class="icon-btn" aria-label="{{ $L === 'tr' ? 'Ara' : 'Search' }}">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6.4" stroke="currentColor" stroke-width="1.5"/><path d="M14 14l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
             @if(count($locales) > 1)
                 <div class="lang-switch is-desktop">
                     @foreach($locales as $i => $lc)
@@ -147,6 +159,26 @@
         </div>
     </div>
 </footer>
+
+{{-- Çerez (KVKK) banner --}}
+<div class="cookie-banner" data-cookie hidden>
+    <p class="cookie-banner__text">
+        {{ $L === 'tr'
+            ? 'Web sitemizde deneyiminizi iyileştirmek için çerezler kullanıyoruz.'
+            : 'We use cookies to improve your experience on our website.' }}
+        <a href="{{ $route2('page', 'gizlilik') }}">{{ $L === 'tr' ? 'Gizlilik Politikası' : 'Privacy Policy' }}</a>
+    </p>
+    <div class="cookie-banner__actions">
+        <button class="btn btn--ghost btn--sm" data-cookie-reject>{{ $L === 'tr' ? 'Reddet' : 'Reject' }}</button>
+        <button class="btn btn--solid btn--sm" data-cookie-accept>{{ $L === 'tr' ? 'Kabul Et' : 'Accept' }}</button>
+    </div>
+</div>
+
+{{-- Görsel büyütme (lightbox) --}}
+<div class="lightbox" data-lightbox hidden>
+    <button class="lightbox__close" data-lightbox-close aria-label="Kapat">✕</button>
+    <img class="lightbox__img" data-lightbox-img src="" alt="">
+</div>
 
 <script src="{{ asset('js/site.js') }}"></script>
 @if(!empty($settings['custom_js']))<script>{!! $settings['custom_js'] !!}</script>@endif

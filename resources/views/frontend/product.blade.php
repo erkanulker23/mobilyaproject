@@ -1,7 +1,8 @@
 @extends('frontend.layout')
 
-@section('title', $pick($product->tr, $product->en) . ' — AWA Mobilya')
-@section('description', \Illuminate\Support\Str::limit(strip_tags($pick($product->desc_tr, $product->desc_en)), 155))
+@section('title', ($pick($product->seo_title_tr, $product->seo_title_en) ?: $pick($product->tr, $product->en)) . ' — AWA Mobilya')
+@section('description', \Illuminate\Support\Str::limit(strip_tags($pick($product->seo_desc_tr, $product->seo_desc_en) ?: $pick($product->desc_tr, $product->desc_en)), 155))
+@if($product->img)@section('og_image', asset($product->img))@endif
 
 @php
     $gallery = collect($product->gallery ?: [])->filter()->values();

@@ -67,6 +67,13 @@ class ManageGeneral extends SettingsPage
                         Textarea::make('aboutTr')->label('Hakkımızda (TR)')->rows(4),
                         Textarea::make('aboutEn')->label('Hakkımızda (EN)')->rows(4),
                     ]),
+                Section::make('İzleme & Analytics')
+                    ->columns(1)
+                    ->schema([
+                        TextInput::make('ga_id')->label('Google Analytics ölçüm kimliği')
+                            ->placeholder('G-XXXXXXXXXX')
+                            ->helperText('Girilirse tüm sayfalara Google Analytics kodu eklenir.'),
+                    ]),
                 Section::make('Özel Kod (Style / Script)')
                     ->description('Buraya eklenen CSS ve JS tüm sayfalarda <head> ve </body> öncesine eklenir.')
                     ->columns(1)
