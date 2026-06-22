@@ -22,6 +22,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="sitemap" type="application/xml" href="{{ url('/sitemap.xml') }}">
     @if(!empty($settings['custom_css']))<style>{!! $settings['custom_css'] !!}</style>@endif
+    @if(!empty($settings['code_head'])){!! $settings['code_head'] !!}@endif
     @if(!empty($settings['ga_id']))
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ $settings['ga_id'] }}"></script>
         <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','{{ $settings['ga_id'] }}');</script>
@@ -30,6 +31,7 @@
 </head>
 <body>
 @php($curr = request()->url())
+@if(!empty($settings['code_body'])){!! $settings['code_body'] !!}@endif
 <header class="site-header @yield('header_hero')" data-header>
     <div class="wrap site-header__bar">
         <a href="{{ $route2('home') }}" class="brand" aria-label="AWA Mobilya">
@@ -44,9 +46,10 @@
 
         <nav class="main-nav" aria-label="Ana menü">
             @foreach($headerMenu as $mi)
-                @php($url = $menuUrl($mi))
-                @php($label = $pick($mi->label_tr, $mi->label_en))
-                @if($mi->type === 'collection')
+                @php($url = $mi->link)
+                @php($label = $mi->menu_name)
+                @php($isCollection = \Illuminate\Support\Str::endsWith(rtrim($url, '/'), '/koleksiyon'))
+                @if($isCollection)
                     <div class="main-nav__item main-nav__item--drop main-nav__item--mega {{ $curr === $url ? 'is-active' : '' }}">
                         <a href="{{ $url }}" class="main-nav__link">{{ $label }}</a>
                         <div class="mega">
@@ -69,9 +72,18 @@
                             </div>
                         </div>
                     </div>
+                @elseif($mi->children && $mi->children->count())
+                    <div class="main-nav__item main-nav__item--drop {{ $curr === $url ? 'is-active' : '' }}">
+                        <a href="{{ $url }}" class="main-nav__link">{{ $label }}</a>
+                        <div class="dropdown">
+                            @foreach($mi->children as $child)
+                                <a href="{{ $child->link }}" class="dropdown__link" @if($child->target) target="{{ $child->target }}" @endif>{{ $child->menu_name }}</a>
+                            @endforeach
+                        </div>
+                    </div>
                 @else
                     <div class="main-nav__item {{ $curr === $url ? 'is-active' : '' }}">
-                        <a href="{{ $url }}" class="main-nav__link">{{ $label }}</a>
+                        <a href="{{ $url }}" class="main-nav__link" @if($mi->target) target="{{ $mi->target }}" @endif>{{ $label }}</a>
                     </div>
                 @endif
             @endforeach
@@ -105,9 +117,9 @@
         </div>
         <nav class="mobile-menu__nav" aria-label="Mobil menü">
             @foreach($headerMenu as $i => $mi)
-                <a href="{{ $menuUrl($mi) }}" class="mobile-menu__link">
+                <a href="{{ $mi->link }}" class="mobile-menu__link">
                     <span class="mobile-menu__num">{{ sprintf('%02d', $i + 1) }}</span>
-                    <span>{{ $pick($mi->label_tr, $mi->label_en) }}</span>
+                    <span>{{ $mi->menu_name }}</span>
                 </a>
             @endforeach
         </nav>
@@ -137,7 +149,7 @@
                 <h4 class="footer-col__title">{{ $L === 'tr' ? 'Kurumsal' : 'Corporate' }}</h4>
                 <div class="footer-col__links">
                     @foreach($footerMenu as $mi)
-                        <a href="{{ $menuUrl($mi) }}">{{ $pick($mi->label_tr, $mi->label_en) }}</a>
+                        <a href="{{ $mi->link }}">{{ $mi->menu_name }}</a>
                     @endforeach
                 </div>
             </div>
@@ -182,6 +194,7 @@
 
 <script src="{{ asset('js/site.js') }}"></script>
 @if(!empty($settings['custom_js']))<script>{!! $settings['custom_js'] !!}</script>@endif
+@if(!empty($settings['code_footer'])){!! $settings['code_footer'] !!}@endif
 @stack('scripts')
 </body>
 </html>

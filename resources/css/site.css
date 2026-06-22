@@ -344,3 +344,9 @@ details[open] .accordion__icon { transform: rotate(45deg); }
 
 /* hidden attribute her zaman gizlesin (class display'ini ezer) */
 [hidden] { display: none !important; }
+
+/* ===== Ürün detay: görsel daha geniş/full ===== */
+.product-detail { grid-template-columns: 1.45fr 1fr; gap: clamp(32px, 4vw, 72px); }
+.gallery__main { border: none; background: transparent; }
+.gallery__thumb { width: 110px; }
+@media (max-width: 900px) { .product-detail { grid-template-columns: 1fr; } }

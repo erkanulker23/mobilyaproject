@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\News\Schemas;
 
 use App\Filament\Support\Seo;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -32,6 +33,8 @@ class NewsForm
                         TextInput::make('sort')->label('Sıra')->numeric()->default(0)->columnSpanFull(),
                         Textarea::make('ex_tr')->label('Özet (TR)')->rows(2)->columnSpanFull(),
                         Textarea::make('ex_en')->label('Özet (EN)')->rows(2)->columnSpanFull(),
+                        FileUpload::make('img')->label('Kapak görseli')
+                            ->image()->disk('site')->directory('uploads')->visibility('public')->imageEditor(),
                     ]),
                 Section::make('İçerik')
                     ->schema([

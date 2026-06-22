@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\MenuItem;
 use App\Models\Setting;
+use Biostate\FilamentMenuBuilder\Models\Menu;
 use Illuminate\Support\Facades\View;
 
 /**
@@ -52,31 +52,25 @@ abstract class FrontendController extends Controller
             ];
             return url($paths[$name] ?? ($base ?: '/'));
         };
-        $menuUrl = function ($mi) use ($route) {
-            return match ($mi->type) {
-                'url'      => $mi->value ?: '#',
-                'category' => $route('category', $mi->value),
-                'page'     => $route('page', $mi->value),
-                default    => $route($mi->type),
-            };
-        };
-
         View::share('L', $L);
         View::share('locales', $this->locales);
         View::share('pick', $pick);
         View::share('route2', $route);
-        View::share('menuUrl', $menuUrl);
         View::share('settings', $settings);
         View::share('headerMenu', $this->menu('header'));
         View::share('footerMenu', $this->menu('footer'));
         View::share('megaCategories', Category::orderBy('sort')->withCount('products')->get());
     }
 
-    protected function menu(string $location)
+    /** Biostate menü builder'dan slug ile nested menü ağacını döndürür. */
+    protected function menu(string $slug)
     {
-        return MenuItem::where('location', $location)
-            ->where('is_active', true)
-            ->orderBy('sort')
-            ->get();
+        $menu = Menu::where('slug', $slug)->first();
+
+        if (! $menu) {
+            return collect();
+        }
+
+        return $menu->items()->defaultOrder()->get()->toTree();
     }
 }

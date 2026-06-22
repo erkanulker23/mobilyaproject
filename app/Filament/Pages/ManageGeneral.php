@@ -75,12 +75,17 @@ class ManageGeneral extends SettingsPage
                             ->helperText('Girilirse tüm sayfalara Google Analytics kodu eklenir.'),
                     ]),
                 Section::make('Özel Kod (Style / Script)')
-                    ->description('Buraya eklenen CSS ve JS tüm sayfalarda <head> ve </body> öncesine eklenir.')
+                    ->description('Tüm sayfalara eklenir. Ham HTML/script/style yazabilirsiniz.')
                     ->columns(1)
                     ->collapsed()
                     ->schema([
-                        Textarea::make('custom_css')->label('Özel CSS')->rows(6)->placeholder(':root { } .site-header { }'),
-                        Textarea::make('custom_js')->label('Özel JS')->rows(6)->placeholder("console.log('hi');"),
+                        Textarea::make('custom_css')->label('Özel CSS')->rows(5)->placeholder(':root { } .site-header { }'),
+                        Textarea::make('code_head')->label('Header kodu (&lt;head&gt; içine)')->rows(5)
+                            ->helperText('Meta etiketleri, doğrulama kodları, <script>/<style> vb.'),
+                        Textarea::make('code_body')->label('Body başı kodu (&lt;body&gt; hemen sonrası)')->rows(5)
+                            ->helperText('Google Tag Manager noscript, chat widget vb.'),
+                        Textarea::make('code_footer')->label('Footer kodu (&lt;/body&gt; öncesi)')->rows(5)
+                            ->helperText('Analitik, pixel, özel JS vb.'),
                     ]),
             ])
             ->statePath('data');
