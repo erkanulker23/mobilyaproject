@@ -20,11 +20,12 @@
 
         <div class="product-detail">
             <div class="product-gallery" data-gallery>
-                <div class="gallery__main" data-gallery-main style="background-image:url('{{ asset($gallery->first()) }}')"></div>
+                <img class="gallery__main" data-gallery-main src="{{ asset($gallery->first()) }}" alt="{{ $pick($product->tr, $product->en) }}">
                 @if($gallery->count() > 1)
                     <div class="gallery__thumbs">
                         @foreach($gallery as $i => $img)
                             <button class="gallery__thumb {{ $i === 0 ? 'is-active' : '' }}" data-gallery-thumb
+                                    data-img="{{ asset($img) }}"
                                     style="background-image:url('{{ asset($img) }}')" aria-label="Görsel {{ $i + 1 }}"></button>
                         @endforeach
                     </div>

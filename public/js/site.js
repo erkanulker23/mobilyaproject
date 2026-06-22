@@ -48,8 +48,11 @@
     var main = gal.querySelector('[data-gallery-main]');
     gal.querySelectorAll('[data-gallery-thumb]').forEach(function (thumb) {
       thumb.addEventListener('click', function () {
-        var bg = thumb.style.backgroundImage;
-        if (main && bg) main.style.backgroundImage = bg;
+        var src = thumb.getAttribute('data-img');
+        if (main && src) {
+          if (main.tagName === 'IMG') { main.src = src; }
+          else { main.style.backgroundImage = thumb.style.backgroundImage; }
+        }
         gal.querySelectorAll('[data-gallery-thumb]').forEach(function (t) { t.classList.remove('is-active'); });
         thumb.classList.add('is-active');
       });

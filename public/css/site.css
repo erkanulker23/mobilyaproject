@@ -324,3 +324,6 @@ details[open] .accordion__icon { transform: rotate(45deg); }
 .brand__logo--light { display: none; }
 .site-header--hero .brand__logo--dark { display: none; }
 .site-header--hero .brand__logo--light { display: block; }
+
+/* ===== Ürün galeri ana görseli: tam görünür (kırpılmaz) ===== */
+.gallery__main { width: 100%; height: auto; display: block; aspect-ratio: auto; background: var(--bg-card); border: 1px solid var(--line); }
