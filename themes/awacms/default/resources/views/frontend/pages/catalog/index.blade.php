@@ -5,7 +5,7 @@
     @include('frontend.partials.page-hero', [
         'eyebrow' => 'Dijital Kataloglar',
         'title' => 'Katalog ve dokümanlar',
-        'subtitle' => 'Proje broşürlerimizi ve kurumsal kataloglarımızı inceleyip indirebilirsiniz.',
+        'subtitle' => 'Ürün kataloglarımızı ve broşürlerimizi inceleyip indirebilirsiniz.',
         'breadcrumbs' => ['Kataloglar' => null],
     ])
 
@@ -39,7 +39,7 @@
             <div style="margin-top:60px;background:#1C1813;border-radius:18px;padding:48px;display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap">
                 <div>
                     <h3 style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:clamp(22px,2.4vw,32px);color:#fff">Aradığınız dokümanı bulamadınız mı?</h3>
-                    <p style="margin-top:10px;font-size:15px;color:rgba(255,255,255,.7);max-width:50ch">Özel proje sunumları ve detaylı teknik dokümanlar için bizimle iletişime geçin.</p>
+                    <p style="margin-top:10px;font-size:15px;color:rgba(255,255,255,.7);max-width:50ch">Detaylı ürün bilgisi ve özel talepler için bizimle iletişime geçin.</p>
                 </div>
                 <a href="{{ route('contact.index') }}" style="display:inline-flex;align-items:center;gap:10px;background:#9C8463;color:#fff;font-weight:700;font-size:14px;padding:17px 30px;text-decoration:none;white-space:nowrap;transition:all .3s" style-hover="background:#7D6A4F;transform:translateY(-2px)">Talep Oluştur →</a>
             </div>

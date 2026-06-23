@@ -28,8 +28,8 @@
 
     @include('frontend.partials.page-hero', [
         'eyebrow' => 'İletişim',
-        'title' => 'Projenizi birlikte konuşalım',
-        'subtitle' => 'Yeni bir proje, iş birliği veya teklif talebi — ekibimiz en kısa sürede size dönüş yapar.',
+        'title' => 'Bizimle iletişime geçin',
+        'subtitle' => 'Ürünlerimiz, bayilik ve özel talepleriniz için ekibimiz en kısa sürede size dönüş yapar.',
         'breadcrumbs' => ['İletişim' => null],
     ])
 
