@@ -77,29 +77,14 @@ Route::get('robots.txt', function (\App\Settings\GeneralSettings $settings) {
 })->name('robots_txt');
 
 
+// Frontend = AWA Mobilya DC tasarımı (client-render), içerik DB'den (DcSiteData).
+// Tek sayfa uygulaması: tüm gezinme (ürün/koleksiyon/haber/iletişim) istemci tarafında.
 Route::get('/', function () {
-    try {
-        $content = app(HomepageSettings::class)->content;
-    } catch (MissingSettings $e) {
-        $content = null;
-    }
+    $data = app(\App\Services\DcSiteData::class)->build();
 
-    try {
-        $generalSettings = app(\App\Settings\GeneralSettings::class);
-    } catch (MissingSettings $e) {
-        $generalSettings = null;
-    }
-
-    seo()
-        ->title($generalSettings->seo_title ?? '')
-        ->description($generalSettings->seo_description ?? '')
-        ->site($generalSettings->site_name ?? '')
-        ->image($generalSettings->header_logo ? url(Storage::url($generalSettings->header_logo)) : '')
-        ->twitterImage($generalSettings->header_logo ? url(Storage::url($generalSettings->header_logo)) : '')
-        ->url(route('home'));
-
-    return view('frontend.home', [
-        'content' => $content,
+    return view('frontend.dc', [
+        'serverData' => json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+        'v' => @filemtime(public_path('dc/support.js')) ?: '1',
     ]);
 })->name('home');
 

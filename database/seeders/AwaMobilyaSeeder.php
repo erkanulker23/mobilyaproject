@@ -40,6 +40,7 @@ class AwaMobilyaSeeder extends Seeder
         $slider = $this->seedSlides();
         $faq = $this->seedFaq();
         $this->seedNews();
+        $this->seedDealers();
         $this->seedTestimonials();
         $this->seedPages();
         [$headerMenu, $footerMenu] = $this->seedMenus();
@@ -281,6 +282,24 @@ class AwaMobilyaSeeder extends Seeder
                 $this->addImage($post, 'listing_image', $n['img']);
                 $this->addImage($post, 'details_hero', $n['img']);
             }
+        }
+    }
+
+    private function seedDealers(): void
+    {
+        $dealers = [
+            ['city' => 'İstanbul — Merkez', 'addr' => 'Masko Mobilya Kenti, Başakşehir / İstanbul', 'tel' => '444 96 16'],
+            ['city' => 'Ankara', 'addr' => 'Siteler Karacakaya Cad. No:121, Altındağ / Ankara', 'tel' => '+90 312 000 00 00'],
+            ['city' => 'İzmir', 'addr' => 'Karabağlar Mobilyacılar Sitesi, İzmir', 'tel' => '+90 232 000 00 00'],
+            ['city' => 'Bursa', 'addr' => 'Nilüfer Organize Sanayi Bölgesi, Bursa', 'tel' => '+90 224 000 00 00'],
+            ['city' => 'Antalya', 'addr' => 'Döşemealtı Mobilya OSB, Antalya', 'tel' => '+90 242 000 00 00'],
+            ['city' => 'Adana', 'addr' => 'Yeni Mobilyacılar Sitesi, Seyhan / Adana', 'tel' => '+90 322 000 00 00'],
+        ];
+        foreach ($dealers as $d) {
+            \App\Models\Branch::updateOrCreate(
+                ['name' => $d['city']],
+                ['city' => $d['city'], 'address' => $d['addr'], 'phone' => $d['tel']]
+            );
         }
     }
 
