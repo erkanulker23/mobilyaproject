@@ -28,6 +28,7 @@ class DcSiteData
             'news' => $this->news(),
             'dealers' => $this->dealers(),
             'pages' => $this->pages(),
+            'faqs' => $this->faqs(),
         ];
     }
 
@@ -175,6 +176,20 @@ class DcSiteData
                 'district' => $b->county ?: '',
                 'addr' => $b->address ?: '',
                 'tel' => $b->phone ?: '',
+            ];
+        })->values()->all();
+    }
+
+    private function faqs(): array
+    {
+        $faq = \Modules\Faq\Entities\Faq::with('items')->first();
+        if (! $faq) {
+            return [];
+        }
+        return $faq->items->map(function ($it) {
+            return [
+                'q' => $it->getTranslation('title', 'tr'),
+                'a' => $it->getTranslation('short_description', 'tr') ?: $it->getTranslation('description', 'tr'),
             ];
         })->values()->all();
     }

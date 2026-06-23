@@ -342,7 +342,8 @@ window.AWA = (function () {
       {label:t.contactPage.addressL, value: lang==='tr'?set.addressTr:set.addressEn},
       {label:t.contactPage.hoursL, value: lang==='tr'?set.hoursTr:set.hoursEn}
     ];
-    var faqItems = (t.faqs||[]).map(function (f, i) { var open = s.faqOpen===i; return { q:f.q, a:f.a, open:open, onClick:(function(idx){return function(){c.toggleFaq(idx);};})(i), aStyle:'overflow:hidden;transition:max-height .45s ease,opacity .35s ease,margin .35s ease;max-height:'+(open?'460px':'0')+';opacity:'+(open?1:0)+';margin-top:'+(open?'14px':'0'), iconStyle:'transition:transform .35s ease;display:inline-flex;transform:rotate('+(open?45:0)+'deg)', rowStyle:'border:1px solid '+(open?'#17140f':'#e4ddce')+';background:#fff;border-radius:16px;padding:22px 26px;cursor:pointer;transition:border-color .3s ease' }; });
+    var faqSrc = (data.faqs && data.faqs.length) ? data.faqs : (t.faqs||[]);
+    var faqItems = faqSrc.map(function (f, i) { var open = s.faqOpen===i; return { q:f.q, a:f.a, open:open, onClick:(function(idx){return function(){c.toggleFaq(idx);};})(i), aStyle:'overflow:hidden;transition:max-height .45s ease,opacity .35s ease,margin .35s ease;max-height:'+(open?'460px':'0')+';opacity:'+(open?1:0)+';margin-top:'+(open?'14px':'0'), iconStyle:'transition:transform .35s ease;display:inline-flex;transform:rotate('+(open?45:0)+'deg)', rowStyle:'border:1px solid '+(open?'#17140f':'#e4ddce')+';background:#fff;border-radius:16px;padding:22px 26px;cursor:pointer;transition:border-color .3s ease' }; });
 
     // legal
     var lk = s.legal || 'mesafeli';
