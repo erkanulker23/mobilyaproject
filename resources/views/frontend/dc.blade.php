@@ -421,10 +421,10 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
       </div>
     </section>
     <section style="background:#f6f3ed">
-      <div style="max-width:1480px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(20px,4vw,72px) clamp(54px,6vw,86px)">
-        {{-- galeri küçük görselleri --}}
-        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:clamp(40px,5vw,64px)">
-          <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="4"><div onClick="{{ g.onClick }}" style="width:150px;max-width:22%;{{ g.style }}"></div></sc-for>
+      <div style="max-width:1480px;margin:0 auto;padding:clamp(26px,3vw,40px) clamp(20px,4vw,72px) clamp(54px,6vw,86px)">
+        {{-- galeri küçük görselleri — büyük görselin hemen altında küçük thumb'lar --}}
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:clamp(40px,5vw,64px)">
+          <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="4"><div onClick="{{ g.onClick }}" style="width:78px;height:78px;max-width:20%;{{ g.style }}"></div></sc-for>
         </div>
 
         {{-- Bilgi: 2 kolon --}}
