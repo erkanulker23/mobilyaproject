@@ -78,46 +78,31 @@ class StatsOverview extends BaseWidget
             
             // Sayfa istatistikleri
             $totalPages = \App\Models\Page::count();
-            
-            // Testimonials
-            $totalTestimonials = \App\Models\Testimonial::count();
-            
-            // Şubeler
+            $totalProducts = \App\Models\Project::count();
+            $totalCategories = \App\Models\ProjectCategory::count();
             $totalBranches = \App\Models\Branch::count();
-            
+
             return [
-                \Filament\Widgets\StatsOverviewWidget\Stat::make('Toplam Blog Yazısı', $totalBlogs)
+                \Filament\Widgets\StatsOverviewWidget\Stat::make('Toplam Ürün', $totalProducts)
+                    ->description($totalCategories.' kategori')
+                    ->descriptionIcon('heroicon-m-cube')
+                    ->color('primary'),
+
+                \Filament\Widgets\StatsOverviewWidget\Stat::make('Toplam Haber', $totalBlogs)
                     ->description($this->getPercentageDescription($blogPercentage))
                     ->descriptionIcon($this->getIconByPercentage($blogPercentage))
                     ->color($this->getColorByPercentage($blogPercentage))
                     ->chart([$previousMonthBlogs, $lastMonthBlogs]),
-                    
-                \Filament\Widgets\StatsOverviewWidget\Stat::make('Toplam Servis', $totalServices)
-                    ->description($this->getPercentageDescription($servicePercentage))
-                    ->descriptionIcon($this->getIconByPercentage($servicePercentage))
-                    ->color($this->getColorByPercentage($servicePercentage))
-                    ->chart([$previousMonthServices, $lastMonthServices]),
-                    
-                \Filament\Widgets\StatsOverviewWidget\Stat::make('Form Başvuruları', $totalForms)
-                    ->description($this->getPercentageDescription($formPercentage))
-                    ->descriptionIcon($this->getIconByPercentage($formPercentage))
-                    ->color($this->getColorByPercentage($formPercentage))
-                    ->chart([$previousMonthForms, $lastMonthForms]),
-                    
-                \Filament\Widgets\StatsOverviewWidget\Stat::make('Toplam Sayfa', $totalPages)
-                    ->description('Aktif sayfalar')
-                    ->descriptionIcon('heroicon-m-document-text')
-                    ->color('info'),
-                    
-                \Filament\Widgets\StatsOverviewWidget\Stat::make('Referanslar', $totalTestimonials)
-                    ->description('Müşteri yorumları')
-                    ->descriptionIcon('heroicon-m-star')
-                    ->color('warning'),
-                    
-                \Filament\Widgets\StatsOverviewWidget\Stat::make('Şubeler', $totalBranches)
-                    ->description('Aktif şubeler')
+
+                \Filament\Widgets\StatsOverviewWidget\Stat::make('Bayiler', $totalBranches)
+                    ->description('Yetkili satış noktaları')
                     ->descriptionIcon('heroicon-m-map-pin')
                     ->color('success'),
+
+                \Filament\Widgets\StatsOverviewWidget\Stat::make('Toplam Sayfa', $totalPages)
+                    ->description('Yayındaki sayfalar')
+                    ->descriptionIcon('heroicon-m-document-text')
+                    ->color('info'),
             ];
         });
     }

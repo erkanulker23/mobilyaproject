@@ -69,12 +69,6 @@ class Dashboard extends BasePage
             StatsOverview::class,
             \App\Filament\Widgets\QuickLinks::class,
             LatestBlogPosts::class,
-            \App\Filament\Widgets\PopularBlogPosts::class,
-            LatestFormSubmissions::class,
-            BlogPostsChart::class,
-            PopularBlogCategories::class,
-            \App\Filament\Widgets\LowSeoScorePosts::class,
-            SystemInfo::class,
         ];
     }
 }
