@@ -1,0 +1,1651 @@
+/* Combined CSS from faq.html, form.html, and comment.html */
+
+/* ----------------------------------- */
+/* CSS from faq.html */
+/* ----------------------------------- */
+
+
+section.faq-section {
+    margin-bottom: 80px;
+    padding: 40px 0;
+}
+
+section.faq-section h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.faq-item {
+    margin-bottom: 10px;
+}
+
+.faq-question {
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    padding: 0 15px;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 150px;
+    padding: 15px;
+}
+
+/* Varyant 1: İnce Çizgi ve Nokta */
+
+
+.variant-1 h2 {
+    color: #333;
+}
+
+.variant-1 .faq-item {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.variant-1 .faq-question {
+    color: #333;
+}
+
+.variant-1 .faq-answer {
+    color: #666;
+}
+
+.variant-1 .faq-question::before {
+    content: '•';
+    font-size: 1rem;
+    color: #333;
+    margin-right: 10px;
+}
+
+.variant-1 .faq-item.active .faq-question::before {
+    content: '◦';
+}
+
+
+.variant-2 h2 {
+    color: #444;
+}
+
+.variant-2 .faq-item {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.variant-2 .faq-question {
+    color: #444;
+}
+
+.variant-2 .faq-answer {
+    color: #777;
+}
+
+.variant-2 .faq-question::after {
+    content: '+';
+    font-size: 1rem;
+    color: #444;
+}
+
+.variant-2 .faq-item.active .faq-question::after {
+    content: '−';
+}
+
+/* Varyant 3: Kalın Başlık ve Sol Çizgi */
+
+
+.variant-3 h2 {
+    color: #1e88e5;
+}
+
+.variant-3 .faq-item {
+    position: relative;
+    padding-left: 20px;
+}
+
+.variant-3 .faq-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: #1e88e5;
+}
+
+.variant-3 .faq-question {
+    color: #1e88e5;
+    font-size: 1.1rem;
+}
+
+.variant-3 .faq-answer {
+    color: #555;
+}
+
+.variant-3 .faq-question::after {
+    content: '→';
+    font-size: 0.9rem;
+    color: #1e88e5;
+}
+
+.variant-3 .faq-item.active .faq-question::after {
+    content: '↓';
+}
+
+/* Varyant 4: Yan Yana Grid ve Monokrom */
+
+
+.variant-4 h2 {
+    color: #333;
+}
+
+.variant-4 .faq-item {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.variant-4 .faq-question {
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.variant-4 .faq-answer {
+    color: #666;
+}
+
+.variant-4 .faq-question::after {
+    content: '+';
+    font-size: 1rem;
+    color: #333;
+}
+
+.variant-4 .faq-item.active .faq-question::after {
+    content: '−';
+}
+
+/* Varyant 5: Hafif Renkli ve Yumuşak */
+
+
+.variant-5 h2 {
+    color: #d81b60;
+}
+
+.variant-5 .faq-item {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+}
+
+.variant-5 .faq-question {
+    color: #d81b60;
+    transition: color 0.3s ease;
+}
+
+.variant-5 .faq-question:hover {
+    color: #ad1457;
+}
+
+.variant-5 .faq-answer {
+    color: #666;
+}
+
+.variant-5 .faq-question::after {
+    content: '✚';
+    font-size: 0.9rem;
+    color: #d81b60;
+}
+
+.variant-5 .faq-item.active .faq-question::after {
+    content: '✖';
+}
+
+@media (max-width: 768px) {
+    section.faq-section h2 {
+        font-size: 1.5rem;
+    }
+    .faq-question {
+        font-size: 0.9rem;
+    }
+    .faq-answer {
+        font-size: 0.85rem;
+    }
+}
+
+/* ----------------------------------- */
+/* CSS from form.html */
+/* ----------------------------------- */
+section.contact-section {
+    padding: 40px 0;
+    background-size: cover;
+    background-position: center;
+}
+
+section.contact-section .container-fluid {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+section.contact-section .form-content {
+    display: flex;
+    gap: 30px;
+    min-height: 400px;
+}
+
+section.contact-section .form-content > div {
+    flex: 1;
+}
+
+section.contact-section .form-content .text-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+section.contact-section .form-content .form-area {
+    display: flex;
+    flex-direction: column;
+}
+
+section.contact-section .form-content .text-area h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+section.contact-section .form-content .text-area p {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+section.contact-section .form-content .text-area .extra-info {
+    font-size: 0.85rem;
+    margin-top: 10px;
+}
+
+section.contact-section .form-content .text-area i {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+section.contact-section .form-content .text-area img {
+    max-width: 100px;
+    margin-bottom: 15px;
+}
+
+section.contact-section .form-content .form-area .form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+section.contact-section .form-content .form-area label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+    text-transform: uppercase;
+}
+
+section.contact-section .form-content .form-area input,
+section.contact-section .form-content .form-area select,
+section.contact-section .form-content .form-area textarea {
+    width: 100%;
+    padding: 10px 30px 10px 10px;
+    font-size: 0.9rem;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid;
+    border-radius: 1px;
+}
+
+section.contact-section .form-content .form-area textarea {
+    resize: none;
+    height: 60px;
+}
+
+section.contact-section .form-content .form-area .form-group i {
+    position: absolute;
+    right: 10px;
+    top: 35px;
+    font-size: 1rem;
+}
+
+section.contact-section .form-content .form-area .submit-btn {
+    border: none;
+    padding: 10px 30px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    text-transform: uppercase;
+}
+
+/* Requestformnew-1: Açık Gri Gradient, Form Alanı Beyaz Arka Plan */
+.requestformnew-1 {
+    background: linear-gradient(135deg, #f1f1f1, #e0e0e0);
+}
+
+.requestformnew-1 .form-content .text-area {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.requestformnew-1 .form-content .text-area h2 {
+    color: #1c2526;
+    font-size: 1.8rem;
+}
+
+.requestformnew-1 .form-content .text-area p {
+    color: #4b5e6f;
+}
+
+.requestformnew-1 .form-content .form-area {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.requestformnew-1 .form-content .form-area label {
+    color: #1c2526;
+}
+
+.requestformnew-1 .form-content .form-area input,
+.requestformnew-1 .form-content .form-area select,
+.requestformnew-1 .form-content .form-area textarea {
+    color: #4b5e6f;
+    border-bottom: 1px solid #ccc;
+    background: transparent;
+}
+
+.requestformnew-1 .form-content .form-area .form-group i {
+    color: #dc3545;
+}
+
+.requestformnew-1 .form-content .form-area .submit-btn {
+    background: #dc3545;
+    color: #fff;
+}
+
+.requestformnew-1 .form-content .form-area .submit-btn:hover {
+    background: #c82333;
+    transform: scale(1.05);
+}
+
+.requestformnew-1 .form-content .form-area select option {
+    background: #fff;
+    color: #4b5e6f;
+}
+
+/* Requestformnew-2: Beyaz ve Modern, Arka Plan Resmi */
+.requestformnew-2 {
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1618517351616-38fb9e37d3dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+}
+
+.requestformnew-2 .form-content .text-area {
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.requestformnew-2 .form-content .text-area h2 {
+    color: #2c3e50;
+    border-bottom: 2px solid #2c3e50;
+    padding-bottom: 5px;
+    font-weight: 700;
+}
+
+.requestformnew-2 .form-content .text-area p {
+    color: #4b5e6f;
+    font-style: italic;
+}
+
+.requestformnew-2 .form-content .text-area i {
+    color: #2c3e50;
+}
+
+.requestformnew-2 .form-content .form-area label {
+    color: #2c3e50;
+}
+
+.requestformnew-2 .form-content .form-area input,
+.requestformnew-2 .form-content .form-area select,
+.requestformnew-2 .form-content .form-area textarea {
+    color: #4b5e6f;
+    border-bottom: 2px dashed #e0e0e0;
+    background: transparent;
+}
+
+.requestformnew-2 .form-content .form-area .form-group i {
+    color: #2c3e50;
+    top: 10px;
+    right: 0;
+}
+
+.requestformnew-2 .form-content .form-area .submit-btn {
+    background: #dc3545;
+    color: #fff;
+    border-radius: 25px;
+}
+
+.requestformnew-2 .form-content .form-area .submit-btn:hover {
+    background: #c82333;
+    transform: scale(1.05);
+}
+
+.requestformnew-2 .form-content .form-area select option {
+    background: #fff;
+    color: #4b5e6f;
+}
+
+/* Requestformnew-3: Koyu Mavi ve Şık, Arka Plan Resmi, Form Alanı Beyaz Arka Plan */
+.requestformnew-3 {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1514565132229-5d5882f5e46b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+}
+
+.requestformnew-3 .form-content .text-area {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.requestformnew-3 .form-content .text-area h2 {
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    font-size: 1.7rem;
+}
+
+.requestformnew-3 .form-content .text-area p {
+    color: #e0e0e0;
+    font-size: 1rem;
+}
+
+.requestformnew-3 .form-content .text-area img {
+    border-radius: 10px;
+}
+
+.requestformnew-3 .form-content .form-area {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.requestformnew-3 .form-content .form-area label {
+    color: #1c2526;
+}
+
+.requestformnew-3 .form-content .form-area input,
+.requestformnew-3 .form-content .form-area select,
+.requestformnew-3 .form-content .form-area textarea {
+    color: #4b5e6f;
+    border-bottom: 1px solid #ccc;
+    background: transparent;
+}
+
+.requestformnew-3 .form-content .form-area .form-group i {
+    color: #e91e63;
+}
+
+.requestformnew-3 .form-content .form-area .submit-btn {
+    background: #e91e63;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.requestformnew-3 .form-content .form-area .submit-btn:hover {
+    background: #c2185b;
+    transform: translateY(-2px);
+}
+
+.requestformnew-3 .form-content .form-area select option {
+    background: #fff;
+    color: #4b5e6f;
+}
+
+/* Requestformnew-4: Açık Mavi ve Minimalist, Gradient */
+.requestformnew-4 {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+}
+
+.requestformnew-4 .form-content .text-area {
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.requestformnew-4 .form-content .text-area h2 {
+    color: #0d47a1;
+    border-left: 4px solid #0d47a1;
+    padding-left: 10px;
+    font-weight: 700;
+}
+
+.requestformnew-4 .form-content .text-area p {
+    color: #1976d2;
+}
+
+.requestformnew-4 .form-content .text-area .extra-info {
+    color: #1976d2;
+}
+
+.requestformnew-4 .form-content .text-area i {
+    color: #0d47a1;
+}
+
+.requestformnew-4 .form-content .form-area {
+    background: #f0f8ff;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.requestformnew-4 .form-content .form-area label {
+    color: #0d47a1;
+}
+
+.requestformnew-4 .form-content .form-area input,
+.requestformnew-4 .form-content .form-area select,
+.requestformnew-4 .form-content .form-area textarea {
+    color: #1976d2;
+    border-bottom: 1px solid #1976d2;
+    background: transparent;
+}
+
+.requestformnew-4 .form-content .form-area .form-group i {
+    color: #0d47a1;
+    top: 10px;
+    right: 0;
+}
+
+.requestformnew-4 .form-content .form-area .submit-btn {
+    background: #dc3545;
+    color: #fff;
+    border-radius: 0;
+}
+
+.requestformnew-4 .form-content .form-area .submit-btn:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+}
+
+.requestformnew-4 .form-content .form-area select option {
+    background: #fff;
+    color: #1976d2;
+}
+
+/* Requestformnew-5: Koyu Grition ve Modern, Arka Plan Resmi, Form Alanı Beyaz Arka Plan */
+.requestformnew-5 {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1586528116142-7b1ed1ca9bbb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+}
+
+.requestformnew-5 .form-content .text-area {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.requestformnew-5 .form-content .text-area h2 {
+    color: #fff;
+    position: relative;
+    font-size: 1.6rem;
+}
+
+.requestformnew-5 .form-content .text-area h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: #1e88e5;
+}
+
+.requestformnew-5 .form-content .text-area p {
+    color: #e0e0e0;
+    font-size: 0.95rem;
+}
+
+.requestformnew-5 .form-content .form-area {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.requestformnew-5 .form-content .form-area label {
+    color: #1c2526;
+}
+
+.requestformnew-5 .form-content .form-area input,
+.requestformnew-5 .form-content .form-area select,
+.requestformnew-5 .form-content .form-area textarea {
+    color: #4b5e6f;
+    border-bottom: 1px solid #ccc;
+    background: transparent;
+}
+
+.requestformnew-5 .form-content .form-area .form-group i {
+    color: #1e88e5;
+}
+
+.requestformnew-5 .form-content .form-area .submit-btn {
+    background: #1e88e5;
+    color: #fff;
+    border-radius: 25px;
+}
+
+.requestformnew-5 .form-content .form-area .submit-btn:hover {
+    background: #1565c0;
+    transform: scale(1.05);
+}
+
+.requestformnew-5 .form-content .form-area select option {
+    background: #fff;
+    color: #4b5e6f;
+}
+
+@media (max-width: 768px) {
+    section.contact-section {
+        padding: 20px 0;
+    }
+    section.contact-section .form-content .text-area h2 {
+        font-size: 1.4rem;
+    }
+    section.contact-section .form-content .text-area p {
+        font-size: 0.85rem;
+    }
+    section.contact-section .form-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* ----------------------------------- */
+/* CSS from comment.html */
+/* ----------------------------------- */
+.container-fluid {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+/* Her varyant için ortak başlık ve alt başlık */
+.testimonialnew-variant-section h2 {
+    font-size: 28px;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.testimonialnew-variant-section h2 span {
+    font-size: 20px;
+    color: #f39c12;
+    margin-right: 8px;
+}
+
+.testimonialnew-variant-section .subtitle {
+    font-size: 16px;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 40px;
+    max-width: 600px;
+    line-height: 1.4;
+    font-weight: 400;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Swiper için ortak stiller */
+.testimonialnew-variant-section .swiper {
+    width: 100%;
+    padding: 60px 0;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.testimonialnew-variant-section .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    height: auto;
+    box-sizing: border-box;
+    width: 300px;
+}
+
+/* Tüm Yorumlar Butonları için Ortak Stil */
+.testimonialnew-variant-section .all-reviews-btn-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.testimonialnew-variant-section .all-reviews-btn {
+    text-decoration: none;
+}
+
+/* Varyant 1: Minimalist Beyaz Kart */
+.testimonialnew-variant-1-section {
+    background-color: #b2e7f5;
+    padding: 30px 0;
+    width: 100%;
+}
+
+.testimonialnew-variant-1-section .comment-card {
+    background: #ffffff;
+    text-align: center;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.testimonialnew-variant-1-section .image-container {
+    width: 80px;
+    height: 80px;
+    background: #ccc;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    overflow: hidden;
+}
+
+.testimonialnew-variant-1-section .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testimonialnew-variant-1-section .rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.testimonialnew-variant-1-section .rating i {
+    font-size: 14px;
+    color: #f39c12;
+}
+
+.testimonialnew-variant-1-section h3 {
+    font-size: 16px;
+    color: #1a1a1a;
+    margin: 10px 0;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.testimonialnew-variant-1-section p {
+    font-size: 14px;
+    color: #1a1a1a;
+    line-height: 1.6;
+    margin: 10px 0;
+    font-weight: 400;
+}
+
+.testimonialnew-variant-1-section .company {
+    font-size: 12px;
+    color: #1a1a1a;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.7;
+    margin-top: 10px;
+}
+
+.testimonialnew-variant-1-section .swiper-button-next,
+.testimonialnew-variant-1-section .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+    background: #5d5c5d;
+    border-radius: 8px;
+    color: #3e3e3e;
+    transition: background 0.3s ease, transform 0.3s ease;
+    z-index: 50;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    display: flex;
+    visibility: visible;
+    bottom: 10px;
+    top: auto;
+    border: 2px solid #fff;
+}
+
+.testimonialnew-variant-1-section .swiper-button-next:after,
+.testimonialnew-variant-1-section .swiper-button-prev:after {
+    font-size: 20px;
+}
+
+.testimonialnew-variant-1-section .swiper-button-next {
+    right: 50%;
+    margin-right: -55px;
+}
+
+.testimonialnew-variant-1-section .swiper-button-prev {
+    left: 50%;
+    margin-left: -30px;
+}
+
+.testimonialnew-variant-1-section .all-reviews-btn {
+    margin-top: 20px;
+    background: #2ecc71;
+    border: 2px solid #27ae60;
+    padding: 12px 30px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.testimonialnew-variant-1-section .all-reviews-btn:hover {
+    background: #27ae60;
+    border-color: #219653;
+}
+
+/* Varyant 2: Sol Resim, Sağ Metin */
+.testimonialnew-variant-2-section {
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    padding: 30px 0;
+    width: 100%;
+}
+
+.testimonialnew-variant-2-section .comment-card {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 20px;
+}
+
+.testimonialnew-variant-2-section .image-container {
+    width: 70px;
+    height: 70px;
+    background: #ccc;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.testimonialnew-variant-2-section .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testimonialnew-variant-2-section .text-content {
+    flex: 1;
+}
+
+.testimonialnew-variant-2-section h3 {
+    font-size: 16px;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.testimonialnew-variant-2-section p {
+    font-size: 14px;
+    color: #1a1a1a;
+    line-height: 1.6;
+    margin: 0 0 10px;
+    font-weight: 400;
+}
+
+.testimonialnew-variant-2-section .company {
+    font-size: 12px;
+    color: #1a1a1a;
+    font-weight: 400;
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+.testimonialnew-variant-2-section .rating {
+    display: flex;
+    gap: 5px;
+}
+
+.testimonialnew-variant-2-section .rating i {
+    font-size: 14px;
+    color: #1a1a1a;
+}
+
+.testimonialnew-variant-2-section .swiper-button-next,
+.testimonialnew-variant-2-section .swiper-button-prev {
+    width: 45px;
+    height: 45px;
+    background: #e67e22;
+    border-radius: 10px;
+    color: #fff;
+    transition: background 0.3s ease, transform 0.3s ease;
+    z-index: 50;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    display: flex;
+    visibility: visible;
+    bottom: 10px;
+    top: auto;
+    opacity: 0.9;
+}
+
+
+
+
+.testimonialnew-variant-2-section .swiper-button-next:after,
+.testimonialnew-variant-2-section .swiper-button-prev:after {
+    font-size: 85px;
+}
+
+.testimonialnew-variant-2-section .swiper-button-prev {
+    left: 50%;
+    margin-left: -63px;
+}
+
+.testimonialnew-variant-2-section .swiper-button-next {
+    right: 50%;
+    margin-right: -35px;
+}
+
+.testimonialnew-variant-2-section .all-reviews-btn {
+    margin-top: 20px;
+    background: #e67e22;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.testimonialnew-variant-2-section .all-reviews-btn:hover {
+    background: #d35400;
+}
+
+/* Varyant 3: Alıntı Stili */
+.testimonialnew-variant-3-section {
+    background-color: #d4e4fa;
+    padding: 30px 0;
+    width: 100%;
+}
+
+.testimonialnew-variant-3-section .comment-card {
+    background: #ffffff;
+    text-align: left;
+    padding: 25px;
+    position: relative;
+    border-left: 4px solid #f39c12;
+}
+
+.testimonialnew-variant-3-section .comment-card::before {
+    content: '“';
+    font-size: 40px;
+    color: #f39c12;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    opacity: 0.3;
+}
+
+.testimonialnew-variant-3-section p {
+    font-size: 14px;
+    color: #1a1a1a;
+    line-height: 1.6;
+    font-style: italic;
+    margin: 25px 0 10px;
+    font-weight: 400;
+}
+
+.testimonialnew-variant-3-section h3 {
+    font-size: 16px;
+    color: #1a1a1a;
+    margin: 0 0 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.testimonialnew-variant-3-section .company {
+    font-size: 12px;
+    color: #1a1a1a;
+    font-weight: 400;
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+.testimonialnew-variant-3-section .rating {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.testimonialnew-variant-3-section .rating i {
+    font-size: 14px;
+    color: #f39c12;
+}
+
+.testimonialnew-variant-3-section .swiper-button-next,
+.testimonialnew-variant-3-section .swiper-button-prev {
+    width: 50px;
+    height: 50px;
+    background: #f39c12;
+    border-radius: 50%;
+    color: #fff;
+    transition: background 0.3s ease, transform 0.3s ease;
+    z-index: 50;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    display: flex;
+    visibility: visible;
+    top: 25px;
+    border: 2px solid #fff;
+}
+
+
+
+.testimonialnew-variant-3-section .swiper-button-next:after,
+.testimonialnew-variant-3-section .swiper-button-prev:after {
+    font-size: 24px;
+}
+
+.testimonialnew-variant-3-section .swiper-button-next {
+    right: 10px;
+}
+
+.testimonialnew-variant-3-section .swiper-button-prev {
+    right: 70px;
+    left: auto;
+}
+
+.testimonialnew-variant-3-section .all-reviews-btn {
+    margin-top: 20px;
+    background: transparent;
+    border: 2px dashed #e74c3c;
+    color: #e74c3c;
+    padding: 8px 20px;
+    font-weight: 500;
+}
+
+.testimonialnew-variant-3-section .all-reviews-btn:hover {
+    background: #e74c3c;
+    color: #fff;
+}
+
+/* Varyant 4: Resim Üstte, Altında Çizgi */
+.testimonialnew-variant-4-section {
+    background-color: #f5e6cc;
+    padding: 30px 0;
+    width: 100%;
+}
+
+.testimonialnew-variant-4-section .comment-card {
+    background: transparent;
+    text-align: center;
+    padding: 25px;
+    border: 2px solid #f39c12;
+    border-radius: 15px;
+}
+
+.testimonialnew-variant-4-section .image-container {
+    width: 70px;
+    height: 70px;
+    background: #ccc;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    overflow: hidden;
+}
+
+.testimonialnew-variant-4-section .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testimonialnew-variant-4-section h3 {
+    font-size: 16px;
+    color: #1a1a1a;
+    margin: 10px 0;
+    font-weight: 500;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.testimonialnew-variant-4-section h3::after {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: #f39c12;
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.testimonialnew-variant-4-section p {
+    font-size: 14px;
+    color: #1a1a1a;
+    line-height: 1.6;
+    margin: 20px 0 10px;
+    font-weight: 400;
+}
+
+.testimonialnew-variant-4-section .company {
+    font-size: 12px;
+    color: #1a1a1a;
+    font-weight: 400;
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+.testimonialnew-variant-4-section .rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.testimonialnew-variant-4-section .rating i {
+    font-size: 18px;
+    color: #f1c40f;
+}
+
+.testimonialnew-variant-4-section .swiper-button-next,
+.testimonialnew-variant-4-section .swiper-button-prev {
+    width: 45px;
+    height: 45px;
+    background: #f39c12;
+    border-radius: 50%;
+    color: #fff;
+    transition: background 0.3s ease, transform 0.3s ease;
+    z-index: 50;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    display: flex;
+    visibility: visible;
+    bottom: 10px;
+    top: auto;
+    border: 1px dashed #fff;
+}
+
+
+.testimonialnew-variant-4-section .swiper-button-next:after,
+.testimonialnew-variant-4-section .swiper-button-prev:after {
+    font-size: 22px;
+}
+
+.testimonialnew-variant-4-section .swiper-button-next {
+    right: 10px;
+}
+
+.testimonialnew-variant-4-section .swiper-button-prev {
+    right: 70px;
+    left: auto;
+}
+
+.testimonialnew-variant-4-section .all-reviews-btn {
+    margin-top: 20px;
+    background: #f39c12;
+    border: 2px solid transparent;
+    padding: 10px 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.testimonialnew-variant-4-section .all-reviews-btn:hover {
+    background: transparent;
+    border-color: #f39c12;
+    color: #f39c12;
+}
+
+/* Varyant 5: Nokta ve Dairesel Resim */
+.testimonialnew-variant-5-section {
+    background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+    padding: 30px 0;
+    width: 100%;
+}
+
+.testimonialnew-variant-5-section .comment-card {
+    background: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    padding: 25px;
+    position: relative;
+    border-radius: 12px;
+    border-top: 5px solid #f39c12;
+}
+
+.testimonialnew-variant-5-section .image-container {
+    width: 70px;
+    height: 70px;
+    background: #ccc;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    overflow: hidden;
+    border: 3px solid #f39c12;
+}
+
+.testimonialnew-variant-5-section .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testimonialnew-variant-5-section h3 {
+    font-size: 16px;
+    color: #1a1a1a;
+    margin: 10px 0;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.testimonialnew-variant-5-section p {
+    font-size: 14px;
+    color: #1a1a1a;
+    line-height: 1.6;
+    margin: 10px 0;
+    font-weight: 400;
+}
+
+.testimonialnew-variant-5-section .company {
+    font-size: 12px;
+    color: #1a1a1a;
+    font-weight: 400;
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+.testimonialnew-variant-5-section .rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.testimonialnew-variant-5-section .rating i {
+    font-size: 14px;
+    color: #f39c12;
+}
+
+.testimonialnew-variant-5-section .swiper-button-next,
+.testimonialnew-variant-5-section .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+    background: #2ecc71;
+    border-radius: 50%;
+    color: #fff;
+    transition: background 0.3s ease, transform 0.3s ease;
+    z-index: 50;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    display: flex;
+    visibility: visible;
+    top: 30px;
+    border: 2px solid #fff;
+    opacity: 0.95;
+}
+
+
+.testimonialnew-variant-5-section .swiper-button-next:after,
+.testimonialnew-variant-5-section .swiper-button-prev:after {
+    font-size: 20px;
+}
+
+.testimonialnew-variant-5-section .swiper-button-prev {
+    left: 0px;
+}
+
+.testimonialnew-variant-5-section .swiper-button-next {
+    left: 50px;
+    right: auto;
+}
+
+.testimonialnew-variant-5-section .all-reviews-btn {
+    margin-top: 20px;
+    background: #f39c12;
+    border: 2px solid #f39c12;
+    padding: 12px 25px;
+    font-weight: 500;
+    border-radius: 0;
+    color: #fff;
+}
+
+.testimonialnew-variant-5-section .all-reviews-btn:hover {
+    background: #8e44ad;
+    border-color: #7d3c98;
+}
+
+/* Varyant 6: Üstte Resim, Altta Metin ve Sağda Yıldızlar */
+.testimonialnew-variant-6-section {
+    background-color: #e8d6f7;
+    padding: 30px 0;
+    width: 100%;
+}
+
+.testimonialnew-variant-6-section .comment-card {
+    background: #ffffff;
+    text-align: left;
+    padding: 25px;
+    border-radius: 8px;
+    position: relative;
+    border: 1px solid #f39c12;
+}
+
+.testimonialnew-variant-6-section .image-container {
+    width: 70px;
+    height: 70px;
+    background: #ccc;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.testimonialnew-variant-6-section .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testimonialnew-variant-6-section h3 {
+    font-size: 16px;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.testimonialnew-variant-6-section p {
+    font-size: 14px;
+    color: #1a1a1a;
+    line-height: 1.6;
+    margin: 0 0 10px;
+    font-weight: 400;
+}
+
+.testimonialnew-variant-6-section .company {
+    font-size: 12px;
+    color: #1a1a1a;
+    font-weight: 400;
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+.testimonialnew-variant-6-section .rating {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    display: flex;
+    gap: 5px;
+}
+
+.testimonialnew-variant-6-section .rating i {
+    font-size: 14px;
+    color: #f39c12;
+}
+
+.testimonialnew-variant-6-section .swiper-button-next,
+.testimonialnew-variant-6-section .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+    background: #565157;
+    border-radius: 8px;
+    color: #fff;
+    transition: background 0.3s ease, transform 0.3s ease;
+    z-index: 50;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    display: flex;
+    visibility: visible;
+    bottom: 10px;
+    top: auto;
+    border: 2px solid #fff;
+}
+
+
+.testimonialnew-variant-6-section .swiper-button-next:after,
+.testimonialnew-variant-6-section .swiper-button-prev:after {
+    font-size: 20px;
+}
+
+.testimonialnew-variant-6-section .swiper-button-prev {
+    left: 0;
+}
+
+.testimonialnew-variant-6-section .swiper-button-next {
+    left: 45px;
+    
+}
+
+.testimonialnew-variant-6-section .all-reviews-btn {
+    margin-top: 20px;
+    background: #565157;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+.testimonialnew-variant-6-section .all-reviews-btn:hover {
+    background: #565157;
+}
+
+/* Varyant 7: Koyu Tasarım */
+.testimonialnew-variant-7-section {
+    background: #2d3436;
+    padding: 30px 0;
+    width: 100%;
+}
+
+.testimonialnew-variant-7-section .comment-card {
+    background: #636e72;
+    text-align: center;
+    padding: 25px;
+    border-radius: 8px;
+}
+
+.testimonialnew-variant-7-section h3 {
+    font-size: 16px;
+    color: #ffffff;
+    margin: 0 0 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.testimonialnew-variant-7-section p {
+    font-size: 14px;
+    color: #dfe6e9;
+    line-height: 1.6;
+    margin: 0 0 10px;
+    font-weight: 400;
+}
+
+.testimonialnew-variant-7-section .company {
+    font-size: 12px;
+    color: #dfe6e9;
+    font-weight: 400;
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+.testimonialnew-variant-7-section .rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.testimonialnew-variant-7-section .rating[direction="rtl"] .rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.testimonialnew-variant-7-section .rating i {
+    font-size: 14px;
+    color: #f39c12;
+}
+
+.testimonialnew-variant-7-section .swiper-button-next,
+.testimonialnew-variant-7-section .swiper-button-prev {
+    width: 50px;
+    height: 50px;
+    background: #050d35;
+    border-radius: 50%;
+    color: #fff;
+    transition: background 0.3s ease, transform 0.3s ease;
+    z-index: 50;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    display: flex;
+    visibility: visible;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 2px solid #fff;
+    opacity: 0.9;
+}
+
+
+
+.testimonialnew-variant-7-section .swiper-button-next:after,
+.testimonialnew-variant-7-section .swiper-button-prev:after {
+    font-size: 24px;
+}
+
+.testimonialnew-variant-7-section .swiper-button-next {
+    right: 10px;
+}
+
+.testimonialnew-variant-7-section .swiper-button-prev {
+    left: 10px;
+}
+
+.testimonialnew-variant-7-section .all-reviews-btn {
+    margin-top: 20px;
+    background: #fff0;
+    border: 2px solid #636e72;
+    color: #212726;
+    padding: 10px 25px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.testimonialnew-variant-7-section .all-reviews-btn:hover {
+    background: #636e72;
+    color: #ffffff;
+}
+
+/* Mobil Uyumluluk için Medya Sorguları */
+@media (max-width: 768px) {
+    .testimonialnew-variant-section h2 {
+        font-size: 22px;
+    }
+    .testimonialnew-variant-section h2 span {
+        font-size: 16px;
+    }
+    .testimonialnew-variant-section .subtitle {
+        font-size: 14px;
+        max-width: 90%;
+    }
+    .testimonialnew-variant-section .swiper {
+        max-width: 100%;
+        padding: 40px 0;
+    }
+    .testimonialnew-variant-1-section .comment-card,
+    .testimonialnew-variant-2-section .comment-card,
+    .testimonialnew-variant-3-section .comment-card,
+    .testimonialnew-variant-4-section .comment-card,
+    .testimonialnew-variant-5-section .comment-card,
+    .testimonialnew-variant-6-section .comment-card,
+    .testimonialnew-variant-7-section .comment-card {
+        max-width: 90%;
+        padding: 15px;
+    }
+    .testimonialnew-variant-1-section .image-container,
+    .testimonialnew-variant-2-section .image-container,
+    .testimonialnew-variant-3-section .image-container,
+    .testimonialnew-variant-4-section .image-container,
+    .testimonialnew-variant-5-section .image-container,
+    .testimonialnew-variant-6-section .image-container {
+        width: 60px;
+        height: 60px;
+    }
+    .testimonialnew-variant-2-section .comment-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 90%;
+    }
+    .testimonialnew-variant-6-section .rating {
+        position: static;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    .testimonialnew-variant-1-section .swiper-button-next,
+    .testimonialnew-variant-1-section .swiper-button-prev,
+    .testimonialnew-variant-2-section .swiper-button-next,
+    .testimonialnew-variant-2-section .swiper-button-prev,
+    .testimonialnew-variant-3-section .swiper-button-next,
+    .testimonialnew-variant-3-section .swiper-button-prev,
+    .testimonialnew-variant-4-section .swiper-button-next,
+    .testimonialnew-variant-4-section .swiper-button-prev,
+    .testimonialnew-variant-5-section .swiper-button-next,
+    .testimonialnew-variant-5-section .swiper-button-prev,
+    .testimonialnew-variant-6-section .swiper-button-next,
+    .testimonialnew-variant-6-section .swiper-button-prev,
+    .testimonialnew-variant-7-section .swiper-button-next,
+    .testimonialnew-variant-7-section .swiper-button-prev {
+        width: 35px;
+        height: 35px;
+    }
+    .testimonialnew-variant-1-section .swiper-button-next:after,
+    .testimonialnew-variant-1-section .swiper-button-prev:after,
+    .testimonialnew-variant-2-section .swiper-button-next:after,
+    .testimonialnew-variant-2-section .swiper-button-prev:after,
+    .testimonialnew-variant-3-section .swiper-button-next:after,
+    .testimonialnew-variant-3-section .swiper-button-prev:after,
+    .testimonialnew-variant-4-section .swiper-button-next:after,
+    .testimonialnew-variant-4-section .swiper-button-prev:after,
+    .testimonialnew-variant-5-section .swiper-button-next:after,
+    .testimonialnew-variant-5-section .swiper-button-prev:after,
+    .testimonialnew-variant-6-section .swiper-button-next:after,
+    .testimonialnew-variant-6-section .swiper-button-prev:after,
+    .testimonialnew-variant-7-section .swiper-button-next:after,
+    .testimonialnew-variant-7-section .swiper-button-prev:after {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonialnew-variant-section h2 {
+        font-size: 18px;
+    }
+    .testimonialnew-variant-section h2 span {
+        font-size: 14px;
+    }
+    .testimonialnew-variant-section .subtitle {
+        font-size: 12px;
+    }
+    .testimonialnew-variant-1-section .image-container,
+    .testimonialnew-variant-2-section .image-container,
+    .testimonialnew-variant-3-section .image-container,
+    .testimonialnew-variant-4-section .image-container,
+    .testimonialnew-variant-5-section .image-container,
+    .testimonialnew-variant-6-section .image-container {
+        width: 50px;
+        height: 50px;
+    }
+}

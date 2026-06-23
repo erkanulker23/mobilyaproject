@@ -1,16 +1,33 @@
 {
-    "$schema": "https://www.schemastore.org/package.json",
     "private": true,
-    "type": "module",
     "scripts": {
+        "dev": "vite",
         "build": "vite build",
-        "dev": "vite"
+        "production": "vite build",
+        "minify-theme-css": "node build-scripts/minify-css.js",
+        "minify-theme-js": "node build-scripts/minify-js.js",
+        "minify-theme": "npm run minify-theme-css && npm run minify-theme-js",
+        "build-all": "npm run production && npm run minify-theme"
     },
     "devDependencies": {
-        "@tailwindcss/vite": "^4.0.0",
-        "concurrently": "^9.0.1",
-        "laravel-vite-plugin": "^3.1",
-        "tailwindcss": "^4.0.0",
-        "vite": "^8.0.0"
+        "autoprefixer": "^10.4.21",
+        "axios": "^0.27",
+        "cssnano": "^6.0.1",
+        "laravel-vite-plugin": "^0.6.0",
+        "lodash": "^4.17.19",
+        "postcss": "^8.1.14",
+        "postcss-cli": "^10.1.0",
+        "terser": "^5.24.0",
+        "vite": "^3.0.0"
+    },
+    "dependencies": {
+        "@popperjs/core": "^2.11.8",
+        "@types/sortablejs": "^1.15.8",
+        "alpinejs": "^3.12.0",
+        "countries-phone-masks": "^1.0.8",
+        "imask": "^7.1.3",
+        "sortablejs": "^1.15.6",
+        "sticky-sidebar": "^3.3.1",
+        "tippy.js": "^6.3.7"
     }
 }

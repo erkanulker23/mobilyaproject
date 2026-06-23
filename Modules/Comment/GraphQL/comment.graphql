@@ -1,0 +1,24 @@
+type Comment {
+    id: ID!
+    commentableId: ID! @rename(attribute: "commentable_id")
+    commentableType: String!@rename(attribute: "commentable_type")
+    commentedId: ID!@rename(attribute: "commented_id")
+    commentedType: String!@rename(attribute: "commented_type")
+    comment: String!
+    isApproved: Boolean @rename(attribute: "is_approved")
+    parent_id: ID!@rename(attribute: "parent_id")
+
+    commentable: Commentable!
+    commented: Commented!
+
+    isReacted: Boolean  @rename(attribute: "is_reacted")
+    reacted: Reaction
+
+    childrenCount: Int! @count(relation: "children")
+
+    createdAt: DateTime! @rename(attribute: "create_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}
+
+union Commentable = Video
+union Commented = User

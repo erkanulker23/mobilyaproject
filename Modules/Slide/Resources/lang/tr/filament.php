@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'slides_and_sliders' => 'Slaytlar',
+    'slide' => 'Slayt',
+    'slides' => 'Slaytlar',
+    'slider' => 'Slider',
+    'sliders' => 'Sliderlar',
+    'image' => 'Görsel',
+    'mobile_image' => 'Mobil Görsel',
+    'title' => 'Başlık',
+    'content' => 'İçerik',
+    'subtitle' => 'İkinci Başlık',
+    'target_type' => 'Hedef Tipi',
+    'target' => 'Hedef',
+    'link_url' => 'Link Url',
+    'publish_at' => 'Yayınlanma Tarihi',
+    'interval' => 'Süre',
+    'unpublish_at' => 'Yayından Kaldırılma Tarihi',
+    'cta_text' => 'Buton Yazısı',
+    'order' => 'Sıra',
+    'title_color' => 'Başlık Rengi',
+    'content_color' => 'İçerik Rengi',
+    'subtitle_color' => 'İkinci Başlık Rengi',
+    'show_title_on_mobile' => 'Mobilde Başlığı Göster',
+    'show_content_on_mobile' => 'Mobilde İçeriği Göster',
+    'show_subtitle_on_mobile' => 'Mobilde İkinci Başlığı Göster',
+];

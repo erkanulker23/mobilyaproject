@@ -2,130 +2,36 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Category;
-use App\Models\Dealer;
-use App\Models\Lead;
-use App\Models\News;
+use App\DTOs\Page\PageData;
+use App\Http\Controllers\Controller;
 use App\Models\Page;
-use App\Models\Product;
+use App\Settings\ImageSettings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
-class PageController extends FrontendController
+class PageController extends Controller
 {
-    public function corporate()
+    public function show(Request $request, Page $page)
     {
-        $this->boot();
+        $imageSettings = app(ImageSettings::class);
 
-        return view('frontend.corporate');
-    }
+        seo()
+            ->title($page->seo_title ?? $page->title)
+            ->description($page->seo_description ?? '')
+            ->url($request->fullUrl());
 
-    public function collection(?string $slug = null)
-    {
-        $this->boot();
+        // Get hero banner images with fallback to default images
+        $heroImage = $imageSettings->page_hero
+            ? url(Storage::url($imageSettings->page_hero))
+            : url(Storage::url('default_images/page_hero.webp'));
+        $heroImageMobile = $imageSettings->page_hero_mobile
+            ? url(Storage::url($imageSettings->page_hero_mobile))
+            : url(Storage::url('default_images/page_hero_mobile.webp'));
 
-        $categories = Category::orderBy('sort')->get();
-        $active = $slug ? $categories->firstWhere('slug', $slug) : $categories->first();
-
-        $products = Product::with('category')
-            ->when($active, fn ($q) => $q->where('category_id', $active->id))
-            ->orderBy('sort')
-            ->get();
-
-        return view('frontend.collection', compact('categories', 'active', 'products'));
-    }
-
-    public function product(string $slug)
-    {
-        $this->boot();
-
-        $product = Product::with('category')->where('slug', $slug)->firstOrFail();
-        $related = Product::with('category')
-            ->where('category_id', $product->category_id)
-            ->where('id', '!=', $product->id)
-            ->orderBy('sort')->take(3)->get();
-
-        return view('frontend.product', compact('product', 'related'));
-    }
-
-    public function news()
-    {
-        $this->boot();
-
-        $news = News::orderBy('sort')->get();
-
-        return view('frontend.news', compact('news'));
-    }
-
-    public function article(string $slug)
-    {
-        $this->boot();
-
-        $article = News::where('slug', $slug)->firstOrFail();
-        $related = News::where('id', '!=', $article->id)->orderBy('sort')->take(3)->get();
-
-        return view('frontend.article', compact('article', 'related'));
-    }
-
-    public function dealers()
-    {
-        $this->boot();
-
-        $dealers = Dealer::orderBy('sort')->get();
-
-        return view('frontend.dealers', compact('dealers'));
-    }
-
-    public function contact()
-    {
-        $this->boot();
-
-        return view('frontend.contact');
-    }
-
-    public function contactSubmit(Request $request)
-    {
-        $data = $request->validate([
-            'name'    => ['nullable', 'string', 'max:255'],
-            'email'   => ['nullable', 'email', 'max:255'],
-            'phone'   => ['nullable', 'string', 'max:50'],
-            'message' => ['nullable', 'string', 'max:5000'],
+        return view('frontend.pages.page.show', [
+            'page' => PageData::fromModel($page),
+            'heroImage' => $heroImage,
+            'heroImageMobile' => $heroImageMobile,
         ]);
-
-        Lead::create($data);
-
-        return back()->with('sent', true);
-    }
-
-    public function faq()
-    {
-        $this->boot();
-
-        $faqs = \App\Models\Faq::where('is_active', true)->orderBy('sort')->get();
-
-        return view('frontend.faq', compact('faqs'));
-    }
-
-    public function search(Request $request)
-    {
-        $this->boot();
-
-        $q = trim((string) $request->get('q', ''));
-        $results = collect();
-        if ($q !== '') {
-            $results = Product::with('category')
-                ->where(fn ($w) => $w->where('tr', 'like', "%$q%")->orWhere('en', 'like', "%$q%"))
-                ->orderBy('sort')->get();
-        }
-
-        return view('frontend.search', compact('q', 'results'));
-    }
-
-    public function legal(string $slug)
-    {
-        $this->boot();
-
-        $page = Page::where('key', $slug)->firstOrFail();
-
-        return view('frontend.legal', compact('page'));
     }
 }

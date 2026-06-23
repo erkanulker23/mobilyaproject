@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Filament\Resources\ServicePostResource\Pages;
+
+use App\Filament\Resources\ServicePostResource;
+use Filament\Actions;
+use Filament\Resources\Pages\ListRecords;
+
+class ListServicePosts extends ListRecords
+{
+    use ListRecords\Concerns\Translatable;
+
+    protected static string $resource = ServicePostResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\CreateAction::make(),
+            Actions\LocaleSwitcher::make(),
+        ];
+    }
+}

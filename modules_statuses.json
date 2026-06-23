@@ -1,0 +1,23 @@
+{
+    "Product": true,
+    "Producer": true,
+    "Filament": true,
+    "Category": true,
+    "Cart": true,
+    "Slide": true,
+    "Tag": true,
+    "Group": false,
+    "Menu": true,
+    "Cargo": true,
+    "Comment": true,
+    "Order": true,
+    "Badge": true,
+    "Newsletter": true,
+    "References": true,
+    "Faq": true,
+    "Members": true,
+    "Features": true,
+    "Plan": false,
+    "Gallery": true,
+    "GoogleReview": true
+}

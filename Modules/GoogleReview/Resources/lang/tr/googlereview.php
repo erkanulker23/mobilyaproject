@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'name' => 'Google Yorumları',
+    'reviews' => 'Yorumlar',
+    'customer_reviews' => 'Müşteri Yorumları',
+    'valued_customer_opinions' => 'Değerli müşterilerimizin görüşleri',
+    'rating' => 'Puan',
+    'reviewer' => 'Yorumcu',
+    'review' => 'Yorum',
+    'date' => 'Tarih',
+    'published' => 'Yayında',
+    'featured' => 'Öne Çıkan',
+    'widgets' => 'Widget\'lar',
+    'widget_name' => 'Widget Adı',
+    'layout' => 'Layout',
+    'style' => 'Stil',
+    'active' => 'Aktif',
+    'order' => 'Sıra',
+    'settings' => 'Ayarlar',
+    'create_review' => 'Yorum Oluştur',
+    'edit_review' => 'Yorumu Düzenle',
+    'delete_review' => 'Yorumu Sil',
+    'create_widget' => 'Widget Oluştur',
+    'edit_widget' => 'Widget\'ı Düzenle',
+    'delete_widget' => 'Widget\'ı Sil',
+    'no_reviews' => 'Henüz yorum yok.',
+    'load_more' => 'Daha Fazla Yükle',
+];
+

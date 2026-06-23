@@ -1,0 +1,24 @@
+{
+    "name": "nwidart/googlereview",
+    "description": "Google Reviews Module for AWA CMS",
+    "authors": [
+        {
+            "name": "AWA CMS",
+            "email": "info@awacms.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\GoogleReview\\": ""
+        }
+    }
+}
+

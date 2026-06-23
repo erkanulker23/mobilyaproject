@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'slides_and_sliders' => 'Slides And Sliders',
+    'slide' => 'Slide',
+    'slides' => 'Slides',
+    'slider' => 'Slider',
+    'sliders' => 'Sliders',
+    'image' => 'Image',
+    'title' => 'Title',
+    'content' => 'Content',
+    'subtitle' => 'Subtitle',
+    'target_type' => 'Target Type',
+    'target' => 'Target',
+    'link_url' => 'Link Url',
+    'publish_at' => 'Published At',
+    'interval' => 'Interval',
+    'unpublish_at' => 'Unpublished At',
+    'title_color' => 'Title Color',
+    'content_color' => 'Content Color',
+    'subtitle_color' => 'Subtitle Color',
+    'show_title_on_mobile' => 'Show Title on Mobile',
+    'show_content_on_mobile' => 'Show Content on Mobile',
+    'show_subtitle_on_mobile' => 'Show Subtitle on Mobile',
+];

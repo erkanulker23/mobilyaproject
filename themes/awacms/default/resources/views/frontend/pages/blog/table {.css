@@ -1,0 +1,30 @@
+table {
+    width: 100%; /* Tablo genişliği */
+    border-collapse: collapse; /* Kenar boşluklarını kaldırır */
+}
+
+th, td {
+    padding: 15px; /* Hücre içi boşluk */
+    text-align: left; /* Metin hizalaması */
+    border: 1px solid #ddd; /* Hücre kenarları */
+}
+
+th {
+    background-color: #4CAF50; /* Başlık arka plan rengi */
+    color: white; /* Başlık metin rengi */
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Çift satırların arka plan rengi */
+}
+
+tr:hover {
+    background-color: #ddd; /* Üzerine gelindiğinde satırın arka plan rengi */
+}
+
+@media (max-width: 600px) {
+    th, td {
+        padding: 10px; /* Mobil görünümde hücre içi boşluk */
+        font-size: 14px; /* Mobil görünümde yazı boyutu */
+    }
+}

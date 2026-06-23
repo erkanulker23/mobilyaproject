@@ -1,0 +1,27 @@
+{
+    "name": "nwidart/cargo",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Cargo\\": ""
+        }
+    },
+    "require": {
+        "cybercog/laravel-eloquent-flag": "^5.4",
+        "qirolab/laravel-reactions": "^2.6"
+    }
+}

@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'name' => 'Google Reviews',
+    'reviews' => 'Reviews',
+    'customer_reviews' => 'Customer Reviews',
+    'valued_customer_opinions' => 'Valued customer opinions',
+    'rating' => 'Rating',
+    'reviewer' => 'Reviewer',
+    'review' => 'Review',
+    'date' => 'Date',
+    'published' => 'Published',
+    'featured' => 'Featured',
+    'widgets' => 'Widgets',
+    'widget_name' => 'Widget Name',
+    'layout' => 'Layout',
+    'style' => 'Style',
+    'active' => 'Active',
+    'order' => 'Order',
+    'settings' => 'Settings',
+    'create_review' => 'Create Review',
+    'edit_review' => 'Edit Review',
+    'delete_review' => 'Delete Review',
+    'create_widget' => 'Create Widget',
+    'edit_widget' => 'Edit Widget',
+    'delete_widget' => 'Delete Widget',
+    'no_reviews' => 'No reviews yet.',
+    'load_more' => 'Load More',
+];
+

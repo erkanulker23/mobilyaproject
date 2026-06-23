@@ -1,0 +1,12 @@
+{
+    "name": "GoogleReview",
+    "alias": "googlereview",
+    "description": "Google Reviews Management Module",
+    "keywords": ["google", "reviews", "testimonials"],
+    "priority": 0,
+    "providers": [
+        "Modules\\GoogleReview\\Providers\\GoogleReviewServiceProvider"
+    ],
+    "files": []
+}
+

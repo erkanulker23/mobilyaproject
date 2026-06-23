@@ -1,0 +1,23 @@
+{
+    "name": "menu-builder",
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "main": "./dist/menu-builder.cjs",
+    "module": "./dist/menu-builder.js",
+    "exports": {
+        ".": {
+            "import": "./dist/menu-builder.js",
+            "require": "./dist/menu-builder.cjs"
+        }
+    },
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite dev"
+    },
+    "dependencies": {
+        "dragula": "^3.7.3",
+        "vite": "^3.1.3"
+    }
+}

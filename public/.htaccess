@@ -9,10 +9,6 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Handle X-XSRF-Token Header
-    RewriteCond %{HTTP:x-xsrf-token} .
-    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
-
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
@@ -22,4 +18,72 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # JavaScript dosyaları için önbellekleme
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType application/x-javascript "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+
+    # CSS dosyaları için önbellekleme
+    ExpiresByType text/css "access plus 1 year"
+
+    # Görseller için önbellekleme
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+    # Cache-Control başlıkları ile önbellekleme
+    <FilesMatch "\.(js|css)$">
+        Header set Cache-Control "max-age=31536000, public, immutable"
+    </FilesMatch>
+
+    # Web font dosyaları için önbellekleme ve CORS
+    <FilesMatch "\.(woff|woff2)$">
+        Header set Cache-Control "max-age=31536000, public, immutable"
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+
+    # Image dosyaları için önbellekleme
+    <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg)$">
+        Header set Cache-Control "max-age=31536000, public, immutable"
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+    # Tüm metin, html, javascript, css ve xml dosyalarını sıkıştır
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/x-javascript application/json
+
+    # Ayrıca belirli dosya türleri için sıkıştırmayı etkinleştir
+    <FilesMatch "\.(js|css|json|xml|html)$">
+        SetOutputFilter DEFLATE
+    </FilesMatch>
+
+    # Tarayıcıların Gzip sıkıştırmasını destekleyip desteklemediğini kontrol et
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+
+    # Sıkıştırmayı yalnızca belirli boyutların üzerindeki dosyalar için etkinleştir
+    Header append Vary User-Agent
+</IfModule>
+
+<IfModule mod_headers.c>
+    # Web fontları için Access-Control-Allow-Origin
+    <FilesMatch "\.(woff|woff2)$">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_http2.c>
+    # HTTP/2 ile hız optimizasyonu
+    HTTP2Enable on
 </IfModule>
