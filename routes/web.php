@@ -125,6 +125,7 @@ $dc = function (array $state = []) {
         'seoTitle' => $title,
         'seoDescription' => $desc,
         'ogImage' => $s['ogImage'] ?? '',
+        'favicon' => $s['favicon'] ?? '',
         'v' => @filemtime(public_path('dc/support.js')) ?: '1',
     ]);
 };

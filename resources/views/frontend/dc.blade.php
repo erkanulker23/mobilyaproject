@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
+@if(!empty($favicon))<link rel="icon" href="{{ $favicon }}"><link rel="apple-touch-icon" href="{{ $favicon }}">@endif
 <title>{{ $seoTitle ?? 'AWA Mobilya' }}</title>
 <meta name="description" content="{{ $seoDescription ?? '' }}">
 <meta property="og:type" content="website">

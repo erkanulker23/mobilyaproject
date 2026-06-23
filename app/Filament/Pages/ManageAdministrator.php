@@ -25,7 +25,9 @@ class ManageAdministrator extends SettingsPage
     protected function getFormSchema(): array
     {
         $themes = ThemesManager::all()->mapWithKeys(function ($theme, $key) {
-            return [$key => (string) Str::title(last(explode('/', $key)))];
+            $label = $key === 'awacms/default' ? 'Building' : (string) Str::title(last(explode('/', $key)));
+
+            return [$key => $label];
         });
 
         return [
