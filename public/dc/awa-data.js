@@ -225,6 +225,8 @@ window.AWA = (function () {
       isMp4: !ytMatch && /\.mp4($|\?)/i.test(storyVid), mp4Url: storyVid,
       isImage: !storyVid && !!set.storyImage, mediaBg: IMG(set.storyImage || '')
     };
+    var igPosts = (set.instagramPosts || []).map(function(p){ return { bg:IMG(p.img), link:p.link || (set.instagramUrl || '#') }; });
+    var instagram = { show: igPosts.length > 0, username: set.instagramUsername || '', handle: '@'+(set.instagramUsername || ''), url: set.instagramUrl || '#', posts: igPosts };
     var slides = (data.slides && data.slides.length) ? data.slides : defaultData().slides;
     var pages = data.pages || defaultData().pages;
     var CATS = (data.categories && data.categories.length) ? data.categories : CATS_DEFAULT;
@@ -606,7 +608,7 @@ window.AWA = (function () {
       heroBg:IMG(hs.img), heroSub: lang==='tr'?hs.subTr:hs.subEn, heroTitle:hp[lang], heroCta:(function(id){return function(){c.goProduct(id);};})(hs.productId), heroDots:heroDots, goHero:c.goHero,
       stats:stats, aboutText: lang==='tr'?set.aboutTr:set.aboutEn,
       scriptAbout: lang==='tr'?'zamansız zarafet':'timeless elegance', scriptFeatured: lang==='tr'?'el emeğiyle':'handcrafted with care', scriptContact: lang==='tr'?'bize ulaşın':'say hello',
-      catCards:catCards, newsTeaser:newsTeaser, newsList:newsList, homeSections:homeSections, story:story,
+      catCards:catCards, newsTeaser:newsTeaser, newsList:newsList, homeSections:homeSections, story:story, instagram:instagram,
       testimonials:testimonials, hasTestimonials:hasTestimonials,
       testiKicker: lang==='tr'?'MÜŞTERİLERİMİZ':'TESTIMONIALS',
       testiTitle: lang==='tr'?'Bizimle çalışanlar ne diyor?':'What our partners say',

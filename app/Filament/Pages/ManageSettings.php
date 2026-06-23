@@ -66,6 +66,27 @@ class ManageSettings extends SettingsPage
                     TextInput::make('story_button_link')->label('Buton Linki')->placeholder('/kurumsal'),
                 ]),
 
+            Section::make('instagram')
+                ->heading('Anasayfa Instagram Bölümü')
+                ->columns(2)
+                ->description('Instagram kullanıcı adı, profil linki ve gösterilecek gönderi görselleri.')
+                ->schema([
+                    TextInput::make('instagram_username')->label('Kullanıcı Adı')->placeholder('awamobilya'),
+                    TextInput::make('instagram_url')->label('Profil Linki')->placeholder('https://instagram.com/awamobilya'),
+                    Repeater::make('instagram_posts')
+                        ->label('Gönderiler')
+                        ->columnSpanFull()
+                        ->columns(2)
+                        ->schema([
+                            FileUpload::make('image')->label('Görsel')->image()->imageEditor()->disk('public')->directory('instagram'),
+                            TextInput::make('link')->label('Gönderi Linki (opsiyonel)')->url(),
+                        ])
+                        ->defaultItems(0)
+                        ->addActionLabel('Gönderi ekle')
+                        ->collapsible()
+                        ->grid(2),
+                ]),
+
             Section::make('address')
                 ->heading('Adres Bilgileri')
                 ->columns(2)

@@ -23,6 +23,13 @@ class GeneralSettings extends Settings
 
     public ?string $story_button_link = null;
 
+    // Anasayfa Instagram bölümü
+    public ?string $instagram_username = null;
+
+    public ?string $instagram_url = null;
+
+    public array $instagram_posts = [];
+
     public ?string $header_logo = null;
 
     public ?string $address = null;

@@ -66,6 +66,13 @@ class DcSiteData
             'storyImage' => $s->story_image ? \Storage::disk('public')->url($s->story_image) : '',
             'storyBtnText' => $s->story_button_text ?: 'Keşfet',
             'storyBtnLink' => $s->story_button_link ?: '/kurumsal',
+            'instagramUsername' => $s->instagram_username ?: '',
+            'instagramUrl' => $s->instagram_url ?: '',
+            'instagramPosts' => collect($s->instagram_posts ?? [])->map(function ($p) use ($s) {
+                $im = $p['image'] ?? '';
+                $url = $im === '' ? '' : ((str_starts_with($im, 'http') || str_starts_with($im, '/')) ? $im : \Storage::disk('public')->url($im));
+                return ['img' => $url, 'link' => $p['link'] ?? ($s->instagram_url ?: '#')];
+            })->filter(fn ($x) => $x['img'] !== '')->values()->all(),
         ];
     }
 

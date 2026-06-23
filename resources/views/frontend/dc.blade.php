@@ -326,6 +326,28 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
         </div>
       </div>
     </section>
+
+    {{-- Instagram --}}
+    <sc-if value="{{ instagram.show }}" hint-placeholder-val="{{ true }}">
+    <section style="background:#f6f3ed;border-top:1px solid #ece6da">
+      <div style="max-width:1640px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,48px)">
+        <div style="display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:clamp(32px,4vw,52px)">
+          <a href="{{ instagram.url }}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;text-decoration:none">
+            <span style="display:flex;align-items:center;justify-content:center;width:58px;height:58px;border-radius:50%;background:#f6f3ed;color:#17140f"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+          </a>
+          <div>
+            <a href="{{ instagram.url }}" target="_blank" rel="noopener" style="font-family:Archivo;font-weight:800;font-size:22px;color:#17140f;text-decoration:none">{{ instagram.handle }}</a>
+          </div>
+          <a href="{{ instagram.url }}" target="_blank" rel="noopener" style="font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#17140f;border:1px solid #17140f;padding:13px 26px;border-radius:8px;text-decoration:none" style-hover="background:#17140f;color:#fff">Takip Et</a>
+        </div>
+        <div style="display:flex;gap:16px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory">
+          <sc-for list="{{ instagram.posts }}" as="ig" hint-placeholder-count="6">
+            <a href="{{ ig.link }}" target="_blank" rel="noopener" style="flex:none;width:clamp(240px,22vw,300px);aspect-ratio:1/1;border-radius:14px;{{ ig.bg }};scroll-snap-align:start;transition:transform .4s cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-6px)"></a>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+    </sc-if>
   </div>
   </sc-if>
 

@@ -98,6 +98,12 @@ class AwaMobilyaSeeder extends Seeder
             ['name' => 'linkedin', 'url' => 'https://linkedin.com/company/awamobilya'],
             ['name' => 'youtube', 'url' => 'https://youtube.com/@awamobilya'],
         ];
+        $s->instagram_username = 'awamobilya';
+        $s->instagram_url = 'https://instagram.com/awamobilya';
+        if (empty($s->instagram_posts)) {
+            $ig = ['2.png', '5.png', '7.png', '1.png', '3.png', '8.png'];
+            $s->instagram_posts = array_map(fn ($im) => ['image' => '/uploads/'.$im, 'link' => 'https://instagram.com/awamobilya'], $ig);
+        }
         $s->save();
     }
 
