@@ -7,6 +7,7 @@ use App\Models\Project;
 use Filament\Forms;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -80,13 +81,14 @@ class ProjectResource extends Resource
                 ]),
 
             Forms\Components\Section::make('Ürünü Oluşturan Parçalar')
-                ->description('Ürünü oluşturan parçalar (ör. Üçlü Kanepe, Berjer, Komodin) ve ölçüleri.')
+                ->description('Ürünü oluşturan parçalar (ör. Üçlü Kanepe, Berjer, Komodin) ve ölçüleri. Parça girilmezse aşağıdaki ürün ölçüleri zorunludur.')
                 ->schema([
                     Forms\Components\Repeater::make('specs')
                         ->hiddenLabel()
+                        ->live()
                         ->schema([
                             Forms\Components\TextInput::make('label')->label('Parça Adı')->placeholder('Üçlü Kanepe')->required(),
-                            Forms\Components\TextInput::make('value')->label('Ölçü / Detay')->placeholder('G 240 · D 95 · Y 85 cm'),
+                            Forms\Components\TextInput::make('value')->label('Ölçü / Detay')->placeholder('G 240 · D 95 · Y 85 cm')->required(),
                             Forms\Components\FileUpload::make('image')
                                 ->label('Parça Görseli')
                                 ->image()
@@ -100,6 +102,12 @@ class ProjectResource extends Resource
                         ->collapsible()
                         ->itemLabel(fn (array $state): ?string => $state['label'] ?? null)
                         ->addActionLabel('Parça ekle'),
+                    Forms\Components\TextInput::make('product_dimensions')
+                        ->label('Ürün Ölçüleri')
+                        ->placeholder('G 240 · D 95 · Y 85 cm')
+                        ->helperText('Parça eklenmediyse ürünün genel ölçülerini girin.')
+                        ->visible(fn (Get $get): bool => empty($get('specs')))
+                        ->required(fn (Get $get): bool => empty($get('specs'))),
                 ]),
 
             Forms\Components\Section::make('Öne Çıkan Özellikler')

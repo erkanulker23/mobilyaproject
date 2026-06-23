@@ -12,7 +12,6 @@
     <div class="flex gap-2">
         {{($this->createSubItemAction)(['menuItemId' => $item->id])}}
         {{($this->editAction)(['menuItemId' => $item->id])}}
-        {{($this->viewAction)(['menuItemId' => $item->id])}}
         {{($this->deleteAction)(['menuItemId' => $item->id])}}
     </div>
     </div>
@@ -27,8 +26,8 @@
                     animation: 150,
                     fallbackOnBody: true,
                     swapThreshold: 0.65,
-                    onEnd: (evt) => {
-                        this.data = getDataStructure(document.getElementById('parentNested'));
+                    onEnd: () => {
+                        $root.syncTree();
                     }
                 })
             },

@@ -45,6 +45,7 @@ window.AWA = (function () {
         logo:'', favicon:'', brandTr:'AWA', brandSub:'MOBİLYA',
         addressTr:'Masko Mobilya Kenti 5. Cadde No: 12, Başakşehir / İstanbul',
         addressEn:'Masko Furniture City 5th Ave No: 12, Başakşehir / Istanbul',
+        addressPlaceName:'Merkez Ofis',
         hoursTr:'Hafta içi 09:00 – 18:00 · Cumartesi 10:00 – 17:00',
         hoursEn:'Weekdays 09:00 – 18:00 · Saturday 10:00 – 17:00',
         aboutTr:'Sektörü iyi analiz ederek teknoloji ile el emeğini birleştiren, markalaşmaya önem veren AWA Mobilya; dinamik ve sezgisel yapısıyla sektörün öncü firmalarından biridir. Bu başarıya, günümüz çizgisini yönlendiren ve geleceğin felsefesini şekillendiren ürünler üreterek ulaşmıştır.',
@@ -245,7 +246,14 @@ window.AWA = (function () {
       : 'position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(246,243,237,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,.07)');
     var link = function (a) { return 'white-space:nowrap;font-family:Archivo;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;color:' + navColor + ';opacity:' + (a?1:.78) + ';padding:6px 0;border-bottom:2px solid ' + (a?accent:'transparent') + ';transition:opacity .25s ease,border-color .25s ease'; };
     var langStyle = function (a) { return 'cursor:pointer;color:' + navColor + ';opacity:' + (a?1:.5); };
-    var kickerStyle = "font-family:'Space Mono';font-size:12px;letter-spacing:.2em;color:" + accent + ";text-transform:uppercase";
+    var kickerStyle = "font-family:'Space Mono';font-size:12px;letter-spacing:.2em;color:#5c4f3a;text-transform:uppercase";
+    var kickerStyleLight = "font-family:'Space Mono';font-size:12px;letter-spacing:.2em;color:#e8dcc4;text-transform:uppercase";
+    var scriptOnLight = '#5c4f3a';
+    var scriptOnDark = '#e8dcc4';
+    var textBody = '#3d372f';
+    var textMuted = '#6b6356';
+    var textOnDarkBody = '#ddd6c8';
+    var textOnDarkMuted = '#b8af9f';
 
     var catName = function (id) { var x = CATS.filter(function(k){return k.id===id;})[0]; return x ? x[lang] : id; };
     var catDesc = function (id) { var x = CATS.filter(function(k){return k.id===id;})[0]; return x ? (lang==='tr'?x.dTr:x.dEn) : ''; };
@@ -302,6 +310,8 @@ window.AWA = (function () {
     var productPieces;
     if (curP.pieces && curP.pieces.length) {
       productPieces = curP.pieces.map(function (pc, i) { return { name:pc.name, dims:pc.dims, bg:IMG(pc.img ? pc.img : pieceFallback[i % pieceFallback.length]) }; });
+    } else if (curP.productDimensions) {
+      productPieces = [{ name: lang==='tr'?'Ürün Ölçüleri':'Product Dimensions', dims:curP.productDimensions, bg:IMG(pieceFallback[0]) }];
     } else {
       productPieces = (PIECES[curP.cat] || PIECES.koltuk).map(function (pc, i) { return { name:pc[lang], dims:pc.d, bg:IMG(pieceFallback[i % pieceFallback.length]) }; });
     }
@@ -319,18 +329,18 @@ window.AWA = (function () {
       var dark = idx % 2 === 1;
       return { cat:sd.cat, title: lang==='tr'?sd.tr:sd.en, kicker: catName(sd.cat), count:items.length, products:items, onAll:(function(id){return function(){c.goCollection(id);};})(sd.cat),
         dark:dark,
-        secStyle: dark ? 'background:#15120d' : 'background:#f6f3ed',
+        secStyle: dark ? 'background:#1c1812;color:#f8f5ef' : 'background:#ffffff;color:#17140f',
         titleColor: dark ? '#ffffff' : '#17140f',
-        kickerColor: dark ? accent : accent,
-        descColor: dark ? '#b9b1a4' : '#5d564b',
-        btnStyle: dark ? 'border:1px solid #3a352e;color:#cabfae' : 'border:1px solid #d3cabb;color:#17140f',
+        kickerColor: dark ? '#e8dcc4' : '#5c4f3a',
+        descColor: dark ? '#ddd6c8' : '#3d372f',
+        btnStyle: dark ? 'border:1px solid #6b6356;color:#f8f5ef' : 'border:1px solid #c9bfb0;color:#17140f',
         nameColor: dark ? '#ffffff' : '#17140f' };
     });
 
     // news + article
     var locN = function (n, i) { return { id:n.id, date:n.date, cat: lang==='tr'?n.catTr:n.catEn, title: lang==='tr'?n.tr:n.en, excerpt: lang==='tr'?n.exTr:n.exEn, bg:IMG(n.img ? n.img : ('/'+NEWSIMG[i % NEWSIMG.length])), onClick:(function(id){return function(){c.goArticle(id);};})(n.id) }; };
     var newsList = data.news.map(locN);
-    var newsTeaser = newsList.slice(0,3);
+    var newsTeaser = newsList.slice(0,3).map(function(n){ return Object.assign({}, n, { catStyle:'color:#5c4f3a;font-weight:600' }); });
     var curNIndex = Math.max(0, data.news.map(function(n){return n.id;}).indexOf(s.article));
     var curN = data.news[curNIndex] || data.news[0];
     var article = curN ? {
@@ -406,11 +416,12 @@ window.AWA = (function () {
     var dealerGroups = Object.keys(dgMap).sort().map(function(k){ return { il:k, count:dgMap[k].length, list:dgMap[k].map(function(d){ return { city:d.city, addr:d.addr, tel:d.tel, district:d.district }; }) }; });
 
     // contact cards
+    var hqPlace = set.addressPlaceName || t.contactPage.hqLabel;
     var contactCards = [
-      {label:t.contactPage.phoneL, value:set.phone},
-      {label:t.contactPage.emailL, value:set.email},
-      {label:t.contactPage.addressL, value: lang==='tr'?set.addressTr:set.addressEn},
-      {label:t.contactPage.hoursL, value: lang==='tr'?set.hoursTr:set.hoursEn}
+      {place:hqPlace, label:t.contactPage.phoneL, value:set.phone, isPhone:true, isEmail:false, isAddress:false, isHours:false, valueSize:'17px'},
+      {place:hqPlace, label:t.contactPage.emailL, value:set.email, isPhone:false, isEmail:true, isAddress:false, isHours:false, valueSize:'17px'},
+      {place:hqPlace, label:t.contactPage.addressL, value: lang==='tr'?set.addressTr:set.addressEn, isPhone:false, isEmail:false, isAddress:true, isHours:false, valueSize:'15px'},
+      {place:hqPlace, label:t.contactPage.hoursL, value: lang==='tr'?set.hoursTr:set.hoursEn, isPhone:false, isEmail:false, isAddress:false, isHours:true, valueSize:'15px'}
     ];
     var faqSrc = (data.faqs && data.faqs.length) ? data.faqs : (t.faqs||[]);
     var faqItems = faqSrc.map(function (f, i) { var open = s.faqOpen===i; return { q:f.q, a:f.a, open:open, onClick:(function(idx){return function(){c.toggleFaq(idx);};})(i), aStyle:'overflow:hidden;transition:max-height .45s ease,opacity .35s ease,margin .35s ease;max-height:'+(open?'460px':'0')+';opacity:'+(open?1:0)+';margin-top:'+(open?'14px':'0'), iconStyle:'transition:transform .35s ease;display:inline-flex;transform:rotate('+(open?45:0)+'deg)', rowStyle:'border:1px solid '+(open?'#17140f':'#e4ddce')+';background:#fff;border-radius:16px;padding:22px 26px;cursor:pointer;transition:border-color .3s ease' }; });
@@ -625,7 +636,10 @@ window.AWA = (function () {
           R.createElement('span', { style:{fontFamily:'Archivo',fontWeight:500,fontSize:'11px',letterSpacing:'.42em',color:navColor,opacity:.55} }, set.brandSub||'MOBİLYA')
         );
     return {
-      t:t, accent:accent, kickerStyle:kickerStyle, headerStyle:headerStyle, navColor:navColor, brandMark:brandMark,
+      t:t, accent:accent, kickerStyle:kickerStyle, kickerStyleLight:kickerStyleLight,
+      scriptOnLight:scriptOnLight, scriptOnDark:scriptOnDark,
+      textBody:textBody, textMuted:textMuted, textOnDarkBody:textOnDarkBody, textOnDarkMuted:textOnDarkMuted,
+      headerStyle:headerStyle, navColor:navColor, brandMark:brandMark,
       goHome:c.goHome, goCorporate:c.goCorporate, goNews:c.goNews, goContact:c.goContact, goDealers:c.goDealers,
       goCollectionDefault:c.goCollectionDefault, goCollectionCurrent:c.goCollectionCurrent, goCatalog:c.goCatalog,
       goMesafeli:c.goMesafeli, goKvkk:c.goKvkk, goAdmin:c.goAdmin,

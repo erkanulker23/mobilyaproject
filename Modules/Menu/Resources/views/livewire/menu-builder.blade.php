@@ -3,10 +3,16 @@
     <form wire:submit="save" x-data="{
         data: $wire.entangle('data'),
         sortables: [],
+        syncTree() {
+            const root = document.getElementById('parentNested');
+            if (root) {
+                this.data = this.getDataStructure(root);
+            }
+        },
         getDataStructure(parentNode) {
           const items = Array.from(parentNode.children).filter((item) => {
             return item.classList.contains('item');
-          }); // Get children items of the current node
+          });
 
           return Array.from(items).map((item) => {
             const id = item.getAttribute('data-id');
@@ -17,9 +23,7 @@
           });
         }
     }"
-    x-on:menu-item-created.window="() => {
-        console.log('menu-item-created');
-    }"
+    x-init="$nextTick(() => syncTree())"
     >
         <div class="nested-wrapper">
             <div id="parentNested" class="nested"
@@ -30,8 +34,8 @@
                             animation: 150,
                             fallbackOnBody: true,
                             swapThreshold: 0.65,
-                            onEnd: (evt) => {
-                                this.data = getDataStructure(document.getElementById('parentNested'));
+                            onEnd: () => {
+                                $root.syncTree();
                             }
                         })
                     },
@@ -45,7 +49,8 @@
             <x-filament::button
                 :dark-mode="config('filament.dark_mode')"
                 wire:loading.attr="disabled"
-                type="submit"
+                type="button"
+                x-on:click="$root.syncTree(); $wire.save()"
                 class="mt-2"
             >
                 <x-filament::loading-indicator wire:loading class="h-5 w-5" />

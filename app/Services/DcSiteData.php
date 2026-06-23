@@ -49,6 +49,7 @@ class DcSiteData
             'brandSub' => mb_strtoupper($parts[1] ?? ''),
             'addressTr' => $s->address ?: '',
             'addressEn' => $s->address ?: '',
+            'addressPlaceName' => $s->address_place_name ?: ($s->address_locality ?: 'Merkez Ofis'),
             'hoursTr' => $s->working_hours ?: '',
             'hoursEn' => $s->working_hours ?: '',
             'aboutTr' => $this->aboutText(),
@@ -144,6 +145,7 @@ class DcSiteData
                     'longTr' => $long,
                     'longEn' => $long,
                     'pieces' => $pieces,
+                    'productDimensions' => $p->product_dimensions ?: '',
                     'features' => collect($p->features ?: [])->filter()->values()->all(),
                 ];
             })->values()->all();

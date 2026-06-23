@@ -12,6 +12,11 @@ class ListPages extends ListRecords
 
     protected static string $resource = PageResource::class;
 
+    public function getSubheading(): ?string
+    {
+        return 'Sitede yalnızca hakkimizda, mesafeli-satis, kvkk ve gizlilik slug\'ları kullanılır. "Kullanılmıyor" etiketli sayfalar adminde görünür ancak ön yüzde ayrı sayfa olarak açılmaz.';
+    }
+
     protected function getHeaderActions(): array
     {
         return [

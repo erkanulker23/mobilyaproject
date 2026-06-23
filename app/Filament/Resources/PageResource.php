@@ -84,11 +84,31 @@ class PageResource extends Resource
 
     public static function table(Table $table): Table
     {
+        $frontendSlugs = [
+            'hakkimizda' => 'Kurumsal',
+            'mesafeli-satis' => 'Yasal',
+            'kvkk' => 'Yasal',
+            'gizlilik' => 'Yasal',
+        ];
+
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->label('Başlık')
                     ->limit(50),
+                Tables\Columns\TextColumn::make('slug')
+                    ->label('Slug (TR)')
+                    ->getStateUsing(fn (Page $record): string => (string) $record->getTranslation('slug', 'tr'))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('frontend_usage')
+                    ->label('Sitede')
+                    ->badge()
+                    ->getStateUsing(function (Page $record) use ($frontendSlugs): string {
+                        $slug = (string) $record->getTranslation('slug', 'tr');
+
+                        return $frontendSlugs[$slug] ?? 'Kullanılmıyor';
+                    })
+                    ->color(fn (string $state): string => $state === 'Kullanılmıyor' ? 'gray' : 'success'),
             ])
             ->filters([
                 //

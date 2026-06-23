@@ -56,7 +56,7 @@ class HomepageBuilderPage extends Page implements HasForms
         $this->form->fill(['content' => $content]);
     }
 
-    /** Hangi blok hangi içerik alanlarını düzenler. */
+    /** Her blokta düzenlenebilir alanlar. */
     public static array $blockFields = [
         'hero' => [],
         'featured' => ['title', 'subtitle', 'text', 'button_text'],
@@ -68,6 +68,20 @@ class HomepageBuilderPage extends Page implements HasForms
         'products' => ['title', 'subtitle'],
         'news' => ['title', 'subtitle'],
         'instagram' => [],
+    ];
+
+    /** Blok içeriğinin nereden geldiği — admin açıklaması. */
+    public static array $blockSources = [
+        'hero' => 'İçerik kaynağı: Slider / Slaytlar. Buradan yalnızca sıra ve görünürlük ayarlanır.',
+        'featured' => 'Başlık ve metin buradan düzenlenir. Görseller şablonda sabittir.',
+        'about' => 'Başlık buradan; metin boşsa Hakkımızda sayfası / Genel Ayarlar kullanılır.',
+        'catalog' => 'Başlık ve metin buradan düzenlenir. Katalog dosyası ayrı yönetilir.',
+        'categories' => 'Yalnızca bölüm başlığı buradan. Kartlar Ürün Kategorileri + Ürünlerden otomatik gelir.',
+        'story' => 'İçerik kaynağı: Genel Ayarlar → Hikaye / Tanıtım. Buradan sıra ve görünürlük.',
+        'showcases' => 'Başlık buradan; proje kartları İlham Veren Projeler kayıtlarından gelir.',
+        'products' => 'Her kategori için ayrı ürün satırı otomatik oluşur. Başlıklar kategori adından gelir.',
+        'news' => 'Başlık buradan; haber kartları Blog/Haberler kayıtlarından gelir.',
+        'instagram' => 'İçerik kaynağı: Genel Ayarlar → Instagram. Buradan sıra ve görünürlük.',
     ];
 
     public function form(Form $form): Form
@@ -90,8 +104,12 @@ class HomepageBuilderPage extends Page implements HasForms
             }
             if (empty($schema)) {
                 $schema[] = \Filament\Forms\Components\Placeholder::make('info')
-                    ->label('')
-                    ->content('Bu bölümün içeriği ilgili yerden yönetilir (Slider / Genel Ayarlar). Buradan sırasını ve görünürlüğünü ayarlayabilirsiniz.');
+                    ->label('İçerik kaynağı')
+                    ->content(self::$blockSources[$type] ?? 'Bu bölümün sırasını ve görünürlüğünü buradan ayarlayın.');
+            } else {
+                array_unshift($schema, \Filament\Forms\Components\Placeholder::make('source_'.$type)
+                    ->label('İçerik kaynağı')
+                    ->content(self::$blockSources[$type] ?? ''));
             }
             $blocks[] = Block::make($type)->label($label)->schema($schema);
         }
@@ -100,7 +118,7 @@ class HomepageBuilderPage extends Page implements HasForms
             ->schema([
                 Builder::make('content')
                     ->label('Anasayfa Bölümleri')
-                    ->helperText('Bölümleri sürükleyerek sıralayın; istemediğiniz bölümü silin. Anasayfa bu sıraya göre gösterilir.')
+                    ->helperText('Bölümleri sürükleyerek sıralayın; istemediğiniz bölümü silin. Kaydettiğiniz sıra anasayfaya yansır. Metin alanı olan bloklar başlık/metin düzenler; diğerleri ilgili admin sayfasından beslenir (Slider, Ürünler, Genel Ayarlar).')
                     ->blocks($blocks)
                     ->blockNumbers(false)
                     ->collapsible()

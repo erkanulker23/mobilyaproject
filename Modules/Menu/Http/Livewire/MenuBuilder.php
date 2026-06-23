@@ -59,6 +59,8 @@ class MenuBuilder extends Component implements HasActions, HasForms
                 });
 
                 $menuItem->delete();
+                $this->fillItems();
+                $this->dispatch('menu-tree-updated');
             });
     }
 
@@ -72,6 +74,9 @@ class MenuBuilder extends Component implements HasActions, HasForms
             ->fillForm(function (array $arguments) {
                 $menuItemId = $arguments['menuItemId'];
                 $menuItem = MenuItem::find($menuItemId);
+                if (! $menuItem) {
+                    return [];
+                }
 
                 return [
                     'name' => $menuItem->name,
@@ -95,6 +100,13 @@ class MenuBuilder extends Component implements HasActions, HasForms
                 }
 
                 $menuItem->update($data);
+                $this->fillItems();
+                $this->dispatch('menu-tree-updated');
+
+                Notification::make()
+                    ->title('Menü öğesi güncellendi')
+                    ->success()
+                    ->send();
             });
     }
 
@@ -117,18 +129,13 @@ class MenuBuilder extends Component implements HasActions, HasForms
                     'menu_id' => $this->menuId,
                 ]);
                 $parent->appendNode($menuItem);
-            });
-    }
+                $this->fillItems();
+                $this->dispatch('menu-tree-updated');
 
-    public function viewAction(): Action
-    {
-        // TODO: extend action and make new edit action for this component
-        return Action::make('view')
-            ->size(ActionSize::ExtraSmall)
-            ->icon('heroicon-m-eye')
-            ->iconButton()
-            ->action(function (array $arguments) {
-                $menuItemId = $arguments['menuItemId'];
+                Notification::make()
+                    ->title('Alt menü öğesi eklendi')
+                    ->success()
+                    ->send();
             });
     }
 
@@ -139,7 +146,14 @@ class MenuBuilder extends Component implements HasActions, HasForms
 
     public function fillItems(): void
     {
-        $this->items = Menu::find($this->menuId)
+        $menu = Menu::find($this->menuId);
+        if (! $menu) {
+            $this->items = collect();
+
+            return;
+        }
+
+        $this->items = $menu
             ->items()
             ->with(['childrenDeep' => function ($query) {
                 $query->defaultOrder();

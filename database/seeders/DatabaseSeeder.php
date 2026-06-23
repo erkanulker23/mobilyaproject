@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             //DefaultThemeSeeder::class,
             CitiesTableSeeder::class,
             CountiesTableSeeder::class,
-            DefaultPageContentsSeeder::class,
+            // AwaMobilyaSeeder zaten yasal sayfaları oluşturur; DefaultPageContentsSeeder tekrarlı kayıt üretir.
+            // DefaultPageContentsSeeder::class,
         ]);
 
         $superadmin_role = Role::create(['name' => 'superadmin']);
