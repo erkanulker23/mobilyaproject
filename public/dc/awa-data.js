@@ -227,6 +227,8 @@ window.AWA = (function () {
     };
     var igPosts = (set.instagramPosts || []).map(function(p){ return { bg:IMG(p.img), link:p.link || (set.instagramUrl || '#') }; });
     var instagram = { show: igPosts.length > 0, username: set.instagramUsername || '', handle: '@'+(set.instagramUsername || ''), url: set.instagramUrl || '#', posts: igPosts };
+    var igLabel = { instagram:'IG', facebook:'f', linkedin:'in', youtube:'YT', twitter:'X', x:'X' };
+    var socials = (set.social || []).map(function(s){ var n=(s.name||'').toLowerCase(); return { name:n, url:s.url || '#', label: igLabel[n] || (n.charAt(0).toUpperCase()) }; });
     var slides = (data.slides && data.slides.length) ? data.slides : defaultData().slides;
     var pages = data.pages || defaultData().pages;
     var CATS = (data.categories && data.categories.length) ? data.categories : CATS_DEFAULT;
@@ -608,7 +610,7 @@ window.AWA = (function () {
       heroBg:IMG(hs.img), heroSub: lang==='tr'?hs.subTr:hs.subEn, heroTitle:hp[lang], heroCta:(function(id){return function(){c.goProduct(id);};})(hs.productId), heroDots:heroDots, goHero:c.goHero,
       stats:stats, aboutText: lang==='tr'?set.aboutTr:set.aboutEn,
       scriptAbout: lang==='tr'?'zamansız zarafet':'timeless elegance', scriptFeatured: lang==='tr'?'el emeğiyle':'handcrafted with care', scriptContact: lang==='tr'?'bize ulaşın':'say hello',
-      catCards:catCards, newsTeaser:newsTeaser, newsList:newsList, homeSections:homeSections, story:story, instagram:instagram,
+      catCards:catCards, newsTeaser:newsTeaser, newsList:newsList, homeSections:homeSections, story:story, instagram:instagram, socials:socials,
       testimonials:testimonials, hasTestimonials:hasTestimonials,
       testiKicker: lang==='tr'?'MÜŞTERİLERİMİZ':'TESTIMONIALS',
       testiTitle: lang==='tr'?'Bizimle çalışanlar ne diyor?':'What our partners say',

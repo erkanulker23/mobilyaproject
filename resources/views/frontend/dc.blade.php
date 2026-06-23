@@ -1197,26 +1197,37 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
 
   <sc-if value="{{ showFooter }}" hint-placeholder-val="{{ true }}">
   <footer style="background:#15120d;color:#cabfae">
-    <div style="max-width:1560px;margin:0 auto;padding:clamp(56px,6vw,90px) clamp(20px,4vw,72px) clamp(40px,4vw,56px);display:grid;grid-template-columns:{{ gFooter }};gap:clamp(28px,4vw,56px)">
-      <div>
-        <div style="display:flex;align-items:baseline;gap:9px"><span style="font-family:Archivo;font-weight:900;font-size:28px;letter-spacing:-.04em;color:#fff">AWA</span><span style="font-family:Archivo;font-weight:500;font-size:11px;letter-spacing:.4em;color:#fff;opacity:.5">MOBİLYA</span></div>
-        <p style="margin:18px 0 0;font-size:15px;line-height:1.7;color:#9a8f7e;max-width:280px">{{ aboutText }}</p>
-        <div style="display:flex;gap:10px;margin-top:26px"><span style="width:42px;height:42px;border-radius:50%;border:1px solid #34302a;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:Archivo;font-weight:700;font-size:14px;color:#cabfae" style-hover="border-color:#cabfae">f</span><span style="width:42px;height:42px;border-radius:50%;border:1px solid #34302a;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:Archivo;font-weight:700;font-size:12px;color:#cabfae" style-hover="border-color:#cabfae">in</span><span style="width:42px;height:42px;border-radius:50%;border:1px solid #34302a;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:Archivo;font-weight:700;font-size:12px;color:#cabfae" style-hover="border-color:#cabfae">X</span></div>
+    <div style="max-width:1560px;margin:0 auto;padding:clamp(56px,6vw,90px) clamp(20px,4vw,72px) clamp(36px,4vw,52px)">
+      {{-- ÜST: logo solda, sosyal medya sağda --}}
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-bottom:clamp(34px,4vw,52px);border-bottom:1px solid #262320">
+        <div style="display:flex;align-items:baseline;gap:9px"><span style="font-family:Archivo;font-weight:900;font-size:32px;letter-spacing:-.04em;color:#fff">AWA</span><span style="font-family:Archivo;font-weight:500;font-size:12px;letter-spacing:.4em;color:#fff;opacity:.5">MOBİLYA</span></div>
+        <div style="display:flex;gap:12px">
+          <sc-for list="{{ socials }}" as="s" hint-placeholder-count="3"><a href="{{ s.url }}" target="_blank" rel="noopener" style="width:44px;height:44px;border-radius:50%;border:1px solid #34302a;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:Archivo;font-weight:700;font-size:13px;color:#cabfae;text-decoration:none" style-hover="border-color:#cabfae;color:#fff">{{ s.label }}</a></sc-for>
+        </div>
       </div>
-      <div>
-        <div style="font-family:'Space Mono';font-size:11px;letter-spacing:.16em;color:{{ accent }};text-transform:uppercase;margin-bottom:18px">{{ t.nav.collection }}</div>
-        <div style="display:flex;flex-direction:column;gap:12px"><sc-for list="{{ footerCats }}" as="f" hint-placeholder-count="4"><span onClick="{{ f.onClick }}" style="cursor:pointer;font-size:15px;color:#cabfae" style-hover="color:#fff">{{ f.label }}</span></sc-for></div>
-      </div>
-      <div>
-        <div style="font-family:'Space Mono';font-size:11px;letter-spacing:.16em;color:{{ accent }};text-transform:uppercase;margin-bottom:18px">{{ t.footer.corporate }}</div>
-        <div style="display:flex;flex-direction:column;gap:12px"><sc-for list="{{ footerCorp }}" as="f" hint-placeholder-count="4"><span onClick="{{ f.onClick }}" style="cursor:pointer;font-size:15px;color:#cabfae" style-hover="color:#fff">{{ f.label }}</span></sc-for></div>
-      </div>
-      <div>
-        <div style="font-family:Archivo;font-weight:700;font-size:20px;color:#fff">{{ t.newsletter.title }}</div>
-        <p style="margin:12px 0 18px;font-size:14px;line-height:1.6;color:#9a8f7e">{{ t.newsletter.desc }}</p>
-        <sc-if value="{{ subscribed }}" hint-placeholder-val="{{ false }}"><div style="background:rgba(255,255,255,.06);border:1px solid #34302a;border-radius:999px;padding:15px 24px;font-size:14px;color:#e9e2d5">{{ t.newsletter.thanks }}</div></sc-if>
-        <sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}"><div style="background:rgba(255,255,255,.06);border:1px solid #34302a;border-radius:999px;padding:6px 6px 6px 22px;display:flex;align-items:center;gap:10px"><input data-field="nemail" placeholder="{{ t.newsletter.placeholder }}" style="flex:1;border:none;outline:none;background:transparent;font-size:15px;color:#fff"/><button onClick="{{ subscribe }}" style="flex:none;width:46px;height:46px;border-radius:50%;background:{{ accent }};border:none;cursor:pointer;color:#1a1610;display:flex;align-items:center;justify-content:center"><svg width="20" height="10" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.7"/></svg></button></div></sc-if>
-        <div style="margin-top:24px"><div style="font-family:Archivo;font-weight:800;font-size:24px;color:#fff">{{ phone }}</div><div style="font-size:14px;color:#9a8f7e">{{ email }}</div></div>
+
+      {{-- ALT: link kolonları + iletişim + bülten --}}
+      <div style="display:grid;grid-template-columns:{{ gFooter }};gap:clamp(28px,4vw,56px);padding-top:clamp(40px,5vw,64px)">
+        <div>
+          <div style="font-family:'Space Mono';font-size:11px;letter-spacing:.16em;color:{{ accent }};text-transform:uppercase;margin-bottom:18px">{{ t.nav.collection }}</div>
+          <div style="display:flex;flex-direction:column;gap:12px"><sc-for list="{{ footerCats }}" as="f" hint-placeholder-count="4"><span onClick="{{ f.onClick }}" style="cursor:pointer;font-size:15px;color:#cabfae" style-hover="color:#fff">{{ f.label }}</span></sc-for></div>
+        </div>
+        <div>
+          <div style="font-family:'Space Mono';font-size:11px;letter-spacing:.16em;color:{{ accent }};text-transform:uppercase;margin-bottom:18px">{{ t.footer.corporate }}</div>
+          <div style="display:flex;flex-direction:column;gap:12px"><sc-for list="{{ footerCorp }}" as="f" hint-placeholder-count="4"><span onClick="{{ f.onClick }}" style="cursor:pointer;font-size:15px;color:#cabfae" style-hover="color:#fff">{{ f.label }}</span></sc-for></div>
+        </div>
+        <div>
+          <div style="font-family:'Space Mono';font-size:11px;letter-spacing:.16em;color:{{ accent }};text-transform:uppercase;margin-bottom:18px">{{ t.nav.contact }}</div>
+          <div style="font-size:15px;line-height:1.7;color:#9a8f7e">{{ address }}</div>
+          <div style="margin-top:14px;font-family:Archivo;font-weight:800;font-size:22px;color:#fff">{{ phone }}</div>
+          <div style="font-size:14px;color:#9a8f7e">{{ email }}</div>
+        </div>
+        <div>
+          <div style="font-family:Archivo;font-weight:700;font-size:20px;color:#fff">{{ t.newsletter.title }}</div>
+          <p style="margin:12px 0 18px;font-size:14px;line-height:1.6;color:#9a8f7e">{{ t.newsletter.desc }}</p>
+          <sc-if value="{{ subscribed }}" hint-placeholder-val="{{ false }}"><div style="background:rgba(255,255,255,.06);border:1px solid #34302a;border-radius:999px;padding:15px 24px;font-size:14px;color:#e9e2d5">{{ t.newsletter.thanks }}</div></sc-if>
+          <sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}"><div style="background:rgba(255,255,255,.06);border:1px solid #34302a;border-radius:999px;padding:6px 6px 6px 22px;display:flex;align-items:center;gap:10px"><input data-field="nemail" placeholder="{{ t.newsletter.placeholder }}" style="flex:1;border:none;outline:none;background:transparent;font-size:15px;color:#fff"/><button onClick="{{ subscribe }}" style="flex:none;width:46px;height:46px;border-radius:50%;background:{{ accent }};border:none;cursor:pointer;color:#1a1610;display:flex;align-items:center;justify-content:center"><svg width="20" height="10" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.7"/></svg></button></div></sc-if>
+        </div>
       </div>
     </div>
     <div style="border-top:1px solid #262320">
