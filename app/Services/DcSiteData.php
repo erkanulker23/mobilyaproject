@@ -219,7 +219,13 @@ class DcSiteData
             $content = [];
         }
         $blocks = collect($content)
-            ->map(fn ($b) => ['type' => $b['type'] ?? '', 'title' => $b['data']['title'] ?? ($b['title'] ?? '')])
+            ->map(fn ($b) => [
+                'type' => $b['type'] ?? '',
+                'title' => $b['data']['title'] ?? '',
+                'subtitle' => $b['data']['subtitle'] ?? '',
+                'text' => $b['data']['text'] ?? '',
+                'button_text' => $b['data']['button_text'] ?? '',
+            ])
             ->filter(fn ($b) => in_array($b['type'], $allowed, true))
             ->values()->all();
 

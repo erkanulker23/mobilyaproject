@@ -56,17 +56,44 @@ class HomepageBuilderPage extends Page implements HasForms
         $this->form->fill(['content' => $content]);
     }
 
+    /** Hangi blok hangi içerik alanlarını düzenler. */
+    public static array $blockFields = [
+        'hero' => [],
+        'featured' => ['title', 'subtitle', 'text', 'button_text'],
+        'about' => ['title', 'subtitle', 'text'],
+        'catalog' => ['title', 'text', 'button_text'],
+        'categories' => ['title', 'subtitle'],
+        'story' => [],
+        'showcases' => ['title', 'subtitle'],
+        'products' => ['title', 'subtitle'],
+        'news' => ['title', 'subtitle'],
+        'instagram' => [],
+    ];
+
     public function form(Form $form): Form
     {
         $blocks = [];
         foreach (self::$blockLabels as $type => $label) {
-            $blocks[] = Block::make($type)
-                ->label($label)
-                ->schema([
-                    TextInput::make('title')
-                        ->label('Başlık (yönetim için not)')
-                        ->default($label),
-                ]);
+            $fields = self::$blockFields[$type] ?? [];
+            $schema = [];
+            if (in_array('title', $fields, true)) {
+                $schema[] = TextInput::make('title')->label('Başlık');
+            }
+            if (in_array('subtitle', $fields, true)) {
+                $schema[] = TextInput::make('subtitle')->label('Alt Başlık / Etiket');
+            }
+            if (in_array('text', $fields, true)) {
+                $schema[] = \Filament\Forms\Components\Textarea::make('text')->label('Metin')->rows(3);
+            }
+            if (in_array('button_text', $fields, true)) {
+                $schema[] = TextInput::make('button_text')->label('Buton Yazısı');
+            }
+            if (empty($schema)) {
+                $schema[] = \Filament\Forms\Components\Placeholder::make('info')
+                    ->label('')
+                    ->content('Bu bölümün içeriği ilgili yerden yönetilir (Slider / Genel Ayarlar). Buradan sırasını ve görünürlüğünü ayarlayabilirsiniz.');
+            }
+            $blocks[] = Block::make($type)->label($label)->schema($schema);
         }
 
         return $form

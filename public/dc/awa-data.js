@@ -367,7 +367,20 @@ window.AWA = (function () {
     }; });
     // Her bölümün sırası/görünürlüğü builder'dan (CSS order + display)
     var blkOrder={}; srcBlocks.forEach(function(b,i){ if(!(b.type in blkOrder)) blkOrder[b.type]=i; });
-    var sec={}; ['hero','featured','about','catalog','categories','story','showcases','products','news','instagram'].forEach(function(t){ sec[t]=(t in blkOrder)?('order:'+blkOrder[t]):'display:none'; });
+    var secKeys=['hero','featured','about','catalog','categories','story','showcases','products','news','instagram'];
+    var sec={}; secKeys.forEach(function(t){ sec[t]=(t in blkOrder)?('order:'+blkOrder[t]):'display:none'; });
+    // Blok içerikleri (admin Anasayfa Düzenleyici'den; boşsa varsayılan)
+    var blkMap={}; srcBlocks.forEach(function(b){ if(!blkMap[b.type]) blkMap[b.type]=b; });
+    var bD=function(t,f,def){ var b=blkMap[t]; return (b&&b[f])?b[f]:def; };
+    var blkData={
+      featured:{ title:bD('featured','title',t.featured.title), subtitle:bD('featured','subtitle',t.featured.kicker), text:bD('featured','text',t.featured.desc), btn:bD('featured','button_text',t.cta.exploreProducts) },
+      about:{ title:bD('about','title',t.about.title), subtitle:bD('about','subtitle',t.about.kicker), text:bD('about','text',(lang==='tr'?set.aboutTr:set.aboutEn)) },
+      catalog:{ title:bD('catalog','title',t.catalog.title), text:bD('catalog','text',t.catalog.desc), btn:bD('catalog','button_text',t.cta.download) },
+      categories:{ title:bD('categories','title',t.collections.title), subtitle:bD('categories','subtitle',t.collections.kicker) },
+      showcases:{ title:bD('showcases','title','İlham Veren Projeler'), subtitle:bD('showcases','subtitle',t.nav.projects) },
+      news:{ title:bD('news','title',t.newsSec.title), subtitle:bD('news','subtitle',t.newsSec.kicker) },
+      products:{ title:bD('products','title',''), subtitle:bD('products','subtitle','') }
+    };
 
     // testimonials (müşteri yorumları)
     var testimonials = (data.testimonials || []).map(function (tm) {
@@ -643,7 +656,7 @@ window.AWA = (function () {
       heroBg:IMG(hs.img), heroSub: lang==='tr'?hs.subTr:hs.subEn, heroTitle:hp[lang], heroCta:(function(id){return function(){c.goProduct(id);};})(hs.productId), heroDots:heroDots, goHero:c.goHero,
       stats:stats, aboutText: lang==='tr'?set.aboutTr:set.aboutEn,
       scriptAbout: lang==='tr'?'zamansız zarafet':'timeless elegance', scriptFeatured: lang==='tr'?'el emeğiyle':'handcrafted with care', scriptContact: lang==='tr'?'bize ulaşın':'say hello',
-      catCards:catCards, newsTeaser:newsTeaser, newsList:newsList, homeSections:homeSections, story:story, instagram:instagram, socials:socials, homeBlocks:homeBlocks, sec:sec,
+      catCards:catCards, newsTeaser:newsTeaser, newsList:newsList, homeSections:homeSections, story:story, instagram:instagram, socials:socials, homeBlocks:homeBlocks, sec:sec, blkData:blkData,
       testimonials:testimonials, hasTestimonials:hasTestimonials,
       testiKicker: lang==='tr'?'MÜŞTERİLERİMİZ':'TESTIMONIALS',
       testiTitle: lang==='tr'?'Bizimle çalışanlar ne diyor?':'What our partners say',

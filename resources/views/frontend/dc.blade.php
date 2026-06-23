@@ -169,7 +169,7 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
   <!-- HOME -->
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
   <div style="display:flex;flex-direction:column">
-    <section style="position:relative;height:90vh;min-height:600px;overflow:hidden;{{ sec.hero }}">
+    <section style="position:relative;height:100vh;min-height:600px;overflow:hidden;{{ sec.hero }}">
       <div style="{{ heroTrackStyle }}">
         <sc-for list="{{ heroSlidesAll }}" as="hsl" hint-placeholder-count="3">
           <div style="position:relative;flex:none;width:100%;height:100%;overflow:hidden">
@@ -199,10 +199,10 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
       <div style="position:absolute;top:-120px;left:-180px;width:760px;height:760px;border-radius:50%;background:#fff;opacity:.6"></div>
       <div style="position:relative;max-width:1560px;margin:0 auto;padding:clamp(70px,9vw,130px) clamp(20px,4vw,72px);display:grid;grid-template-columns:{{ gFeatured }};gap:clamp(32px,5vw,90px);align-items:center">
         <div>
-          <span style="{{ kickerStyle }}">{{ t.featured.kicker }}</span>
+          <span style="{{ kickerStyle }}">{{ blkData.featured.subtitle }}</span>
           <div style="font-family:'Dancing Script',cursive;font-weight:600;font-size:clamp(28px,3.4vw,40px);color:{{ accent }};line-height:1;margin-top:10px">{{ scriptFeatured }}</div>
-          <h2 style="margin:8px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(38px,4.6vw,64px);line-height:1.02;letter-spacing:-.025em">{{ t.featured.title }}</h2>
-          <p style="margin:26px 0 0;font-size:18px;line-height:1.65;color:#5d564b;max-width:430px">{{ t.featured.desc }}</p>
+          <h2 style="margin:8px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(38px,4.6vw,64px);line-height:1.02;letter-spacing:-.025em">{{ blkData.featured.title }}</h2>
+          <p style="margin:26px 0 0;font-size:18px;line-height:1.65;color:#5d564b;max-width:430px">{{ blkData.featured.text }}</p>
           <div style="display:flex;gap:18px;margin-top:38px">
             <div style="flex:1;border-radius:14px;aspect-ratio:1/1;background:url('uploads/9.png') center/cover"></div>
             <div style="flex:1;border-radius:14px;aspect-ratio:1/1;background:url('uploads/4.png') center/cover"></div>
@@ -217,10 +217,10 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
       <div style="max-width:1560px;margin:0 auto;padding:clamp(70px,9vw,130px) clamp(20px,4vw,72px);display:grid;grid-template-columns:{{ gAbout }};gap:clamp(36px,5vw,90px);align-items:center">
         <div style="border-radius:18px;aspect-ratio:3/3.6;background:url('uploads/3.png') center/cover"></div>
         <div>
-          <span style="font-family:'Space Mono';font-size:12px;letter-spacing:.2em;color:{{ accent }};text-transform:uppercase">{{ t.about.kicker }}</span>
+          <span style="font-family:'Space Mono';font-size:12px;letter-spacing:.2em;color:{{ accent }};text-transform:uppercase">{{ blkData.about.subtitle }}</span>
           <div style="font-family:'Dancing Script',cursive;font-weight:600;font-size:clamp(28px,3.4vw,42px);color:{{ accent }};line-height:1;margin-top:10px">{{ scriptAbout }}</div>
-          <h2 style="margin:8px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(36px,4.4vw,58px);line-height:1.04;letter-spacing:-.025em;color:#fff">{{ t.about.title }}</h2>
-          <p style="margin:26px 0 0;font-size:17px;line-height:1.7;color:#b9b1a4;max-width:560px">{{ aboutText }}</p>
+          <h2 style="margin:8px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(36px,4.4vw,58px);line-height:1.04;letter-spacing:-.025em;color:#fff">{{ blkData.about.title }}</h2>
+          <p style="margin:26px 0 0;font-size:17px;line-height:1.7;color:#b9b1a4;max-width:560px">{{ blkData.about.text }}</p>
           <div style="display:flex;gap:clamp(28px,5vw,80px);margin-top:52px;flex-wrap:wrap">
             <sc-for list="{{ stats }}" as="s" hint-placeholder-count="3"><div><div data-countup="1" data-count="{{ s.count }}" data-suffix="{{ s.suffix }}" style="font-family:Archivo;font-weight:800;font-size:clamp(46px,5vw,68px);line-height:1;color:#fff">{{ s.n }}</div><div style="margin-top:8px;font-size:14px;color:#8f8676;max-width:170px">{{ s.l }}</div></div></sc-for>
           </div>
@@ -234,8 +234,8 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
       <div style="position:relative;max-width:1560px;margin:0 auto;padding:clamp(70px,9vw,128px) clamp(20px,4vw,72px);display:grid;grid-template-columns:{{ gCatalog }};gap:clamp(36px,5vw,80px);align-items:center">
         <div>
           <span style="font-family:'Space Mono';font-size:12px;letter-spacing:.22em;color:{{ accent }};text-transform:uppercase">KATALOG · 2026</span>
-          <h2 style="margin:16px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(38px,4.6vw,62px);line-height:1.02;letter-spacing:-.025em;color:#fff">{{ t.catalog.title }}</h2>
-          <p style="margin:22px 0 0;font-size:18px;line-height:1.65;color:#b9b1a4;max-width:400px">{{ t.catalog.desc }}</p>
+          <h2 style="margin:16px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(38px,4.6vw,62px);line-height:1.02;letter-spacing:-.025em;color:#fff">{{ blkData.catalog.title }}</h2>
+          <p style="margin:22px 0 0;font-size:18px;line-height:1.65;color:#b9b1a4;max-width:400px">{{ blkData.catalog.text }}</p>
           <button onClick="{{ goCatalog }}" style="margin-top:36px;display:inline-flex;align-items:center;gap:14px;background:{{ accent }};color:#1a1610;border:none;cursor:pointer;padding:17px 32px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase">{{ t.cta.download }}<svg width="22" height="10" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.6"/></svg></button>
         </div>
         <div style="display:flex;gap:clamp(14px,2vw,26px);justify-content:flex-end;align-items:flex-end">
@@ -250,7 +250,7 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
     <section style="background:#f6f3ed;{{ sec.categories }}">
       <div style="max-width:1560px;margin:0 auto;padding:clamp(70px,9vw,120px) clamp(20px,4vw,72px)">
         <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-bottom:46px">
-          <div><span style="{{ kickerStyle }}">{{ t.collections.kicker }}</span><h2 style="margin:16px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(36px,4.4vw,58px);letter-spacing:-.025em">{{ t.collections.title }}</h2></div>
+          <div><span style="{{ kickerStyle }}">{{ blkData.categories.subtitle }}</span><h2 style="margin:16px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(36px,4.4vw,58px);letter-spacing:-.025em">{{ blkData.categories.title }}</h2></div>
           <button onClick="{{ goCollectionDefault }}" style="display:inline-flex;align-items:center;gap:12px;background:transparent;color:#17140f;border:1px solid #d3cabb;cursor:pointer;padding:14px 26px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase">{{ t.cta.allCollections }}<svg width="20" height="9" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.5"/></svg></button>
         </div>
         <div style="display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:thin">
@@ -291,8 +291,8 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
     <section style="background:#f6f3ed;{{ sec.showcases }}">
       <div style="max-width:1560px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,72px)">
         <div style="text-align:center;margin-bottom:clamp(36px,4vw,56px)">
-          <span style="font-family:'Space Mono';font-size:12px;letter-spacing:.2em;color:{{ accent }};text-transform:uppercase">{{ t.nav.projects }}</span>
-          <h2 style="margin:14px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(30px,3.6vw,52px);letter-spacing:-.025em;color:#17140f">İlham Veren Projeler</h2>
+          <span style="font-family:'Space Mono';font-size:12px;letter-spacing:.2em;color:{{ accent }};text-transform:uppercase">{{ blkData.showcases.subtitle }}</span>
+          <h2 style="margin:14px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(30px,3.6vw,52px);letter-spacing:-.025em;color:#17140f">{{ blkData.showcases.title }}</h2>
           <div style="margin-top:22px"><span onClick="{{ goShowcases }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:10px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#17140f;border:1px solid #17140f;padding:13px 26px;border-radius:8px" style-hover="background:#17140f;color:#fff">Hepsini gör</span></div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px">
@@ -337,7 +337,7 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
     <section style="background:#fff;border-top:1px solid #ece6da;{{ sec.news }}">
       <div style="max-width:1560px;margin:0 auto;padding:clamp(70px,9vw,120px) clamp(20px,4vw,72px)">
         <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-bottom:46px">
-          <div><span style="{{ kickerStyle }}">{{ t.newsSec.kicker }}</span><h2 style="margin:16px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(36px,4.4vw,58px);letter-spacing:-.025em">{{ t.newsSec.title }}</h2></div>
+          <div><span style="{{ kickerStyle }}">{{ blkData.news.subtitle }}</span><h2 style="margin:16px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(36px,4.4vw,58px);letter-spacing:-.025em">{{ blkData.news.title }}</h2></div>
           <button onClick="{{ goNews }}" style="display:inline-flex;align-items:center;gap:12px;background:transparent;color:#17140f;border:1px solid #d3cabb;cursor:pointer;padding:14px 26px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase">{{ t.cta.viewAll }}<svg width="20" height="9" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.5"/></svg></button>
         </div>
         <div style="display:grid;grid-template-columns:{{ g3 }};gap:26px">
