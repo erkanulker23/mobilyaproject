@@ -265,6 +265,25 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
       </div>
     </section>
 
+    {{-- Hikaye / Tanıtım (video veya görsel + metin) --}}
+    <sc-if value="{{ story.show }}" hint-placeholder-val="{{ true }}">
+    <section style="background:#fff">
+      <div style="max-width:1560px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,72px);display:grid;grid-template-columns:{{ gContact }};gap:clamp(36px,5vw,72px);align-items:center">
+        <div style="border-radius:18px;overflow:hidden;background:#ece6da;aspect-ratio:16/10;position:relative">
+          <sc-if value="{{ story.isYoutube }}" hint-placeholder-val="{{ false }}"><iframe src="{{ story.embedUrl }}" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></sc-if>
+          <sc-if value="{{ story.isMp4 }}" hint-placeholder-val="{{ false }}"><video src="{{ story.mp4Url }}" controls style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video></sc-if>
+          <sc-if value="{{ story.isImage }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;{{ story.mediaBg }}"></div></sc-if>
+        </div>
+        <div>
+          <span style="font-family:'Space Mono';font-size:12px;letter-spacing:.2em;color:{{ accent }};text-transform:uppercase">{{ story.subtitle }}</span>
+          <h2 style="margin:14px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(30px,3.6vw,52px);letter-spacing:-.025em;line-height:1.05;color:#17140f">{{ story.title }}</h2>
+          <p style="margin:22px 0 0;font-size:17px;line-height:1.85;color:#5d564b;max-width:560px">{{ story.text }}</p>
+          <button onClick="{{ story.onBtn }}" style="margin-top:32px;display:inline-flex;align-items:center;gap:12px;background:#17140f;color:#fff;border:none;cursor:pointer;padding:16px 32px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase">{{ story.btnText }}<svg width="20" height="9" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.5"/></svg></button>
+        </div>
+      </div>
+    </section>
+    </sc-if>
+
     <sc-for list="{{ homeSections }}" as="hs" hint-placeholder-count="4">
     <section style="{{ hs.secStyle }}">
       <div style="max-width:1560px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,72px)">

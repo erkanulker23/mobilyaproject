@@ -8,6 +8,21 @@ class GeneralSettings extends Settings
 {
     public string $site_name;
 
+    // Anasayfa "Hikayemiz" / tanıtım bölümü
+    public ?string $story_title = null;
+
+    public ?string $story_subtitle = null;
+
+    public ?string $story_text = null;
+
+    public ?string $story_video = null;
+
+    public ?string $story_image = null;
+
+    public ?string $story_button_text = null;
+
+    public ?string $story_button_link = null;
+
     public ?string $header_logo = null;
 
     public ?string $address = null;

@@ -47,6 +47,25 @@ class ManageSettings extends SettingsPage
                 ->maxHeight(150)
 ,
 
+            Section::make('story')
+                ->heading('Anasayfa Hikaye / Tanıtım Bölümü')
+                ->columns(2)
+                ->description('Anasayfada gösterilen video/görsel + tanıtım metni.')
+                ->schema([
+                    TextInput::make('story_subtitle')->label('Üst Başlık')->placeholder('AWA Mobilya'),
+                    TextInput::make('story_title')->label('Başlık')->placeholder('Hikayemiz'),
+                    Textarea::make('story_text')->label('Metin')->rows(4)->columnSpanFull(),
+                    TextInput::make('story_video')
+                        ->label('Video URL (YouTube / MP4)')
+                        ->helperText('YouTube/Vimeo linki ya da .mp4 adresi. Boş bırakılırsa görsel gösterilir.')
+                        ->columnSpanFull(),
+                    FileUpload::make('story_image')
+                        ->label('Görsel (video yoksa)')
+                        ->image()->imageEditor()->disk('public')->directory('story'),
+                    TextInput::make('story_button_text')->label('Buton Yazısı')->placeholder('Keşfet'),
+                    TextInput::make('story_button_link')->label('Buton Linki')->placeholder('/kurumsal'),
+                ]),
+
             Section::make('address')
                 ->heading('Adres Bilgileri')
                 ->columns(2)

@@ -59,6 +59,13 @@ class DcSiteData
             'ogImage' => '/uploads/1.png',
             'whatsapp' => $s->whatsapp ?: '',
             'social' => $this->social($s),
+            'storyTitle' => $s->story_title ?: '',
+            'storySubtitle' => $s->story_subtitle ?: '',
+            'storyText' => $s->story_text ?: '',
+            'storyVideo' => $s->story_video ?: '',
+            'storyImage' => $s->story_image ? \Storage::disk('public')->url($s->story_image) : '',
+            'storyBtnText' => $s->story_button_text ?: 'Keşfet',
+            'storyBtnLink' => $s->story_button_link ?: '/kurumsal',
         ];
     }
 

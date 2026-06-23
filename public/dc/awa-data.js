@@ -214,6 +214,17 @@ window.AWA = (function () {
     var page = s.page;
     var data = c.getData();
     var set = data.settings;
+    // Anasayfa hikaye/tanıtım bölümü
+    var storyVid = set.storyVideo || '';
+    var ytMatch = storyVid.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([\w-]{11})/);
+    var story = {
+      show: !!(set.storyTitle || set.storyText || storyVid || set.storyImage),
+      title: set.storyTitle || '', subtitle: set.storySubtitle || '', text: set.storyText || '',
+      btnText: set.storyBtnText || 'Keşfet', onBtn: (function(link){ return function(){ try{ if(link){ if(link.indexOf('http')===0){ window.location.href=link; } else { c.nav(c._stateFromPath ? c._stateFromPath(link) : {page:'corporate'}); } } else { c.goCorporate(); } }catch(e){ c.goCorporate(); } }; })(set.storyBtnLink || ''),
+      isYoutube: !!ytMatch, embedUrl: ytMatch ? ('https://www.youtube.com/embed/'+ytMatch[1]) : '',
+      isMp4: !ytMatch && /\.mp4($|\?)/i.test(storyVid), mp4Url: storyVid,
+      isImage: !storyVid && !!set.storyImage, mediaBg: IMG(set.storyImage || '')
+    };
     var slides = (data.slides && data.slides.length) ? data.slides : defaultData().slides;
     var pages = data.pages || defaultData().pages;
     var CATS = (data.categories && data.categories.length) ? data.categories : CATS_DEFAULT;
@@ -595,7 +606,7 @@ window.AWA = (function () {
       heroBg:IMG(hs.img), heroSub: lang==='tr'?hs.subTr:hs.subEn, heroTitle:hp[lang], heroCta:(function(id){return function(){c.goProduct(id);};})(hs.productId), heroDots:heroDots, goHero:c.goHero,
       stats:stats, aboutText: lang==='tr'?set.aboutTr:set.aboutEn,
       scriptAbout: lang==='tr'?'zamansız zarafet':'timeless elegance', scriptFeatured: lang==='tr'?'el emeğiyle':'handcrafted with care', scriptContact: lang==='tr'?'bize ulaşın':'say hello',
-      catCards:catCards, newsTeaser:newsTeaser, newsList:newsList, homeSections:homeSections,
+      catCards:catCards, newsTeaser:newsTeaser, newsList:newsList, homeSections:homeSections, story:story,
       testimonials:testimonials, hasTestimonials:hasTestimonials,
       testiKicker: lang==='tr'?'MÜŞTERİLERİMİZ':'TESTIMONIALS',
       testiTitle: lang==='tr'?'Bizimle çalışanlar ne diyor?':'What our partners say',
