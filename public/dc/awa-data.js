@@ -312,14 +312,14 @@ window.AWA = (function () {
     });
 
     // news + article
-    var locN = function (n, i) { return { id:n.id, date:n.date, cat: lang==='tr'?n.catTr:n.catEn, title: lang==='tr'?n.tr:n.en, excerpt: lang==='tr'?n.exTr:n.exEn, bg:IMG(NEWSIMG[i % NEWSIMG.length]), onClick:(function(id){return function(){c.goArticle(id);};})(n.id) }; };
+    var locN = function (n, i) { return { id:n.id, date:n.date, cat: lang==='tr'?n.catTr:n.catEn, title: lang==='tr'?n.tr:n.en, excerpt: lang==='tr'?n.exTr:n.exEn, bg:IMG(n.img ? n.img : ('/'+NEWSIMG[i % NEWSIMG.length])), onClick:(function(id){return function(){c.goArticle(id);};})(n.id) }; };
     var newsList = data.news.map(locN);
     var newsTeaser = newsList.slice(0,3);
     var curNIndex = Math.max(0, data.news.map(function(n){return n.id;}).indexOf(s.article));
     var curN = data.news[curNIndex] || data.news[0];
     var article = curN ? {
       title: lang==='tr'?curN.tr:curN.en, date:curN.date, cat: lang==='tr'?curN.catTr:curN.catEn,
-      bg:IMG(NEWSIMG[curNIndex % NEWSIMG.length]),
+      bg:IMG(curN.img ? curN.img : ('/'+NEWSIMG[curNIndex % NEWSIMG.length])),
       body: (lang==='tr'?curN.bodyTr:curN.bodyEn || '').split('\n').filter(function(x){return x.trim();}).map(function(p){return {p:p};})
     } : {title:'',date:'',cat:'',bg:'',body:[]};
     var relatedArticles = data.news.filter(function(n){return n.id!==(curN&&curN.id);}).slice(0,3).map(function(n,i){ return locN(n, i+1); });
@@ -341,6 +341,10 @@ window.AWA = (function () {
     var distSet = {}; allDealers.forEach(function(d){ if((!dIl || d.province===dIl) && d.district) distSet[d.district]=1; });
     var dealerDistricts = [{v:'',label:(lang==='tr'?'Tüm İlçeler':'All Districts')}].concat(Object.keys(distSet).sort().map(function(p){return {v:p,label:p};}));
     var dealers = allDealers.filter(function(d){ return (!dIl || d.province===dIl) && (!dIlce || d.district===dIlce); }).map(function (d) { return { city:d.city, addr:d.addr, tel:d.tel }; });
+    // İletişim sayfası için il bazında bayi kırılımı
+    var dgMap = {};
+    allDealers.forEach(function(d){ var k=d.province||'Diğer'; (dgMap[k]=dgMap[k]||[]).push(d); });
+    var dealerGroups = Object.keys(dgMap).sort().map(function(k){ return { il:k, count:dgMap[k].length, list:dgMap[k].map(function(d){ return { city:d.city, addr:d.addr, tel:d.tel, district:d.district }; }) }; });
 
     // contact cards
     var contactCards = [
@@ -603,7 +607,7 @@ window.AWA = (function () {
       galSlides:galSlides, galTrackStyle:galTrackStyle, galDots:galDots,
       article:article, relatedArticles:relatedArticles,
       dealers:dealers, contactCards:contactCards,
-      dealerProvinces:dealerProvinces, dealerDistricts:dealerDistricts, dealerIl:dIl, dealerIlce:dIlce, setDealerIl:c.setDealerIl, setDealerIlce:c.setDealerIlce,
+      dealerProvinces:dealerProvinces, dealerDistricts:dealerDistricts, dealerIl:dIl, dealerIlce:dIlce, setDealerIl:c.setDealerIl, setDealerIlce:c.setDealerIlce, dealerGroups:dealerGroups,
       legalDoc:legalDoc, legalNav:legalNav,
       phone:set.phone, email:set.email, address: lang==='tr'?set.addressTr:set.addressEn, hours: lang==='tr'?set.hoursTr:set.hoursEn,
       footerCats:footerCats, footerCorp:footerCorp, headerMenu:headerMenu, footerMenu:footerMenu, hasHeaderMenu:headerMenu.length>0,

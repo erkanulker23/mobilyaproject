@@ -584,6 +584,37 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
         </div>
       </div>
     </section>
+    {{-- Bayiler kırılımı (il bazında) --}}
+    <section style="background:#f6f3ed;border-top:1px solid #ece6da">
+      <div style="max-width:1560px;margin:0 auto;padding:clamp(56px,6vw,90px) clamp(20px,4vw,72px) clamp(64px,8vw,110px)">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(30px,4vw,46px)">
+          <div>
+            <span style="font-family:'Space Mono';font-size:12px;letter-spacing:.2em;color:#9c8463;text-transform:uppercase">{{ t.dealersPage.kicker }}</span>
+            <h2 style="margin:12px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(26px,3.2vw,42px);letter-spacing:-.02em">{{ t.dealersPage.title }}</h2>
+          </div>
+          <span onClick="{{ goDealers }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:10px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#17140f;border:1px solid #d3cabb;padding:13px 24px;border-radius:999px" style-hover="background:#17140f;color:#fff">{{ t.dealersPage.allT }}<svg width="18" height="9" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px">
+          <sc-for list="{{ dealerGroups }}" as="grp" hint-placeholder-count="4">
+            <div style="background:#fff;border:1px solid #ece6da;border-radius:18px;padding:24px 26px">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid #efe9dd">
+                <div style="font-family:Archivo;font-weight:800;font-size:21px">{{ grp.il }}</div>
+                <div style="font-family:'Space Mono';font-size:11px;color:#9a8f7e;text-transform:uppercase">{{ grp.count }} bayi</div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:16px;margin-top:16px">
+                <sc-for list="{{ grp.list }}" as="d" hint-placeholder-count="2">
+                  <div>
+                    <div style="font-family:Archivo;font-weight:700;font-size:15px;color:#2c241b">{{ d.district }}</div>
+                    <div style="margin-top:4px;font-size:14px;line-height:1.55;color:#6b6356">{{ d.addr }}</div>
+                    <div style="margin-top:5px;font-family:Archivo;font-weight:700;font-size:14px;color:#9c8463">{{ d.tel }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
   </div>
   </sc-if>
 
