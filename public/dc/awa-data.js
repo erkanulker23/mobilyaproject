@@ -228,7 +228,8 @@ window.AWA = (function () {
     var igPosts = (set.instagramPosts || []).map(function(p){ return { bg:IMG(p.img), link:p.link || (set.instagramUrl || '#') }; });
     var instagram = { show: igPosts.length > 0, username: set.instagramUsername || '', handle: '@'+(set.instagramUsername || ''), url: set.instagramUrl || '#', posts: igPosts };
     var igLabel = { instagram:'IG', facebook:'f', linkedin:'in', youtube:'YT', twitter:'X', x:'X' };
-    var socials = (set.social || []).map(function(s){ var n=(s.name||'').toLowerCase(); return { name:n, url:s.url || '#', label: igLabel[n] || (n.charAt(0).toUpperCase()) }; });
+    var faMap = { instagram:'fa-brands fa-instagram', facebook:'fa-brands fa-facebook-f', linkedin:'fa-brands fa-linkedin-in', youtube:'fa-brands fa-youtube', twitter:'fa-brands fa-x-twitter', x:'fa-brands fa-x-twitter', tiktok:'fa-brands fa-tiktok', pinterest:'fa-brands fa-pinterest-p', whatsapp:'fa-brands fa-whatsapp' };
+    var socials = (set.social || []).map(function(s){ var n=(s.name||'').toLowerCase(); return { name:n, url:s.url || '#', label: igLabel[n] || (n.charAt(0).toUpperCase()), fa: faMap[n] || 'fa-solid fa-link' }; });
     var slides = (data.slides && data.slides.length) ? data.slides : defaultData().slides;
     var pages = data.pages || defaultData().pages;
     var CATS = (data.categories && data.categories.length) ? data.categories : CATS_DEFAULT;
@@ -306,13 +307,9 @@ window.AWA = (function () {
     // category cards (home)
     var catCards = CATS.map(function (k) { return { label:k[lang], count:catCount(k.id), bg:IMG(k.img), onClick:(function(id){return function(){c.goCollection(id);};})(k.id) }; });
 
-    // home category showcase sections
-    var sectionDefs = [
-      { cat:'koltuk', tr:'Koltuk Takımları', en:'Sofa Sets' },
-      { cat:'yemek', tr:'Yemek Odası Takımları', en:'Dining Room Sets' },
-      { cat:'yatak', tr:'Yatak Odası Takımları', en:'Bedroom Sets' },
-      { cat:'kose', tr:'Tamamlayıcı Ürünler', en:'Complementary Pieces' }
-    ];
+    // home category showcase sections — kategorilerden dinamik (sadece ürünü olanlar)
+    var sectionDefs = CATS.map(function(k){ return { cat:k.id, tr:k.tr, en:k.en }; })
+      .filter(function(sd){ return data.products.some(function(p){return p.cat===sd.cat;}); });
     var homeSections = sectionDefs.map(function (sd, idx) {
       var items = data.products.filter(function(p){return p.cat===sd.cat;}).map(locP);
       var dark = idx % 2 === 1;
@@ -649,7 +646,7 @@ window.AWA = (function () {
       cookieAccept: lang==='tr'?'Kabul Et':'Accept', cookieReject: lang==='tr'?'Reddet':'Reject', cookieMore: lang==='tr'?'Gizlilik Politikası':'Privacy Policy', goGizlilik:function(){c.goLegal('gizlilik');},
       sortMode:sortMode, sortOptions:sortOptions, setSort:c.setSort,
       heroSlidesAll:heroSlidesAll, heroTrackStyle:heroTrackStyle, heroNext:c.heroNext, heroPrev:c.heroPrev,
-      gFeatured:M?'1fr':'1fr 1.18fr', gAbout:M?'1fr':'.9fr 1.1fr', gCatalog:M?'1fr':'1fr 1.15fr', gCat:M?'1fr':'1fr 1fr', g3:M?'1fr':'repeat(3,1fr)', g2:M?'1fr':'1fr 1fr', gProduct:M?'1fr':'1.05fr .95fr', gContact:M?'1fr':'1.1fr .9fr', gFooter:M?'1fr 1fr':'1.4fr .8fr .8fr 1.3fr',
+      gFeatured:M?'1fr':'1fr 1.18fr', gAbout:M?'1fr':'.9fr 1.1fr', gCatalog:M?'1fr':'1fr 1.15fr', gCat:M?'1fr':'1fr 1fr', g3:M?'1fr':'repeat(3,1fr)', g2:M?'1fr':'1fr 1fr', gProduct:M?'1fr':'1.05fr .95fr', gContact:M?'1fr':'1.1fr .9fr', gFooter:M?'1fr 1fr':'1.4fr .8fr .8fr 1.3fr', gShowcaseRow:M?'1fr':'1.15fr 1fr',
       showFooter: page!=='admin', showCatalog: set.homeCatalog !== '0',
       isMobile:s.isMobile, isDesktop:!s.isMobile, mobileOpen:s.mobileOpen, toggleMobile:c.toggleMobile, closeMobile:c.closeMobile, mobileLinks:mobileLinks, mobileCats:mobileCats,
       trMStyle:'cursor:pointer;color:#fff;opacity:'+(lang==='tr'?1:.4), enMStyle:'cursor:pointer;color:#fff;opacity:'+(lang==='en'?1:.4),

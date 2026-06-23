@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 @if(!empty($favicon))<link rel="icon" href="{{ $favicon }}"><link rel="apple-touch-icon" href="{{ $favicon }}">@endif
 <title>{{ $seoTitle ?? 'AWA Mobilya' }}</title>
 <meta name="description" content="{{ $seoDescription ?? '' }}">
@@ -796,17 +797,18 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
       </div>
     </section>
     <section style="background:#f6f3ed">
-      <div style="max-width:1560px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(20px,4vw,72px) clamp(70px,9vw,120px)">
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px">
-          <sc-for list="{{ showcaseList }}" as="sc" hint-placeholder-count="6">
-            <div onClick="{{ sc.onClick }}" style="cursor:pointer">
-              <div style="border-radius:14px;aspect-ratio:4/3;{{ sc.bg }};overflow:hidden"></div>
-              <h3 style="margin:18px 0 0;font-family:Archivo;font-weight:700;font-size:21px;line-height:1.25;color:#17140f">{{ sc.title }}</h3>
-              <div style="margin-top:10px;font-family:'Space Mono';font-size:12px;letter-spacing:.06em;color:#9a8f7e;text-transform:uppercase">{{ sc.location }}</div>
-              <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#5d564b">{{ sc.excerpt }}</p>
+      <div style="max-width:1440px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(20px,4vw,72px) clamp(70px,9vw,120px);display:flex;flex-direction:column;gap:clamp(40px,5vw,72px)">
+        <sc-for list="{{ showcaseList }}" as="sc" hint-placeholder-count="4">
+          <div onClick="{{ sc.onClick }}" style="cursor:pointer;display:grid;grid-template-columns:{{ gShowcaseRow }};gap:clamp(28px,4vw,56px);align-items:center">
+            <div style="border-radius:16px;aspect-ratio:16/10;{{ sc.bg }};overflow:hidden;box-shadow:0 30px 60px -42px rgba(23,20,15,.5);transition:transform .5s cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-6px)"></div>
+            <div>
+              <div style="font-family:'Space Mono';font-size:12px;letter-spacing:.1em;color:#9a8f7e;text-transform:uppercase">{{ sc.location }}</div>
+              <h3 style="margin:14px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(26px,3vw,42px);line-height:1.1;letter-spacing:-.02em;color:#17140f">{{ sc.title }}</h3>
+              <p style="margin:18px 0 0;font-size:17px;line-height:1.75;color:#5d564b;max-width:520px">{{ sc.excerpt }}</p>
+              <span style="display:inline-flex;align-items:center;gap:10px;margin-top:26px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#17140f;border-bottom:2px solid #17140f;padding-bottom:4px">Devamını oku <i class="fa-solid fa-arrow-right" style="font-size:11px"></i></span>
             </div>
-          </sc-for>
-        </div>
+          </div>
+        </sc-for>
       </div>
     </section>
   </div>
@@ -1298,7 +1300,7 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
       <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-bottom:clamp(34px,4vw,52px);border-bottom:1px solid #262320">
         <div style="display:flex;align-items:baseline;gap:9px"><span style="font-family:Archivo;font-weight:900;font-size:32px;letter-spacing:-.04em;color:#fff">AWA</span><span style="font-family:Archivo;font-weight:500;font-size:12px;letter-spacing:.4em;color:#fff;opacity:.5">MOBİLYA</span></div>
         <div style="display:flex;gap:12px">
-          <sc-for list="{{ socials }}" as="s" hint-placeholder-count="3"><a href="{{ s.url }}" target="_blank" rel="noopener" style="width:44px;height:44px;border-radius:50%;border:1px solid #34302a;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:Archivo;font-weight:700;font-size:13px;color:#cabfae;text-decoration:none" style-hover="border-color:#cabfae;color:#fff">{{ s.label }}</a></sc-for>
+          <sc-for list="{{ socials }}" as="s" hint-placeholder-count="3"><a href="{{ s.url }}" target="_blank" rel="noopener" style="width:44px;height:44px;border-radius:50%;border:1px solid #34302a;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:#cabfae;text-decoration:none" style-hover="border-color:#cabfae;color:#fff"><i class="{{ s.fa }}"></i></a></sc-for>
         </div>
       </div>
 
