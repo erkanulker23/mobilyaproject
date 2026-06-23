@@ -38,24 +38,24 @@
         <div class="kal-pad" style="max-width:1340px;margin:0 auto;padding:0 52px">
             <div class="kal-grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px">
                 <div data-reveal style="opacity:0;background:#fff;border:1px solid #E6E0D4;border-radius:14px;padding:30px 28px;box-shadow:0 18px 44px rgba(43,41,38,.07)">
-                    <div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:#F7EAE2;color:#D97757;font-size:20px;border-radius:11px;margin-bottom:18px">✆</div>
+                    <div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:#F7EAE2;color:#9C8463;font-size:20px;border-radius:11px;margin-bottom:18px">✆</div>
                     <div style="font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:#8B8273">Telefon</div>
-                    <a href="tel:{{ $phoneHref }}" style="font-family:'Plus Jakarta Sans';font-weight:700;font-size:18px;color:#2B2926;margin-top:5px;display:block;text-decoration:none;transition:color .3s" style-hover="color:#D97757">{{ $phone }}</a>
+                    <a href="tel:{{ $phoneHref }}" style="font-family:'Plus Jakarta Sans';font-weight:700;font-size:18px;color:#1C1813;margin-top:5px;display:block;text-decoration:none;transition:color .3s" style-hover="color:#9C8463">{{ $phone }}</a>
                 </div>
                 <div data-reveal data-rd="0.06" style="opacity:0;background:#fff;border:1px solid #E6E0D4;border-radius:14px;padding:30px 28px;box-shadow:0 18px 44px rgba(43,41,38,.07)">
-                    <div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:#F7EAE2;color:#D97757;font-size:20px;border-radius:11px;margin-bottom:18px">✉</div>
+                    <div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:#F7EAE2;color:#9C8463;font-size:20px;border-radius:11px;margin-bottom:18px">✉</div>
                     <div style="font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:#8B8273">E-posta</div>
-                    <a href="mailto:{{ $email }}" style="font-family:'Plus Jakarta Sans';font-weight:700;font-size:18px;color:#2B2926;margin-top:5px;display:block;text-decoration:none;word-break:break-word;transition:color .3s" style-hover="color:#D97757">{{ $email }}</a>
+                    <a href="mailto:{{ $email }}" style="font-family:'Plus Jakarta Sans';font-weight:700;font-size:18px;color:#1C1813;margin-top:5px;display:block;text-decoration:none;word-break:break-word;transition:color .3s" style-hover="color:#9C8463">{{ $email }}</a>
                 </div>
                 <div data-reveal data-rd="0.12" style="opacity:0;background:#fff;border:1px solid #E6E0D4;border-radius:14px;padding:30px 28px;box-shadow:0 18px 44px rgba(43,41,38,.07)">
-                    <div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:#F7EAE2;color:#D97757;font-size:20px;border-radius:11px;margin-bottom:18px">⌖</div>
+                    <div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:#F7EAE2;color:#9C8463;font-size:20px;border-radius:11px;margin-bottom:18px">⌖</div>
                     <div style="font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:#8B8273">Adres</div>
-                    <div style="font-family:'Plus Jakarta Sans';font-weight:700;font-size:15.5px;color:#2B2926;margin-top:5px;line-height:1.5">{{ $address }}</div>
+                    <div style="font-family:'Plus Jakarta Sans';font-weight:700;font-size:15.5px;color:#1C1813;margin-top:5px;line-height:1.5">{{ $address }}</div>
                 </div>
                 <div data-reveal data-rd="0.18" style="opacity:0;background:#fff;border:1px solid #E6E0D4;border-radius:14px;padding:30px 28px;box-shadow:0 18px 44px rgba(43,41,38,.07)">
-                    <div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:#F7EAE2;color:#D97757;font-size:20px;border-radius:11px;margin-bottom:18px">⌚</div>
+                    <div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:#F7EAE2;color:#9C8463;font-size:20px;border-radius:11px;margin-bottom:18px">⌚</div>
                     <div style="font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:#8B8273">Çalışma Saatleri</div>
-                    <div style="font-family:'Plus Jakarta Sans';font-weight:700;font-size:16px;color:#2B2926;margin-top:5px;line-height:1.5">{{ $workingHours }}</div>
+                    <div style="font-family:'Plus Jakarta Sans';font-weight:700;font-size:16px;color:#1C1813;margin-top:5px;line-height:1.5">{{ $workingHours }}</div>
                 </div>
             </div>
         </div>
@@ -84,7 +84,7 @@
                     @csrf
                     <x-honeypot />
 
-                    <h2 style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:26px;color:#2B2926;letter-spacing:-.01em">Bize yazın</h2>
+                    <h2 style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:26px;color:#1C1813;letter-spacing:-.01em">Bize yazın</h2>
                     <p style="font-size:14.5px;line-height:1.6;color:#6A6358;margin-top:-8px">Aşağıdaki formu doldurun, ekibimiz en kısa sürede sizinle iletişime geçsin.</p>
 
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px" class="kal-split">
@@ -112,7 +112,7 @@
                         @error('message')<span style="font-size:12.5px;color:#D63A3A;font-weight:600">{{ $message }}</span>@enderror
                     </div>
 
-                    <button type="submit" style="align-self:flex-start;display:inline-flex;align-items:center;gap:12px;background:#D97757;color:#fff;font-weight:700;font-size:14px;letter-spacing:.4px;padding:18px 36px;border:none;border-radius:9px;cursor:pointer;transition:all .35s cubic-bezier(.16,1,.3,1)" style-hover="background:#C2603F;transform:translateY(-3px);box-shadow:0 16px 40px rgba(217,119,87,.3)">Mesajı Gönder <span style="font-size:16px">→</span></button>
+                    <button type="submit" style="align-self:flex-start;display:inline-flex;align-items:center;gap:12px;background:#9C8463;color:#fff;font-weight:700;font-size:14px;letter-spacing:.4px;padding:18px 36px;border:none;border-radius:9px;cursor:pointer;transition:all .35s cubic-bezier(.16,1,.3,1)" style-hover="background:#7D6A4F;transform:translateY(-3px);box-shadow:0 16px 40px rgba(156,132,99,.3)">Mesajı Gönder <span style="font-size:16px">→</span></button>
                 </form>
             </div>
 
@@ -125,13 +125,13 @@
                         <div class="kal-map-embed">{!! $mapEmbed !!}</div>
                     </div>
                 @else
-                    <div style="position:relative;height:300px;border-radius:16px;overflow:hidden;border:1px solid #E6E0D4;background:linear-gradient(135deg,#2B2926,#3B342D);display:flex;align-items:center;justify-content:center">
-                        <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(217,119,87,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(217,119,87,.12) 1px,transparent 1px);background-size:34px 34px"></div>
-                        <div style="position:absolute;left:0;top:50%;width:100%;height:16px;background:rgba(217,119,87,.18);transform:rotate(-5deg)"></div>
-                        <div style="position:absolute;left:38%;top:0;width:14px;height:100%;background:rgba(217,119,87,.14)"></div>
+                    <div style="position:relative;height:300px;border-radius:16px;overflow:hidden;border:1px solid #E6E0D4;background:linear-gradient(135deg,#1C1813,#3B342D);display:flex;align-items:center;justify-content:center">
+                        <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(156,132,99,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(156,132,99,.12) 1px,transparent 1px);background-size:34px 34px"></div>
+                        <div style="position:absolute;left:0;top:50%;width:100%;height:16px;background:rgba(156,132,99,.18);transform:rotate(-5deg)"></div>
+                        <div style="position:absolute;left:38%;top:0;width:14px;height:100%;background:rgba(156,132,99,.14)"></div>
                         <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:24px">
-                            <span style="display:flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:50%;background:#D97757;color:#fff;font-size:22px;box-shadow:0 0 0 10px rgba(217,119,87,.22)"><i class="fa-solid fa-location-dot"></i></span>
-                            <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#EAC1AC">Genel Merkez</div>
+                            <span style="display:flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:50%;background:#9C8463;color:#fff;font-size:22px;box-shadow:0 0 0 10px rgba(156,132,99,.22)"><i class="fa-solid fa-location-dot"></i></span>
+                            <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#DACDB8">Genel Merkez</div>
                             <div style="font-size:15px;font-weight:600;color:#fff;max-width:34ch;line-height:1.5">{{ $address }}</div>
                         </div>
                     </div>
@@ -140,15 +140,15 @@
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px">
                     @if($workingHours)
                     <div style="padding:24px;border:1px solid #E6E0D4;border-radius:14px;background:#fff">
-                        <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:#F7EAE2;color:#D97757;font-size:18px;border-radius:10px"><i class="fa-regular fa-clock"></i></div>
+                        <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:#F7EAE2;color:#9C8463;font-size:18px;border-radius:10px"><i class="fa-regular fa-clock"></i></div>
                         <div style="font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:#8B8273;margin-top:16px">Çalışma Saatleri</div>
-                        <div style="font-size:15px;font-weight:600;color:#2B2926;margin-top:5px;line-height:1.6">{{ $workingHours }}</div>
+                        <div style="font-size:15px;font-weight:600;color:#1C1813;margin-top:5px;line-height:1.6">{{ $workingHours }}</div>
                     </div>
                     @endif
-                    <a href="tel:{{ $phoneHref }}" style="padding:24px;border:1px solid #E6E0D4;border-radius:14px;background:#fff;text-decoration:none;transition:all .35s cubic-bezier(.16,1,.3,1)" style-hover="border-color:#D97757;transform:translateY(-4px);box-shadow:0 18px 40px rgba(43,41,38,.08)">
-                        <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:#F7EAE2;color:#D97757;font-size:18px;border-radius:10px"><i class="fa-solid fa-phone-volume"></i></div>
+                    <a href="tel:{{ $phoneHref }}" style="padding:24px;border:1px solid #E6E0D4;border-radius:14px;background:#fff;text-decoration:none;transition:all .35s cubic-bezier(.16,1,.3,1)" style-hover="border-color:#9C8463;transform:translateY(-4px);box-shadow:0 18px 40px rgba(43,41,38,.08)">
+                        <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:#F7EAE2;color:#9C8463;font-size:18px;border-radius:10px"><i class="fa-solid fa-phone-volume"></i></div>
                         <div style="font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:#8B8273;margin-top:16px">Hemen Arayın</div>
-                        <div style="font-size:17px;font-weight:700;color:#2B2926;margin-top:5px">{{ $phone }}</div>
+                        <div style="font-size:17px;font-weight:700;color:#1C1813;margin-top:5px">{{ $phone }}</div>
                     </a>
                 </div>
 
@@ -161,14 +161,14 @@
 
     @if(count($branches) > 0)
     {{-- ŞUBELER --}}
-    <section class="kal-section" style="background:#F4EFE7;padding:90px 0">
+    <section class="kal-section" style="background:#F6F3ED;padding:90px 0">
         <div class="kal-pad" style="max-width:1340px;margin:0 auto;padding:0 52px">
-            <div style="display:flex;align-items:center;gap:13px;margin-bottom:22px"><span style="width:34px;height:1px;background:#D97757"></span><span style="font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#D97757">Ofislerimiz</span></div>
-            <h2 style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:clamp(26px,2.8vw,42px);color:#2B2926;margin-bottom:36px">Şubelerimiz</h2>
+            <div style="display:flex;align-items:center;gap:13px;margin-bottom:22px"><span style="width:34px;height:1px;background:#9C8463"></span><span style="font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#9C8463">Ofislerimiz</span></div>
+            <h2 style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:clamp(26px,2.8vw,42px);color:#1C1813;margin-bottom:36px">Şubelerimiz</h2>
             <div class="kal-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
                 @foreach($branches as $i => $branch)
                     <div data-reveal data-rd="{{ ($i % 3) * 0.08 }}" style="opacity:0;background:#fff;border:1px solid #E6E0D4;border-radius:14px;padding:30px 28px">
-                        <h3 style="font-family:'Plus Jakarta Sans';font-weight:700;font-size:19px;color:#2B2926;margin-bottom:14px">{{ $branch->name }}</h3>
+                        <h3 style="font-family:'Plus Jakarta Sans';font-weight:700;font-size:19px;color:#1C1813;margin-bottom:14px">{{ $branch->name }}</h3>
                         <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.55;color:#5A5349">
                             @if($branch->address)<div>⌖ {{ $branch->address }}</div>@endif
                             @if($branch->country || $branch->city)<div>📍 {{ trim(($branch->country ?? '') . ' / ' . ($branch->city ?? ''), ' /') }}</div>@endif
@@ -177,7 +177,7 @@
                             @if($branch->email)<div>✉ {{ $branch->email }}</div>@endif
                         </div>
                         @if($branch->link)
-                            <a href="{{ $branch->link }}" target="_blank" rel="noopener" style="display:inline-block;margin-top:18px;font-size:13.5px;font-weight:700;color:#D97757;text-decoration:none;border-bottom:2px solid #D97757;padding-bottom:4px">Haritada Görüntüle →</a>
+                            <a href="{{ $branch->link }}" target="_blank" rel="noopener" style="display:inline-block;margin-top:18px;font-size:13.5px;font-weight:700;color:#9C8463;text-decoration:none;border-bottom:2px solid #9C8463;padding-bottom:4px">Haritada Görüntüle →</a>
                         @endif
                     </div>
                 @endforeach

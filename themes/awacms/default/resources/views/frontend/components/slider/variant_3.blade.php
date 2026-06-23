@@ -3,7 +3,7 @@
     $kalSlides = ($slider && isset($slider->slides)) ? $slider->slides : collect();
 @endphp
 @if($kalSlides && count($kalSlides))
-<section data-hero id="anasayfa" class="{{ $wrapperClass }}" style="position:relative;height:100vh;min-height:680px;overflow:hidden;background:#2B2926;font-family:'Manrope',system-ui,sans-serif">
+<section data-hero id="anasayfa" class="{{ $wrapperClass }}" style="position:relative;height:100vh;min-height:680px;overflow:hidden;background:#1C1813;font-family:'Manrope',system-ui,sans-serif">
   @foreach($kalSlides as $i => $slide)
     @php $kalImg = $slide->imageUrl ?: $slide->mobileImageUrl; @endphp
     <div data-slide style="position:absolute;inset:0;opacity:{{ $i === 0 ? 1 : 0 }};transition:opacity 1.1s ease">
@@ -17,7 +17,7 @@
       {{-- bu slide'a ait metin --}}
       <div class="kal-pad" style="position:absolute;inset:0;z-index:5;max-width:1340px;margin:0 auto;padding:0 52px;display:flex;flex-direction:column;justify-content:center">
         <div style="max-width:62ch">
-          <div style="display:flex;align-items:center;gap:14px;margin-bottom:26px"><span style="width:42px;height:1px;background:#D97757"></span><span style="font-size:12.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#EAC1AC">{{ $slide->subtitle ?: 'AWA Mobilya' }}</span></div>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:26px"><span style="width:42px;height:1px;background:#9C8463"></span><span style="font-size:12.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#DACDB8">{{ $slide->subtitle ?: 'AWA Mobilya' }}</span></div>
           @if($slide->title)
             @if($i === 0)
               <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:{{ $slide->titleColor ?: '#fff' }};font-size:clamp(44px,5.6vw,98px);line-height:1.02;letter-spacing:-.03em;max-width:15ch;text-shadow:0 2px 40px rgba(0,0,0,.4)">{!! $slide->title !!}</h1>
@@ -30,7 +30,7 @@
           @endif
           @php $kalCta = $slide->ctaText ?? null; $kalLink = $slide->linkUrl ?? null; @endphp
           <div style="display:flex;gap:16px;margin-top:40px;flex-wrap:wrap">
-            <a href="{{ $kalLink ?: route('projects.index') }}" style="display:inline-flex;align-items:center;gap:13px;background:#D97757;color:#fff;font-weight:700;font-size:14px;letter-spacing:.4px;padding:18px 32px;text-decoration:none;transition:all .35s cubic-bezier(.16,1,.3,1)" style-hover="background:#C2603F;transform:translateY(-3px);box-shadow:0 16px 40px rgba(217,119,87,.4)">{{ $kalCta ?: 'Projelerimizi Keşfedin' }} <span style="font-size:16px">→</span></a>
+            <a href="{{ $kalLink ?: route('projects.index') }}" style="display:inline-flex;align-items:center;gap:13px;background:#9C8463;color:#fff;font-weight:700;font-size:14px;letter-spacing:.4px;padding:18px 32px;text-decoration:none;transition:all .35s cubic-bezier(.16,1,.3,1)" style-hover="background:#7D6A4F;transform:translateY(-3px);box-shadow:0 16px 40px rgba(156,132,99,.4)">{{ $kalCta ?: 'Projelerimizi Keşfedin' }} <span style="font-size:16px">→</span></a>
             <a href="{{ route('contact.index') }}" style="display:inline-flex;align-items:center;gap:13px;background:rgba(255,255,255,.08);color:#fff;font-weight:700;font-size:14px;letter-spacing:.4px;padding:18px 32px;text-decoration:none;border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(6px);transition:all .35s" style-hover="background:rgba(255,255,255,.16);transform:translateY(-3px)">Ücretsiz Danışmanlık</a>
           </div>
         </div>

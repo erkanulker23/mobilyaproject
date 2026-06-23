@@ -19,19 +19,19 @@
 <div style="font-family:'Manrope',system-ui,sans-serif;color:#1F1C18;background:#fff">
 
     {{-- HERO --}}
-    <section style="position:relative;background:#2B2926;min-height:54vh;display:flex;align-items:flex-end;overflow:hidden">
+    <section style="position:relative;background:#1C1813;min-height:54vh;display:flex;align-items:flex-end;overflow:hidden">
         @if($heroImg)
             <div style="position:absolute;inset:0"><img src="{{ $heroImg }}" alt="{{ $servicePost->title }}" style="width:100%;height:100%;object-fit:cover;opacity:.5"></div>
         @endif
         <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,26,23,.45),rgba(28,26,23,.93))"></div>
         <div class="kal-pad" style="position:relative;max-width:1340px;margin:0 auto;padding:0 52px 64px;width:100%">
             <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:20px;font-size:12.5px;color:rgba(255,255,255,.6)">
-                <a href="{{ route('home') }}" style="color:rgba(255,255,255,.6);text-decoration:none" style-hover="color:#E0A488">Ana Sayfa</a><span style="opacity:.5">/</span>
-                <a href="{{ route('services.index') }}" style="color:rgba(255,255,255,.6);text-decoration:none" style-hover="color:#E0A488">Hizmetler</a><span style="opacity:.5">/</span>
-                <span style="color:#E0A488">{{ $servicePost->title }}</span>
+                <a href="{{ route('home') }}" style="color:rgba(255,255,255,.6);text-decoration:none" style-hover="color:#C9B79C">Ana Sayfa</a><span style="opacity:.5">/</span>
+                <a href="{{ route('services.index') }}" style="color:rgba(255,255,255,.6);text-decoration:none" style-hover="color:#C9B79C">Hizmetler</a><span style="opacity:.5">/</span>
+                <span style="color:#C9B79C">{{ $servicePost->title }}</span>
             </div>
             @if($categoryName)
-                <div style="display:flex;align-items:center;gap:13px;margin-bottom:16px"><span style="width:34px;height:1px;background:#D97757"></span><span style="font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#EAC1AC">{{ $categoryName }}</span></div>
+                <div style="display:flex;align-items:center;gap:13px;margin-bottom:16px"><span style="width:34px;height:1px;background:#9C8463"></span><span style="font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#DACDB8">{{ $categoryName }}</span></div>
             @endif
             <h1 style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:clamp(34px,4.6vw,68px);line-height:1.04;letter-spacing:-.02em;color:#fff;max-width:20ch">{{ $servicePost->title }}</h1>
             @if($servicePost->shortDescription)
@@ -55,23 +55,23 @@
 
             <aside style="display:flex;flex-direction:column;gap:24px;position:sticky;top:100px">
                 {{-- İletişim kartı --}}
-                <div style="background:linear-gradient(135deg,#2B2926,#3B342D);border-radius:16px;padding:32px 30px;color:#fff;position:relative;overflow:hidden">
-                    <div style="position:absolute;top:-40%;right:-20%;width:220px;height:220px;background:radial-gradient(circle,rgba(217,119,87,.4),transparent 65%);pointer-events:none"></div>
+                <div style="background:linear-gradient(135deg,#1C1813,#3B342D);border-radius:16px;padding:32px 30px;color:#fff;position:relative;overflow:hidden">
+                    <div style="position:absolute;top:-40%;right:-20%;width:220px;height:220px;background:radial-gradient(circle,rgba(156,132,99,.4),transparent 65%);pointer-events:none"></div>
                     <div style="position:relative">
-                        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#E0A488">Yardıma mı ihtiyacınız var?</div>
+                        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#C9B79C">Yardıma mı ihtiyacınız var?</div>
                         <h3 style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:22px;margin-top:12px;line-height:1.2">Bu hizmet hakkında bilgi alın</h3>
                         <p style="margin-top:12px;font-size:14px;line-height:1.65;color:rgba(255,255,255,.65)">Uzman ekibimiz projeniz için ücretsiz danışmanlık sunar.</p>
-                        <a href="{{ route('contact.index') }}" style="margin-top:22px;display:flex;align-items:center;justify-content:center;gap:10px;background:#D97757;color:#fff;font-weight:700;font-size:14px;padding:15px;text-decoration:none;border-radius:8px;transition:all .3s" style-hover="background:#C2603F">İletişime Geçin →</a>
+                        <a href="{{ route('contact.index') }}" style="margin-top:22px;display:flex;align-items:center;justify-content:center;gap:10px;background:#9C8463;color:#fff;font-weight:700;font-size:14px;padding:15px;text-decoration:none;border-radius:8px;transition:all .3s" style-hover="background:#7D6A4F">İletişime Geçin →</a>
                     </div>
                 </div>
 
                 {{-- İlgili hizmetler --}}
                 @if($relevantServices->count())
-                    <div style="background:#F4EFE7;border:1px solid #E6E0D4;border-radius:16px;padding:28px 26px">
-                        <div style="font-family:'Plus Jakarta Sans';font-weight:700;font-size:17px;color:#2B2926;margin-bottom:18px">{{ $categoryName ?? 'Diğer Hizmetler' }}</div>
+                    <div style="background:#F6F3ED;border:1px solid #E6E0D4;border-radius:16px;padding:28px 26px">
+                        <div style="font-family:'Plus Jakarta Sans';font-weight:700;font-size:17px;color:#1C1813;margin-bottom:18px">{{ $categoryName ?? 'Diğer Hizmetler' }}</div>
                         <div style="display:flex;flex-direction:column">
                             @foreach($relevantServices as $rs)
-                                <a href="{{ route('services.show', $rs->slug) }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid #E6E0D4;font-size:14.5px;font-weight:600;color:#2B2926;text-decoration:none;transition:color .3s" style-hover="color:#D97757">
+                                <a href="{{ route('services.show', $rs->slug) }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid #E6E0D4;font-size:14.5px;font-weight:600;color:#1C1813;text-decoration:none;transition:color .3s" style-hover="color:#9C8463">
                                     <span>{{ $rs->title }}</span>
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                 </a>
@@ -83,10 +83,10 @@
                 {{-- Diğer kategoriler --}}
                 @if(isset($otherServiceCategories) && $otherServiceCategories->count())
                     <div style="background:#fff;border:1px solid #E6E0D4;border-radius:16px;padding:28px 26px">
-                        <div style="font-family:'Plus Jakarta Sans';font-weight:700;font-size:17px;color:#2B2926;margin-bottom:16px">Diğer Kategoriler</div>
+                        <div style="font-family:'Plus Jakarta Sans';font-weight:700;font-size:17px;color:#1C1813;margin-bottom:16px">Diğer Kategoriler</div>
                         <div style="display:flex;flex-wrap:wrap;gap:9px">
                             @foreach($otherServiceCategories as $cat)
-                                <a href="{{ $cat->url ?? route('services.index') }}" style="font-size:13px;font-weight:600;color:#2B2926;background:#F4EFE7;border:1px solid #E6E0D4;padding:9px 16px;border-radius:30px;text-decoration:none;transition:all .3s" style-hover="background:#D97757;color:#fff;border-color:#D97757">{{ $cat->name }}</a>
+                                <a href="{{ $cat->url ?? route('services.index') }}" style="font-size:13px;font-weight:600;color:#1C1813;background:#F6F3ED;border:1px solid #E6E0D4;padding:9px 16px;border-radius:30px;text-decoration:none;transition:all .3s" style-hover="background:#9C8463;color:#fff;border-color:#9C8463">{{ $cat->name }}</a>
                             @endforeach
                         </div>
                     </div>
@@ -97,28 +97,28 @@
 
     {{-- İLGİLİ HİZMET KARTLARI --}}
     @if($relevantServices->count())
-        <section class="kal-section" style="background:#F4EFE7;padding:100px 0">
+        <section class="kal-section" style="background:#F6F3ED;padding:100px 0">
             <div class="kal-pad" style="max-width:1340px;margin:0 auto;padding:0 52px">
                 <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px;gap:20px;flex-wrap:wrap">
-                    <h2 style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:clamp(26px,2.8vw,42px);color:#2B2926">İlgili Hizmetler</h2>
-                    <a href="{{ route('services.index') }}" style="font-size:13.5px;font-weight:700;color:#D97757;text-decoration:none;border-bottom:2px solid #D97757;padding-bottom:5px">Tümünü Gör →</a>
+                    <h2 style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:clamp(26px,2.8vw,42px);color:#1C1813">İlgili Hizmetler</h2>
+                    <a href="{{ route('services.index') }}" style="font-size:13.5px;font-weight:700;color:#9C8463;text-decoration:none;border-bottom:2px solid #9C8463;padding-bottom:5px">Tümünü Gör →</a>
                 </div>
                 <div class="kal-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
                     @foreach($relevantServices->take(3) as $rs)
-                        <article style="position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid #E6E0D4;border-radius:14px;overflow:hidden;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s,border-color .4s" style-hover="transform:translateY(-8px);box-shadow:0 24px 50px rgba(43,41,38,.1);border-color:#D97757">
+                        <article style="position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid #E6E0D4;border-radius:14px;overflow:hidden;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s,border-color .4s" style-hover="transform:translateY(-8px);box-shadow:0 24px 50px rgba(43,41,38,.1);border-color:#9C8463">
                             <a href="{{ route('services.show', $rs->slug) }}" aria-label="{{ $rs->title }}" style="position:relative;display:block;aspect-ratio:16/10;overflow:hidden;background:#0c1018">
                                 @if($rs->listingImage)
                                     <img src="{{ $rs->listingImage }}" alt="{{ $rs->title }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.06)">
                                 @else
-                                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3B342D,#2B2926);color:#E0A488;font-family:'Plus Jakarta Sans';font-weight:800;font-size:40px">{{ mb_substr($rs->title, 0, 1) }}</div>
+                                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3B342D,#1C1813);color:#C9B79C;font-family:'Plus Jakarta Sans';font-weight:800;font-size:40px">{{ mb_substr($rs->title, 0, 1) }}</div>
                                 @endif
                             </a>
                             <div style="display:flex;flex-direction:column;flex:1;padding:24px">
-                                <h3 style="font-family:'Plus Jakarta Sans';font-weight:700;font-size:19px;color:#2B2926"><a href="{{ route('services.show', $rs->slug) }}" style="color:#2B2926;text-decoration:none">{{ $rs->title }}</a></h3>
+                                <h3 style="font-family:'Plus Jakarta Sans';font-weight:700;font-size:19px;color:#1C1813"><a href="{{ route('services.show', $rs->slug) }}" style="color:#1C1813;text-decoration:none">{{ $rs->title }}</a></h3>
                                 @if($rs->shortDescription)
                                     <p style="margin-top:10px;font-size:14px;line-height:1.65;color:#6A6358;flex:1">{{ Str::words(strip_tags($rs->shortDescription), 14, '...') }}</p>
                                 @endif
-                                <a href="{{ route('services.show', $rs->slug) }}" style="margin-top:18px;display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#D97757;text-decoration:none" style-hover="color:#C2603F">Detaylı Bilgi →</a>
+                                <a href="{{ route('services.show', $rs->slug) }}" style="margin-top:18px;display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#9C8463;text-decoration:none" style-hover="color:#7D6A4F">Detaylı Bilgi →</a>
                             </div>
                         </article>
                     @endforeach

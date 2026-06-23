@@ -52,14 +52,14 @@
         @foreach($navLinks as $link)
             <a class="kal-nav-link" href="{{ $link['url'] }}" style="font-size:16.5px;font-weight:600;text-decoration:none">{{ $link['label'] }}</a>
         @endforeach
-        <a href="{{ route('contact.index') }}" style="display:inline-flex;align-items:center;gap:11px;font-size:15px;font-weight:700;color:#fff;background:linear-gradient(135deg,#E08366,#C2603F);padding:13px 14px 13px 26px;border-radius:40px;text-decoration:none;box-shadow:0 8px 22px rgba(217,119,87,.35);transition:all .35s cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-2px);box-shadow:0 14px 32px rgba(217,119,87,.5)">
+        <a href="{{ route('contact.index') }}" style="display:inline-flex;align-items:center;gap:11px;font-size:15px;font-weight:700;color:#fff;background:linear-gradient(135deg,#B5A081,#7D6A4F);padding:13px 14px 13px 26px;border-radius:40px;text-decoration:none;box-shadow:0 8px 22px rgba(156,132,99,.35);transition:all .35s cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-2px);box-shadow:0 14px 32px rgba(156,132,99,.5)">
             İletişime Geç
             <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.18);font-size:14px"><i class="fa-solid fa-phone-volume"></i></span>
         </a>
     </nav>
 
     {{-- mobil burger --}}
-    <button class="kal-burger" data-menu-toggle aria-label="Menü" style="display:none;align-items:center;justify-content:center;width:46px;height:46px;background:#2B2926;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:0">
+    <button class="kal-burger" data-menu-toggle aria-label="Menü" style="display:none;align-items:center;justify-content:center;width:46px;height:46px;background:#1C1813;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:0">
         <span style="display:block;width:20px;height:2px;background:#fff"></span>
         <span style="display:block;width:20px;height:2px;background:#fff"></span>
         <span style="display:block;width:20px;height:2px;background:#fff"></span>
@@ -76,7 +76,7 @@
 <div data-mobile-menu class="kal-mobile-menu" aria-hidden="true">
     <div class="kal-mm-inner">
         <div class="kal-mm-head">
-            <span class="kal-mm-logo"><span class="kal-mm-logo-box">{{ $brandInitial }}</span> {{ $brandMain }} <span style="color:#E0A488">{{ $brandSub }}</span></span>
+            <span class="kal-mm-logo"><span class="kal-mm-logo-box">{{ $brandInitial }}</span> {{ $brandMain }} <span style="color:#C9B79C">{{ $brandSub }}</span></span>
             <button data-menu-toggle class="kal-mm-close" aria-label="Menüyü kapat"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <nav class="kal-mm-nav">

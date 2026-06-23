@@ -23,22 +23,11 @@ return new class extends Migration
                 ->constrained('project_categories')->nullOnDelete();
         });
 
-        // Mevcut string kategorileri ProjectCategory'e taşı ve projelere bağla
-        $defaults = [
-            'villa' => 'Villa', 'rezidans' => 'Rezidans', 'ticari' => 'Ticari',
-            'konut' => 'Konut', 'altyapi' => 'Altyapı',
-        ];
+        // Mevcut string kategorileri ProjectCategory'e taşı ve projelere bağla.
+        // (Marka kategorileri AwaMobilyaSeeder tarafından oluşturulur.)
         $existing = DB::table('projects')->whereNotNull('category')->distinct()->pluck('category')->filter()->all();
         $order = 1;
         $map = [];
-        foreach ($defaults as $slug => $name) {
-            $id = DB::table('project_categories')->insertGetId([
-                'name' => $name, 'slug' => $slug, 'order_column' => $order++,
-                'created_at' => now(), 'updated_at' => now(),
-            ]);
-            $map[$slug] = $id;
-        }
-        // Varsayılanlarda olmayan kategoriler
         foreach ($existing as $cat) {
             $slug = Str::slug($cat);
             if (! isset($map[$slug])) {

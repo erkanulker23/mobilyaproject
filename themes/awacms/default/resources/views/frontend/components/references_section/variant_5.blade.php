@@ -10,7 +10,7 @@
         <span style="font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#8B8273">{{ $subtitle }}</span>
       @endif
       @if($title)
-        <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(26px,2.6vw,40px);line-height:1.1;letter-spacing:-.02em;color:#2B2926;margin:14px auto 0;max-width:20ch">{{ $title }}</h2>
+        <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(26px,2.6vw,40px);line-height:1.1;letter-spacing:-.02em;color:#1C1813;margin:14px auto 0;max-width:20ch">{{ $title }}</h2>
       @endif
     </div>
     <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:50px">

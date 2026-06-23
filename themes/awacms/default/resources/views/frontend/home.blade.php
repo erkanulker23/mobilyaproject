@@ -9,9 +9,9 @@
     @if(!empty($content) && is_array($content))
         @include('components.blocks_renderer', ['blocks' => $content])
     @else
-        <section class="kal-section" style="padding:160px 0;text-align:center;background:#F4EFE7">
+        <section class="kal-section" style="padding:160px 0;text-align:center;background:#F6F3ED">
             <div class="kal-pad" style="max-width:700px;margin:0 auto;padding:0 24px">
-                <h1 style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:clamp(28px,4vw,48px);color:#2B2926">Anasayfa içeriği henüz ayarlanmadı</h1>
+                <h1 style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:clamp(28px,4vw,48px);color:#1C1813">Anasayfa içeriği henüz ayarlanmadı</h1>
                 <p style="margin-top:16px;color:#5A5349">Admin panel → <strong>Anasayfa Düzenleyici</strong> bölümünden bölümleri ekleyin.</p>
             </div>
         </section>

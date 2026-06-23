@@ -33,6 +33,7 @@ class AwaMobilyaSeeder extends Seeder
     {
         $this->uploads = base_path('furniture/uploads');
 
+        $this->seedAdmin();
         $this->seedSettings();
         $categories = $this->seedCategories();
         $this->seedProducts($categories);
@@ -58,6 +59,22 @@ class AwaMobilyaSeeder extends Seeder
             $model->addMedia($path)->preservingOriginal()->toMediaCollection($collection);
         } catch (\Throwable $e) {
             // sessiz geç
+        }
+    }
+
+    private function seedAdmin(): void
+    {
+        $user = \App\Models\User::updateOrCreate(
+            ['email' => 'erkanulker0@gmail.com'],
+            [
+                'name' => 'Erkan',
+                'surname' => 'Ulker',
+                'password' => \Illuminate\Support\Facades\Hash::make('Yagmur160315'),
+                'email_verified_at' => now(),
+            ]
+        );
+        if (\Spatie\Permission\Models\Role::where('name', 'superadmin')->exists()) {
+            $user->syncRoles(['superadmin']);
         }
     }
 
@@ -93,13 +110,17 @@ class AwaMobilyaSeeder extends Seeder
             ['key' => 'yemek', 'name' => 'Yemek Odası', 'img' => '3.png'],
         ];
 
+        // Temiz başla: önceki/inşaat kategorilerini kaldır (HasSlug slug'ı isimden
+        // üretip verdiğimiz slug'ı ezdiği için updateOrCreate yerine clean-slate).
+        ProjectCategory::query()->delete();
+
         $map = [];
         $order = 1;
         foreach ($defs as $d) {
-            $cat = ProjectCategory::updateOrCreate(
-                ['slug' => $d['key']],
-                ['name' => $d['name'], 'order_column' => $order++]
-            );
+            $cat = ProjectCategory::create([
+                'name' => $d['name'],
+                'order_column' => $order++,
+            ]);
             $map[$d['key']] = $cat;
         }
 
