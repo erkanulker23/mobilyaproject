@@ -125,11 +125,12 @@ class DcSiteData
                 $cat = optional($p->projectCategory)->slug ?: ($p->category ?: 'koltuk');
                 $gallery = $p->getMedia('gallery')->map(fn ($m) => $m->getUrl())->values()->all();
                 $long = trim(strip_tags(preg_replace('/<\/p>|<br\s*\/?>/i', "\n", (string) $p->content)));
-                $pieces = collect($p->specs ?: [])->map(fn ($s) => [
-                    'name' => $s['label'] ?? '',
-                    'dims' => $s['value'] ?? '',
-                    'img' => ! empty($s['image']) ? \Storage::disk('public')->url($s['image']) : '',
-                ])->filter(fn ($x) => $x['name'] !== '')->values()->all();
+                $pieces = collect($p->specs ?: [])->map(function ($s) {
+                    $im = $s['image'] ?? '';
+                    $img = $im === '' ? '' : ((str_starts_with($im, 'http') || str_starts_with($im, '/')) ? $im : \Storage::disk('public')->url($im));
+
+                    return ['name' => $s['label'] ?? '', 'dims' => $s['value'] ?? '', 'img' => $img];
+                })->filter(fn ($x) => $x['name'] !== '')->values()->all();
 
                 return [
                     'id' => $p->slug,

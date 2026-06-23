@@ -295,11 +295,15 @@ window.AWA = (function () {
     var product = { name:curP[lang], catName:catName(curP.cat), bg:IMG(curP.img), mainBg:IMG(galArr[gi]), curImg:galArr[gi], onMainClick:function(){c.openLightbox();}, desc:prDesc, longDesc:prLong, onBack:function(){c.goCollection(curP.cat);} };
     var productFeatures = ((curP.features && curP.features.length) ? curP.features : FEATURES[lang]).map(function (f) { return { txt:f }; });
     // Parçalar (Takım İçeriği) — admin "Ürünü Oluşturan Parçalar" (DB) varsa onu kullan
+    var absImg=function(u){ return (u && u.indexOf('/')!==0 && u.indexOf('http')!==0) ? ('/'+u) : u; };
+    // ürün galerisi + kategori görselleri parça görseli için yedek havuz
+    var pieceFallback = (curP.gallery && curP.gallery.length ? curP.gallery.slice() : []).concat((pcImgs||[]).map(absImg));
+    if (!pieceFallback.length) pieceFallback = [absImg(curP.img)];
     var productPieces;
     if (curP.pieces && curP.pieces.length) {
-      productPieces = curP.pieces.map(function (pc, i) { return { name:pc.name, dims:pc.dims, bg:IMG(pc.img ? pc.img : pcImgs[i % pcImgs.length]) }; });
+      productPieces = curP.pieces.map(function (pc, i) { return { name:pc.name, dims:pc.dims, bg:IMG(pc.img ? pc.img : pieceFallback[i % pieceFallback.length]) }; });
     } else {
-      productPieces = (PIECES[curP.cat] || PIECES.koltuk).map(function (pc, i) { return { name:pc[lang], dims:pc.d, bg:IMG(pcImgs[i % pcImgs.length]) }; });
+      productPieces = (PIECES[curP.cat] || PIECES.koltuk).map(function (pc, i) { return { name:pc[lang], dims:pc.d, bg:IMG(pieceFallback[i % pieceFallback.length]) }; });
     }
     var related = data.products.filter(function(p){return p.cat===curP.cat && p.id!==curP.id;}).slice(0,3).map(locP);
     if (related.length < 3) related = related.concat(data.products.filter(function(p){return p.id!==curP.id && related.map(function(r){return r.id;}).indexOf(p.id)<0;}).map(locP)).slice(0,3);
