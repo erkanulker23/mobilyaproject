@@ -183,6 +183,13 @@ class AwaMobilyaSeeder extends Seeder
                     'short_description' => $desc[$p['cat']],
                     'content' => '<p>'.$desc[$p['cat']].' El işçiliğiyle üretilen sağlam ahşap karkas, yüksek yoğunluklu oturum süngeri ve leke tutmayan, çıkarılabilir kumaş kılıf. Geniş renk ve kumaş seçeneğiyle 2 yıl üretici garantili.</p>',
                     'specs' => $dims[$p['cat']] ?? [],
+                    'features' => [
+                        'El işçiliğiyle üretilen sağlam ahşap karkas',
+                        'Yüksek yoğunluklu, yumuşak oturum süngeri',
+                        'Leke tutmayan, çıkarılabilir kumaş kılıf',
+                        'Geniş renk ve kumaş seçeneği',
+                        '2 yıl üretici garantisi',
+                    ],
                     'is_featured' => $p['feat'],
                     'published' => true,
                     'order_column' => $order++,

@@ -292,7 +292,7 @@ window.AWA = (function () {
     var prLong = (lang==='tr'?curP.longTr:curP.longEn) || (prByCat[curP.cat] || prByCat.koltuk)[lang];
     var prDesc = (lang==='tr'?curP.descTr:curP.descEn) || catDesc(curP.cat);
     var product = { name:curP[lang], catName:catName(curP.cat), bg:IMG(curP.img), mainBg:IMG(galArr[gi]), curImg:galArr[gi], onMainClick:function(){c.openLightbox();}, desc:prDesc, longDesc:prLong, onBack:function(){c.goCollection(curP.cat);} };
-    var productFeatures = FEATURES[lang].map(function (f) { return { txt:f }; });
+    var productFeatures = ((curP.features && curP.features.length) ? curP.features : FEATURES[lang]).map(function (f) { return { txt:f }; });
     // Parçalar (Takım İçeriği) — admin "Ürünü Oluşturan Parçalar" (DB) varsa onu kullan
     var productPieces;
     if (curP.pieces && curP.pieces.length) {

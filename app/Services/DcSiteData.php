@@ -142,6 +142,7 @@ class DcSiteData
                     'longTr' => $long,
                     'longEn' => $long,
                     'pieces' => $pieces,
+                    'features' => collect($p->features ?: [])->filter()->values()->all(),
                 ];
             })->values()->all();
     }

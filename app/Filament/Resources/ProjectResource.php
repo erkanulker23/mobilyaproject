@@ -102,6 +102,18 @@ class ProjectResource extends Resource
                         ->addActionLabel('Parça ekle'),
                 ]),
 
+            Forms\Components\Section::make('Öne Çıkan Özellikler')
+                ->description('Ürünün öne çıkan özellikleri (ör. El işçiliği ahşap karkas, 2 yıl garanti).')
+                ->schema([
+                    Forms\Components\Repeater::make('features')
+                        ->hiddenLabel()
+                        ->simple(
+                            Forms\Components\TextInput::make('text')->placeholder('Özellik')->required(),
+                        )
+                        ->defaultItems(0)
+                        ->addActionLabel('Özellik ekle'),
+                ]),
+
             Forms\Components\Section::make('Ürün Görselleri')
                 ->schema([
                     SpatieMediaLibraryFileUpload::make('cover')

@@ -23,11 +23,12 @@ class Project extends Model implements HasMedia, Sortable
     protected $fillable = [
         'title', 'slug', 'category', 'project_category_id', 'location', 'status', 'is_sale',
         'client', 'area', 'year', 'short_description', 'content',
-        'specs', 'is_featured', 'published', 'order_column',
+        'specs', 'features', 'is_featured', 'published', 'order_column',
     ];
 
     protected $casts = [
         'specs' => 'array',
+        'features' => 'array',
         'is_sale' => 'boolean',
         'is_featured' => 'boolean',
         'published' => 'boolean',
