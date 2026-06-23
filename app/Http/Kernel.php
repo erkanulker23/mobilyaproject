@@ -40,6 +40,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\CheckIsSiteClosedDueToBillMiddleware::class,
+            \App\Http\Middleware\EnsureFrontendActive::class,
             \App\Http\Middleware\UserLastActive::class,
         ],
 
