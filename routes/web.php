@@ -102,7 +102,10 @@ $dc = function (array $state = []) {
     elseif ($page === 'legal') { $title = ['mesafeli' => 'Mesafeli Satış Sözleşmesi', 'kvkk' => 'KVKK Aydınlatma Metni', 'gizlilik' => 'Gizlilik Politikası'][$state['legal'] ?? 'mesafeli'].$suffix; }
     elseif ($page === 'collection') {
         $title = 'Koleksiyon'.$suffix;
-        if (! empty($state['cat']) && ($c = $find('categories', $state['cat']))) { $title = $c['tr'].$suffix; }
+        if (! empty($state['cat']) && ($c = $find('categories', $state['cat']))) {
+            $title = (! empty($c['seoTitle']) ? $c['seoTitle'] : $c['tr'].$suffix);
+            if (! empty($c['seoDescription'])) { $desc = $c['seoDescription']; }
+        }
     } elseif ($page === 'product' && ($p = $find('products', $state['product'] ?? ''))) {
         $title = $p['tr'].$suffix;
         $desc = $p['tr'].' — '.$brand.' koleksiyonu.';

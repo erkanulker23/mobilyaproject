@@ -16,7 +16,7 @@ class ProjectCategory extends Model implements Sortable
     use HasSlug;
     use SortableTrait;
 
-    protected $fillable = ['name', 'slug', 'order_column'];
+    protected $fillable = ['name', 'slug', 'seo_title', 'seo_description', 'order_column'];
 
     public array $sortable = [
         'order_column_name' => 'order_column',

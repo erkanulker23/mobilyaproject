@@ -96,6 +96,8 @@ class DcSiteData
                 'img' => $img,
                 'dTr' => '',
                 'dEn' => '',
+                'seoTitle' => $c->seo_title ?: '',
+                'seoDescription' => $c->seo_description ?: '',
             ];
         })->values()->all();
     }

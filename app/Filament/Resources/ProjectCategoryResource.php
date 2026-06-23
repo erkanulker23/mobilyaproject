@@ -50,6 +50,17 @@ class ProjectCategoryResource extends Resource
                 ->label('Slug (URL)')
                 ->helperText('Boş bırakılırsa addan otomatik üretilir.')
                 ->unique(ignoreRecord: true),
+            Forms\Components\Section::make('SEO')
+                ->schema([
+                    Forms\Components\TextInput::make('seo_title')
+                        ->label('SEO Başlık')
+                        ->maxLength(255)
+                        ->helperText('Boş bırakılırsa kategori adı kullanılır.'),
+                    Forms\Components\Textarea::make('seo_description')
+                        ->label('SEO Açıklama')
+                        ->rows(2)
+                        ->maxLength(300),
+                ]),
         ]);
     }
 
