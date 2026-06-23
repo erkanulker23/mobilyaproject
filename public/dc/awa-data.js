@@ -356,6 +356,19 @@ window.AWA = (function () {
     var showcaseRelated = showcases.filter(function(x){return x.id!==(curSc&&curSc.id);}).slice(0,3).map(locSc);
     var hasShowcases = showcaseList.length>0;
 
+    // Anasayfa blokları — sıra/yapı "Anasayfa Düzenleyici"den gelir
+    var defBlocks = [{type:'hero'},{type:'featured'},{type:'about'},{type:'catalog'},{type:'categories'},{type:'story'},{type:'showcases'},{type:'products'},{type:'news'},{type:'instagram'}];
+    var srcBlocks = (data.homeBlocks && data.homeBlocks.length) ? data.homeBlocks : defBlocks;
+    var homeBlocks = srcBlocks.map(function(b){ var t=b.type; return {
+      type:t, title:b.title||'',
+      isHero:t==='hero', isFeatured:t==='featured', isAbout:t==='about', isCatalog:t==='catalog',
+      isCategories:t==='categories', isStory:t==='story', isShowcases:t==='showcases',
+      isProducts:t==='products', isNews:t==='news', isInstagram:t==='instagram'
+    }; });
+    // Her bölümün sırası/görünürlüğü builder'dan (CSS order + display)
+    var blkOrder={}; srcBlocks.forEach(function(b,i){ if(!(b.type in blkOrder)) blkOrder[b.type]=i; });
+    var sec={}; ['hero','featured','about','catalog','categories','story','showcases','products','news','instagram'].forEach(function(t){ sec[t]=(t in blkOrder)?('order:'+blkOrder[t]):'display:none'; });
+
     // testimonials (müşteri yorumları)
     var testimonials = (data.testimonials || []).map(function (tm) {
       var r = Math.max(0, Math.min(5, tm.rating || 5));
@@ -630,7 +643,7 @@ window.AWA = (function () {
       heroBg:IMG(hs.img), heroSub: lang==='tr'?hs.subTr:hs.subEn, heroTitle:hp[lang], heroCta:(function(id){return function(){c.goProduct(id);};})(hs.productId), heroDots:heroDots, goHero:c.goHero,
       stats:stats, aboutText: lang==='tr'?set.aboutTr:set.aboutEn,
       scriptAbout: lang==='tr'?'zamansız zarafet':'timeless elegance', scriptFeatured: lang==='tr'?'el emeğiyle':'handcrafted with care', scriptContact: lang==='tr'?'bize ulaşın':'say hello',
-      catCards:catCards, newsTeaser:newsTeaser, newsList:newsList, homeSections:homeSections, story:story, instagram:instagram, socials:socials,
+      catCards:catCards, newsTeaser:newsTeaser, newsList:newsList, homeSections:homeSections, story:story, instagram:instagram, socials:socials, homeBlocks:homeBlocks, sec:sec,
       testimonials:testimonials, hasTestimonials:hasTestimonials,
       testiKicker: lang==='tr'?'MÜŞTERİLERİMİZ':'TESTIMONIALS',
       testiTitle: lang==='tr'?'Bizimle çalışanlar ne diyor?':'What our partners say',

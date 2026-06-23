@@ -168,8 +168,8 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
 
   <!-- HOME -->
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
-  <div>
-    <section style="position:relative;height:90vh;min-height:600px;overflow:hidden">
+  <div style="display:flex;flex-direction:column">
+    <section style="position:relative;height:90vh;min-height:600px;overflow:hidden;{{ sec.hero }}">
       <div style="{{ heroTrackStyle }}">
         <sc-for list="{{ heroSlidesAll }}" as="hsl" hint-placeholder-count="3">
           <div style="position:relative;flex:none;width:100%;height:100%;overflow:hidden">
@@ -195,7 +195,7 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
       </div>
     </section>
 
-    <section style="position:relative;background:#f6f3ed;overflow:hidden">
+    <section style="position:relative;background:#f6f3ed;overflow:hidden;{{ sec.featured }}">
       <div style="position:absolute;top:-120px;left:-180px;width:760px;height:760px;border-radius:50%;background:#fff;opacity:.6"></div>
       <div style="position:relative;max-width:1560px;margin:0 auto;padding:clamp(70px,9vw,130px) clamp(20px,4vw,72px);display:grid;grid-template-columns:{{ gFeatured }};gap:clamp(32px,5vw,90px);align-items:center">
         <div>
@@ -213,7 +213,7 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
       </div>
     </section>
 
-    <section style="background:#15120d;color:#f6f3ed">
+    <section style="background:#15120d;color:#f6f3ed;{{ sec.about }}">
       <div style="max-width:1560px;margin:0 auto;padding:clamp(70px,9vw,130px) clamp(20px,4vw,72px);display:grid;grid-template-columns:{{ gAbout }};gap:clamp(36px,5vw,90px);align-items:center">
         <div style="border-radius:18px;aspect-ratio:3/3.6;background:url('uploads/3.png') center/cover"></div>
         <div>
@@ -229,7 +229,7 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
     </section>
 
     <sc-if value="{{ showCatalog }}" hint-placeholder-val="{{ true }}">
-    <section style="position:relative;background:linear-gradient(135deg,#6e5236,#3a2817);color:#f6f3ed;overflow:hidden">
+    <section style="position:relative;background:linear-gradient(135deg,#6e5236,#3a2817);color:#f6f3ed;overflow:hidden;{{ sec.catalog }}">
       <div style="position:absolute;right:-140px;top:-120px;width:520px;height:520px;border-radius:50%;border:1px solid rgba(201,185,143,.18)"></div>
       <div style="position:relative;max-width:1560px;margin:0 auto;padding:clamp(70px,9vw,128px) clamp(20px,4vw,72px);display:grid;grid-template-columns:{{ gCatalog }};gap:clamp(36px,5vw,80px);align-items:center">
         <div>
@@ -247,7 +247,7 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
     </section>
     </sc-if>
 
-    <section style="background:#f6f3ed">
+    <section style="background:#f6f3ed;{{ sec.categories }}">
       <div style="max-width:1560px;margin:0 auto;padding:clamp(70px,9vw,120px) clamp(20px,4vw,72px)">
         <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-bottom:46px">
           <div><span style="{{ kickerStyle }}">{{ t.collections.kicker }}</span><h2 style="margin:16px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(36px,4.4vw,58px);letter-spacing:-.025em">{{ t.collections.title }}</h2></div>
@@ -269,7 +269,7 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
 
     {{-- Hikaye / Tanıtım (video veya görsel + metin) --}}
     <sc-if value="{{ story.show }}" hint-placeholder-val="{{ true }}">
-    <section style="background:#fff">
+    <section style="background:#fff;{{ sec.story }}">
       <div style="max-width:1560px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,72px);display:grid;grid-template-columns:{{ gContact }};gap:clamp(36px,5vw,72px);align-items:center">
         <div style="border-radius:18px;overflow:hidden;background:#ece6da;aspect-ratio:16/10;position:relative">
           <sc-if value="{{ story.isYoutube }}" hint-placeholder-val="{{ false }}"><iframe src="{{ story.embedUrl }}" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></sc-if>
@@ -288,7 +288,7 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
 
     {{-- İlham Veren Projeler --}}
     <sc-if value="{{ hasShowcases }}" hint-placeholder-val="{{ true }}">
-    <section style="background:#f6f3ed">
+    <section style="background:#f6f3ed;{{ sec.showcases }}">
       <div style="max-width:1560px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,72px)">
         <div style="text-align:center;margin-bottom:clamp(36px,4vw,56px)">
           <span style="font-family:'Space Mono';font-size:12px;letter-spacing:.2em;color:{{ accent }};text-transform:uppercase">{{ t.nav.projects }}</span>
@@ -310,7 +310,7 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
     </sc-if>
 
     <sc-for list="{{ homeSections }}" as="hs" hint-placeholder-count="4">
-    <section style="{{ hs.secStyle }}">
+    <section style="{{ hs.secStyle }};{{ sec.products }}">
       <div style="max-width:1560px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,72px)">
         <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-bottom:40px">
           <div>
@@ -334,7 +334,7 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
     </section>
     </sc-for>
 
-    <section style="background:#fff;border-top:1px solid #ece6da">
+    <section style="background:#fff;border-top:1px solid #ece6da;{{ sec.news }}">
       <div style="max-width:1560px;margin:0 auto;padding:clamp(70px,9vw,120px) clamp(20px,4vw,72px)">
         <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-bottom:46px">
           <div><span style="{{ kickerStyle }}">{{ t.newsSec.kicker }}</span><h2 style="margin:16px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(36px,4.4vw,58px);letter-spacing:-.025em">{{ t.newsSec.title }}</h2></div>
@@ -352,22 +352,22 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
       </div>
     </section>
 
-    {{-- Instagram --}}
+    {{-- Instagram (yeni tasarım) --}}
     <sc-if value="{{ instagram.show }}" hint-placeholder-val="{{ true }}">
-    <section style="background:#f6f3ed;border-top:1px solid #ece6da">
-      <div style="max-width:1640px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,48px)">
-        <div style="display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:clamp(32px,4vw,52px)">
-          <a href="{{ instagram.url }}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;text-decoration:none">
-            <span style="display:flex;align-items:center;justify-content:center;width:58px;height:58px;border-radius:50%;background:#f6f3ed;color:#17140f"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
-          </a>
+    <section style="background:#17140f;color:#f6f3ed;{{ sec.instagram }}">
+      <div style="max-width:1560px;margin:0 auto;padding:clamp(60px,7vw,100px) clamp(20px,4vw,72px)">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(32px,4vw,48px)">
           <div>
-            <a href="{{ instagram.url }}" target="_blank" rel="noopener" style="font-family:Archivo;font-weight:800;font-size:22px;color:#17140f;text-decoration:none">{{ instagram.handle }}</a>
+            <span style="display:inline-flex;align-items:center;gap:10px;font-family:'Space Mono';font-size:12px;letter-spacing:.2em;color:{{ accent }};text-transform:uppercase"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</span>
+            <h2 style="margin:14px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(30px,3.6vw,50px);letter-spacing:-.025em;color:#fff">{{ instagram.handle }}</h2>
           </div>
-          <a href="{{ instagram.url }}" target="_blank" rel="noopener" style="font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#17140f;border:1px solid #17140f;padding:13px 26px;border-radius:8px;text-decoration:none" style-hover="background:#17140f;color:#fff">Takip Et</a>
+          <a href="{{ instagram.url }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;background:{{ accent }};color:#17140f;padding:15px 30px;border-radius:999px;text-decoration:none" style-hover="opacity:.88">Takip Et<svg width="18" height="9" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.7"/></svg></a>
         </div>
-        <div style="display:flex;gap:16px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px">
           <sc-for list="{{ instagram.posts }}" as="ig" hint-placeholder-count="6">
-            <a href="{{ ig.link }}" target="_blank" rel="noopener" style="flex:none;width:clamp(240px,22vw,300px);aspect-ratio:1/1;border-radius:14px;{{ ig.bg }};scroll-snap-align:start;transition:transform .4s cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-6px)"></a>
+            <a href="{{ ig.link }}" target="_blank" rel="noopener" style="position:relative;display:block;aspect-ratio:1/1;border-radius:12px;overflow:hidden;{{ ig.bg }};transition:transform .45s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.03)">
+              <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(23,20,15,0);color:#fff;opacity:0;transition:opacity .35s,background .35s" style-hover="opacity:1;background:rgba(23,20,15,.42)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+            </a>
           </sc-for>
         </div>
       </div>

@@ -454,96 +454,15 @@ class AwaMobilyaSeeder extends Seeder
             $aboutImg = null;
         }
 
-        $content = [
-            [
-                'type' => 'hero_slider',
-                'data' => [
-                    'slider_id' => $slider->id,
-                    'view_variant' => 'variant_1',
-                ],
-            ],
-            [
-                'type' => 'about_us_section',
-                'data' => [
-                    'section_title' => 'Markamız',
-                    'section_subtitle' => 'AWA Mobilya',
-                    'view_variant' => 'variant_1',
-                    'section_description' => '<p>Sektörü iyi analiz ederek teknoloji ile el emeğini birleştiren, markalaşmaya önem veren AWA Mobilya; dinamik ve sezgisel yapısıyla sektörün öncü firmalarından biridir.</p>',
-                    'image' => $aboutImg,
-                    'bg_color' => '#F6F3ED',
-                    'button_text' => 'Daha Fazla',
-                    'button_link' => '/sayfa/hakkimizda',
-                    'list' => [
-                        ['title' => 'El işçiliğiyle üretilen sağlam ahşap karkas'],
-                        ['title' => 'Yüksek yoğunluklu, yumuşak oturum süngeri'],
-                        ['title' => 'Leke tutmayan, çıkarılabilir kumaş kılıf'],
-                        ['title' => '2 yıl üretici garantisi'],
-                    ],
-                ],
-            ],
-            [
-                'type' => 'projects_section',
-                'data' => [
-                    'eyebrow' => 'Koleksiyon',
-                    'section_title' => 'Öne Çıkan Ürünler',
-                    'section_subtitle' => 'Koltuk, köşe, yatak ve yemek odası koleksiyonlarımız',
-                    'view_variant' => 'variant_1',
-                    'limit' => 6,
-                    'only_featured' => true,
-                    'show_filter' => false,
-                    'button_text' => 'Tüm Ürünler',
-                    'button_url' => '/urunler',
-                    'bg_color' => '#ffffff',
-                ],
-            ],
-            [
-                'type' => 'counters_section',
-                'data' => [
-                    'section_title' => 'Rakamlarla AWA Mobilya',
-                    'section_subtitle' => 'Tecrübemiz ve büyümemiz',
-                    'view_variant' => 'variant_1',
-                    'counters' => [
-                        ['title' => 'Yıllık Tecrübe', 'description' => 'Sektördeki tecrübemiz', 'icon' => 'fas fa-calendar-check', 'value' => 35, 'image' => null],
-                        ['title' => 'İhracat Ülke', 'description' => 'Dünya genelinde', 'icon' => 'fas fa-globe', 'value' => 40, 'image' => null],
-                        ['title' => 'Ürün Modeli', 'description' => 'Geniş koleksiyon', 'icon' => 'fas fa-couch', 'value' => 250, 'image' => null],
-                        ['title' => 'Mutlu Müşteri', 'description' => 'Memnun müşterilerimiz', 'icon' => 'fas fa-users', 'value' => 15000, 'image' => null],
-                    ],
-                ],
-            ],
-            [
-                'type' => 'latest_blog_post_section',
-                'data' => [
-                    'section_title' => 'Haberler',
-                    'section_subtitle' => 'AWA Mobilya’dan son gelişmeler',
-                    'view_variant' => 'variant_1',
-                ],
-            ],
-            [
-                'type' => 'faqs_section',
-                'data' => [
-                    'faq_ids' => [$faq->id],
-                    'section_title' => 'Sıkça Sorulan Sorular',
-                    'section_subtitle' => 'Merak edilenler',
-                    'view_variant' => 'variant_1',
-                ],
-            ],
-            [
-                'type' => 'request_form_section',
-                'data' => [
-                    'section_title' => 'Bize Ulaşın',
-                    'section_subtitle' => 'Ürünlerimiz ve bayilik hakkında bilgi alın',
-                    'view_variant' => 'variant_1',
-                    'phone' => '444 96 16',
-                    'email' => 'info@awamobilya.com',
-                    'button_text' => 'Gönder',
-                    'topic_options' => [
-                        ['title' => 'Ürün Bilgisi'],
-                        ['title' => 'Bayilik'],
-                        ['title' => 'Diğer'],
-                    ],
-                ],
-            ],
+        // Anasayfa, "Anasayfa Düzenleyici"deki blok sırasına göre render edilir.
+        // Her blok bir DC bölümüne karşılık gelir; sıralama/açma-kapama buradan yönetilir.
+        $blocks = ['hero', 'featured', 'about', 'catalog', 'categories', 'story', 'showcases', 'products', 'news', 'instagram'];
+        $labels = [
+            'hero' => 'Hero Slider', 'featured' => 'Öne Çıkan', 'about' => 'Hakkımızda',
+            'catalog' => 'Katalog', 'categories' => 'Kategoriler', 'story' => 'Hikaye / Video',
+            'showcases' => 'İlham Veren Projeler', 'products' => 'Ürün Bölümleri', 'news' => 'Haberler', 'instagram' => 'Instagram',
         ];
+        $content = array_map(fn ($t) => ['type' => $t, 'data' => ['title' => $labels[$t]]], $blocks);
 
         $h = app(HomepageSettings::class);
         $h->content = $content;

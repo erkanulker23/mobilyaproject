@@ -30,6 +30,7 @@ class DcSiteData
             'pages' => $this->pages(),
             'faqs' => $this->faqs(),
             'showcases' => $this->showcases(),
+            'homeBlocks' => $this->homeBlocks(),
         ];
     }
 
@@ -206,6 +207,23 @@ class DcSiteData
                 'tel' => $b->phone ?: '',
             ];
         })->values()->all();
+    }
+
+    /** Anasayfa Düzenleyici'den (HomepageSettings.content) sıralı blok listesi. */
+    private function homeBlocks(): array
+    {
+        $allowed = ['hero', 'featured', 'about', 'catalog', 'categories', 'story', 'showcases', 'products', 'news', 'instagram'];
+        try {
+            $content = app(\App\Settings\HomepageSettings::class)->content ?? [];
+        } catch (\Throwable $e) {
+            $content = [];
+        }
+        $blocks = collect($content)
+            ->map(fn ($b) => ['type' => $b['type'] ?? '', 'title' => $b['data']['title'] ?? ($b['title'] ?? '')])
+            ->filter(fn ($b) => in_array($b['type'], $allowed, true))
+            ->values()->all();
+
+        return $blocks;
     }
 
     private function showcases(): array
