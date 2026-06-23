@@ -14,19 +14,23 @@ class BranchResource extends Resource
 {
     protected static ?string $model = Branch::class;
 
+    protected static ?string $slug = 'bayiler';
+
     protected static ?string $navigationIcon = 'heroicon-o-map-pin';
 
-    /**
-     * @return string|null
-     */
     public static function getModelLabel(): string
     {
-        return 'Şube';
+        return 'Bayi';
     }
 
     public static function getPluralModelLabel(): string
     {
-        return 'Şubeler';
+        return 'Bayiler';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Bayiler';
     }
 
     public static function form(Form $form): Form
@@ -64,12 +68,12 @@ class BranchResource extends Resource
     {
         return [
             Forms\Components\TextInput::make('name')
-                ->label('Şube Adı')
+                ->label('Bayi Adı')
                 ->required()
                 ->maxLength(255),
             Forms\Components\TextInput::make('link')
                 ->label('Link')
-                ->helperText('Şube için ayrı bir web sitesi varsa veya google maps linkini buraya yazabilirsiniz.')
+                ->helperText('Bayi için ayrı bir web sitesi varsa veya google maps linkini buraya yazabilirsiniz.')
                 ->maxLength(255),
             Forms\Components\Textarea::make('maps_iframe')
                 ->label('Google Maps Iframe')
@@ -113,7 +117,7 @@ class BranchResource extends Resource
                 ]),
             Forms\Components\Section::make('opening_and_closing_times')
                 ->heading('Açılış ve Kapanış Saatleri')
-                ->description('Şube açılış ve kapanış saatlerini buradan düzenleyebilirsiniz.')
+                ->description('Bayi açılış ve kapanış saatlerini buradan düzenleyebilirsiniz.')
                 ->columns(2)
                 ->schema([
                     Forms\Components\TimePicker::make('weekdays_opening')

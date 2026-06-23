@@ -10,6 +10,11 @@ class EditProjectCategory extends EditRecord
 {
     protected static string $resource = ProjectCategoryResource::class;
 
+    public function getTitle(): string
+    {
+        return 'Ürün Kategorisini Düzenle';
+    }
+
     protected function getHeaderActions(): array
     {
         return [Actions\DeleteAction::make()];

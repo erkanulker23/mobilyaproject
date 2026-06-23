@@ -106,6 +106,12 @@ class DcSiteData
             ->with('projectCategory')->get()->map(function (Project $p) {
                 $cat = optional($p->projectCategory)->slug ?: ($p->category ?: 'koltuk');
                 $gallery = $p->getMedia('gallery')->map(fn ($m) => $m->getUrl())->values()->all();
+                $long = trim(strip_tags(preg_replace('/<\/p>|<br\s*\/?>/i', "\n", (string) $p->content)));
+                $pieces = collect($p->specs ?: [])->map(fn ($s) => [
+                    'name' => $s['label'] ?? '',
+                    'dims' => $s['value'] ?? '',
+                ])->filter(fn ($x) => $x['name'] !== '')->values()->all();
+
                 return [
                     'id' => $p->slug,
                     'cat' => $cat,
@@ -115,6 +121,9 @@ class DcSiteData
                     'gallery' => $gallery,
                     'descTr' => $p->short_description ?: '',
                     'descEn' => $p->short_description ?: '',
+                    'longTr' => $long,
+                    'longEn' => $long,
+                    'pieces' => $pieces,
                 ];
             })->values()->all();
     }

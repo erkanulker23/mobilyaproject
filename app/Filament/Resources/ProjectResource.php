@@ -15,6 +15,8 @@ class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
 
+    protected static ?string $slug = 'urunler';
+
     protected static ?string $navigationIcon = 'heroicon-o-cube';
 
     protected static ?string $navigationGroup = 'İçerik Yönetimi';
@@ -26,7 +28,7 @@ class ProjectResource extends Resource
         return 'Ürün';
     }
 
-    public static function getPluralLabel(): ?string
+    public static function getPluralModelLabel(): string
     {
         return 'Ürünler';
     }

@@ -1214,8 +1214,8 @@ class Component extends DCLogic {
   _pathFor(st){ switch(st.page){
       case 'home': return '/';
       case 'corporate': return '/kurumsal';
-      case 'collection': return '/projeler';
-      case 'product': return '/projeler/'+(st.product||'');
+      case 'collection': return '/urunler';
+      case 'product': return '/urunler/'+(st.product||'');
       case 'news': return '/haberler';
       case 'article': return '/haberler/'+(st.article||'');
       case 'dealers': return '/bayiler';
@@ -1225,9 +1225,9 @@ class Component extends DCLogic {
       default: return '/'; } }
   _pushUrl(st){ try{ if(st.page==='admin') return; var p=this._pathFor(st); if(p!==location.pathname){ history.pushState({dc:{page:st.page,product:st.product,cat:st.cat,article:st.article,legal:st.legal}},'',p); } }catch(e){} }
   _stateFromPath(path){ path=(path||'/').replace(/\/+$/,'')||'/'; if(path==='/') return {page:'home'};
-      var seg=path.split('/').filter(Boolean); var m={kurumsal:'corporate',haberler:'news',bayiler:'dealers',iletisim:'contact',sss:'faq',projeler:'collection'};
+      var seg=path.split('/').filter(Boolean); var m={kurumsal:'corporate',haberler:'news',bayiler:'dealers',iletisim:'contact',sss:'faq',urunler:'collection'};
       if(seg.length===1){ if(m[seg[0]]) return {page:m[seg[0]]}; if(['mesafeli','kvkk','gizlilik'].indexOf(seg[0])>=0) return {page:'legal',legal:seg[0]}; }
-      if(seg[0]==='projeler'){ var pr=(this.getData().products||[]).find(function(x){return x.id===seg[1];}); if(pr) return {page:'product',product:seg[1],cat:pr.cat}; return {page:'collection',cat:seg[1]}; }
+      if(seg[0]==='urunler'){ var pr=(this.getData().products||[]).find(function(x){return x.id===seg[1];}); if(pr) return {page:'product',product:seg[1],cat:pr.cat}; return {page:'collection',cat:seg[1]}; }
       if(seg[0]==='haberler') return {page:'article',article:seg[1]};
       return {page:'home'}; }
   goHome=()=>this.nav({page:'home'});

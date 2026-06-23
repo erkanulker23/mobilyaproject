@@ -202,9 +202,9 @@ class AwaMobilyaSeeder extends Seeder
         $slider->slides()->each(fn ($s) => $s->delete());
 
         $slides = [
-            ['img' => '1.png', 'sub' => 'KÖŞE TAKIMLARI', 'title' => 'Yaşam alanınıza karakter katın', 'cta' => 'Koleksiyonu Keşfet', 'desc' => 'Geniş aileler ve sosyal yaşam için tasarlanan, mekânı verimli kullanan köşe takımları.'],
-            ['img' => '3.png', 'sub' => 'KOLTUK TAKIMLARI', 'title' => 'Konforun zarif hali', 'cta' => 'Ürünleri İncele', 'desc' => 'Modern çizgileri ve yumuşak oturum konforuyla yaşam alanınıza değer katan koltuk takımları.'],
-            ['img' => '7.png', 'sub' => 'YENİ KOLEKSİYON', 'title' => '2026 İlkbahar Koleksiyonu', 'cta' => 'Hemen Bak', 'desc' => 'Doğal kumaşlar ve sıcak tonlarla tasarlanan yeni serimiz şimdi yetkili bayilerimizde.'],
+            ['img' => '1.png', 'sub' => 'KÖŞE TAKIMLARI', 'title' => 'Karakter Katın', 'cta' => 'Keşfet', 'desc' => 'Mekânı verimli kullanan modern köşe takımları.'],
+            ['img' => '3.png', 'sub' => 'KOLTUK TAKIMLARI', 'title' => 'Zarif Konfor', 'cta' => 'İncele', 'desc' => 'Yumuşak hatlar, dengeli oranlar, sıcak dokular.'],
+            ['img' => '7.png', 'sub' => 'YENİ KOLEKSİYON', 'title' => '2026 İlkbahar', 'cta' => 'Hemen Bak', 'desc' => 'Yeni serimiz şimdi yetkili bayilerde.'],
         ];
 
         $order = 1;
@@ -215,7 +215,7 @@ class AwaMobilyaSeeder extends Seeder
                 'subtitle' => ['tr' => $sl['sub'], 'en' => $sl['sub']],
                 'content' => ['tr' => $sl['desc'], 'en' => $sl['desc']],
                 'cta_text' => ['tr' => $sl['cta'], 'en' => $sl['cta']],
-                'link_url' => ['tr' => '/projeler', 'en' => '/projeler'],
+                'link_url' => ['tr' => '/urunler', 'en' => '/urunler'],
                 'title_color' => '#ffffff',
                 'subtitle_color' => '#E0A488',
                 'order_column' => $order++,
@@ -371,7 +371,7 @@ class AwaMobilyaSeeder extends Seeder
         $links = [
             ['name' => 'Anasayfa', 'url' => '/'],
             ['name' => 'Kurumsal', 'url' => '/sayfa/hakkimizda'],
-            ['name' => 'Ürünler', 'url' => '/projeler'],
+            ['name' => 'Ürünler', 'url' => '/urunler'],
             ['name' => 'Haberler', 'url' => '/blog'],
             ['name' => 'İletişim', 'url' => '/iletisim'],
         ];
@@ -448,7 +448,7 @@ class AwaMobilyaSeeder extends Seeder
                     'only_featured' => true,
                     'show_filter' => false,
                     'button_text' => 'Tüm Ürünler',
-                    'button_url' => '/projeler',
+                    'button_url' => '/urunler',
                     'bg_color' => '#ffffff',
                 ],
             ],

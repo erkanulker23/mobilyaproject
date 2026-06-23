@@ -274,10 +274,17 @@ window.AWA = (function () {
       yatak:{tr:'Huzurlu bir uyku ve sakin bir dinlenme alanı için tasarlanan yatak odası takımı; sade çizgileri ve dingin tonlarıyla odaya zarif bir bütünlük kazandırır. Fonksiyonel saklama çözümleri günlük yaşamı kolaylaştırır.',en:'Designed for restful sleep and a calm resting area, this bedroom set brings elegant unity to the room.'},
       yemek:{tr:'Sofranın keyfini bir araya getiren yemek odası takımı; dayanıklı yapısı ve zarif duruşuyla hem günlük öğünlerde hem özel davetlerde öne çıkar. Zamansız tasarımı farklı dekorasyon anlayışlarıyla uyum sağlar.',en:'Bringing the joy of the table together, this dining set stands out at both everyday meals and special gatherings.'}
     };
-    var prLong = (prByCat[curP.cat] || prByCat.koltuk)[lang];
-    var product = { name:curP[lang], catName:catName(curP.cat), bg:IMG(curP.img), mainBg:IMG(galArr[gi]), curImg:galArr[gi], onMainClick:function(){c.openLightbox();}, desc:catDesc(curP.cat), longDesc:prLong, onBack:function(){c.goCollection(curP.cat);} };
+    var prLong = (lang==='tr'?curP.longTr:curP.longEn) || (prByCat[curP.cat] || prByCat.koltuk)[lang];
+    var prDesc = (lang==='tr'?curP.descTr:curP.descEn) || catDesc(curP.cat);
+    var product = { name:curP[lang], catName:catName(curP.cat), bg:IMG(curP.img), mainBg:IMG(galArr[gi]), curImg:galArr[gi], onMainClick:function(){c.openLightbox();}, desc:prDesc, longDesc:prLong, onBack:function(){c.goCollection(curP.cat);} };
     var productFeatures = FEATURES[lang].map(function (f) { return { txt:f }; });
-    var productPieces = (PIECES[curP.cat] || PIECES.koltuk).map(function (pc, i) { return { name:pc[lang], dims:pc.d, bg:IMG(pcImgs[i % pcImgs.length]) }; });
+    // Parçalar (Takım İçeriği) — admin "Ürünü Oluşturan Parçalar" (DB) varsa onu kullan
+    var productPieces;
+    if (curP.pieces && curP.pieces.length) {
+      productPieces = curP.pieces.map(function (pc, i) { return { name:pc.name, dims:pc.dims, bg:IMG(pcImgs[i % pcImgs.length]) }; });
+    } else {
+      productPieces = (PIECES[curP.cat] || PIECES.koltuk).map(function (pc, i) { return { name:pc[lang], dims:pc.d, bg:IMG(pcImgs[i % pcImgs.length]) }; });
+    }
     var related = data.products.filter(function(p){return p.cat===curP.cat && p.id!==curP.id;}).slice(0,3).map(locP);
     if (related.length < 3) related = related.concat(data.products.filter(function(p){return p.id!==curP.id && related.map(function(r){return r.id;}).indexOf(p.id)<0;}).map(locP)).slice(0,3);
 

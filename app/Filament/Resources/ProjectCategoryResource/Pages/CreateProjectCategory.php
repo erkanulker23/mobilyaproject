@@ -8,4 +8,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateProjectCategory extends CreateRecord
 {
     protected static string $resource = ProjectCategoryResource::class;
+
+    public function getTitle(): string
+    {
+        return 'Ürün Kategorisi Ekle';
+    }
 }

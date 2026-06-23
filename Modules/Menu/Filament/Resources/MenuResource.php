@@ -16,6 +16,12 @@ class MenuResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-bars-3';
 
+    // DC frontend kendi sabit navigasyonunu kullanır → menüde gizli.
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
     public static function getNavigationGroup(): ?string
     {
         return 'Menu';

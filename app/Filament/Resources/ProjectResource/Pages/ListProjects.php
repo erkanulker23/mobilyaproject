@@ -10,8 +10,13 @@ class ListProjects extends ListRecords
 {
     protected static string $resource = ProjectResource::class;
 
+    public function getTitle(): string
+    {
+        return 'Ürünler';
+    }
+
     protected function getHeaderActions(): array
     {
-        return [Actions\CreateAction::make()];
+        return [Actions\CreateAction::make()->label('Ürün Ekle')];
     }
 }

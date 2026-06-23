@@ -156,8 +156,8 @@ Route::localized(function () use ($dc) {
     ]))->name('blog.post.show');
 
     // Ürünler / Koleksiyon
-    Route::get('projeler', fn () => $dc(['page' => 'collection']))->name('projects.index');
-    Route::get('projeler/{slug}', function ($slug) use ($dc) {
+    Route::get('urunler', fn () => $dc(['page' => 'collection']))->name('projects.index');
+    Route::get('urunler/{slug}', function ($slug) use ($dc) {
         $p = \App\Models\Project::where('slug', $slug)->with('projectCategory')->first();
         $catSlug = optional(optional($p)->projectCategory)->slug ?: (optional($p)->category);
         if ($p) {

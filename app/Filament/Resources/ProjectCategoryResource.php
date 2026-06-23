@@ -14,6 +14,8 @@ class ProjectCategoryResource extends Resource
 {
     protected static ?string $model = ProjectCategory::class;
 
+    protected static ?string $slug = 'urun-kategorileri';
+
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
     protected static ?string $navigationGroup = 'İçerik Yönetimi';
@@ -25,7 +27,7 @@ class ProjectCategoryResource extends Resource
         return 'Ürün Kategorisi';
     }
 
-    public static function getPluralLabel(): ?string
+    public static function getPluralModelLabel(): string
     {
         return 'Ürün Kategorileri';
     }
@@ -57,7 +59,7 @@ class ProjectCategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->label('Kategori')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('slug')->label('Slug')->color('gray'),
-                Tables\Columns\TextColumn::make('projects_count')->counts('projects')->label('Proje Sayısı')->badge(),
+                Tables\Columns\TextColumn::make('projects_count')->counts('projects')->label('Ürün Sayısı')->badge(),
             ])
             ->actions([Tables\Actions\EditAction::make(), Tables\Actions\DeleteAction::make()])
             ->bulkActions([
