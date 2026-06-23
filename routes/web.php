@@ -112,6 +112,11 @@ $dc = function (array $state = []) {
     } elseif ($page === 'article' && ($n = $find('news', $state['article'] ?? ''))) {
         $title = $n['tr'].$suffix;
         $desc = $n['exTr'] ?? $desc;
+    } elseif ($page === 'showcases') {
+        $title = 'Projeler'.$suffix;
+    } elseif ($page === 'showcase' && ($sc = $find('showcases', $state['showcase'] ?? ''))) {
+        $title = $sc['title'].$suffix;
+        $desc = $sc['excerpt'] ?? $desc;
     }
 
     return view('frontend.dc', [
@@ -157,6 +162,10 @@ Route::localized(function () use ($dc) {
         'page' => 'article',
         'article' => is_object($post) ? $post->getTranslation('slug', 'tr') : $post,
     ]))->name('blog.post.show');
+
+    // Projeler (showcase) — ürünlerden ayrı
+    Route::get('projeler', fn () => $dc(['page' => 'showcases']))->name('showcases.index');
+    Route::get('projeler/{slug}', fn ($slug) => $dc(['page' => 'showcase', 'showcase' => $slug]))->name('showcases.show');
 
     // Ürünler / Koleksiyon
     Route::get('urunler', fn () => $dc(['page' => 'collection']))->name('projects.index');

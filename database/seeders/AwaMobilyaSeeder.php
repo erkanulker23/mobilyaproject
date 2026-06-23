@@ -7,6 +7,7 @@ use App\Models\BlogPost;
 use App\Models\Page;
 use App\Models\Project;
 use App\Models\ProjectCategory;
+use App\Models\Showcase;
 use App\Models\Testimonial;
 use App\Settings\GeneralSettings;
 use App\Settings\HomepageSettings;
@@ -40,6 +41,7 @@ class AwaMobilyaSeeder extends Seeder
         $slider = $this->seedSlides();
         $faq = $this->seedFaq();
         $this->seedNews();
+        $this->seedShowcases();
         $this->seedDealers();
         $this->seedTestimonials();
         $this->seedPages();
@@ -302,6 +304,35 @@ class AwaMobilyaSeeder extends Seeder
             if (! $post->getFirstMedia('listing_image')) {
                 $this->addImage($post, 'listing_image', $n['img']);
                 $this->addImage($post, 'details_hero', $n['img']);
+            }
+        }
+    }
+
+    private function seedShowcases(): void
+    {
+        $items = [
+            ['title' => 'Central Park Manzaralı Daire', 'location' => 'New York, ABD', 'img' => '1.png', 'ex' => 'Şehrin kalbinde, AWA koltuk ve oturma grupları ile tasarlanan modern bir yaşam alanı.'],
+            ['title' => 'Miami Evi', 'location' => 'Florida, ABD', 'img' => '6.png', 'ex' => 'Aydınlık ve ferah bir villada AWA Mobilya dokunuşu.'],
+            ['title' => 'Terminus Rezidans', 'location' => 'Atlanta, ABD', 'img' => '4.png', 'ex' => 'Lüks rezidans projesinde yatak ve yemek odası koleksiyonlarımız.'],
+            ['title' => 'Palomar Tepe Evi', 'location' => 'Kaliforniya, ABD', 'img' => '8.png', 'ex' => 'Doğayla iç içe modern bir mimaride sıcak ve davetkâr iç mekânlar.'],
+        ];
+        $order = 1;
+        foreach ($items as $it) {
+            $sc = Showcase::updateOrCreate(
+                ['slug' => Str::slug($it['title'])],
+                [
+                    'title' => $it['title'],
+                    'location' => $it['location'],
+                    'year' => '2026',
+                    'short_description' => $it['ex'],
+                    'content' => '<p>'.$it['ex'].' Bu projede AWA Mobilya koleksiyonları mekânın ruhuna uygun şekilde konumlandırıldı; konfor, estetik ve dayanıklılık bir araya getirildi.</p>',
+                    'is_featured' => true,
+                    'published' => true,
+                    'order_column' => $order++,
+                ]
+            );
+            if (! $sc->getFirstMedia('cover')) {
+                $this->addImage($sc, 'cover', $it['img']);
             }
         }
     }

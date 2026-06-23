@@ -83,6 +83,7 @@ class AdminPanelProvider extends PanelProvider
                         \Filament\Navigation\NavigationGroup::make('İçerik Yönetimi')->items([
                             ...\App\Filament\Resources\ProjectResource::getNavigationItems(),
                             ...\App\Filament\Resources\ProjectCategoryResource::getNavigationItems(),
+                            ...\App\Filament\Resources\ShowcaseResource::getNavigationItems(),
                             ...\Modules\Slide\Filament\Resources\SliderResource::getNavigationItems(),
                             ...\Modules\Slide\Filament\Resources\SlideResource::getNavigationItems(),
                             ...\App\Filament\Resources\BlogPostResource::getNavigationItems(),

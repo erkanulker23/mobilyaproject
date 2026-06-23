@@ -86,6 +86,7 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
             </div>
           </sc-if>
         </span>
+        <span onClick="{{ goShowcases }}" style="{{ navProjStyle }}">{{ t.nav.projects }}</span>
         <span onClick="{{ goNews }}" style="{{ navNewsStyle }}">{{ t.nav.news }}</span>
         <span onClick="{{ goDealers }}" style="{{ navDealersStyle }}">{{ t.nav.dealers }}</span>
         <span onClick="{{ goContact }}" style="{{ navContactStyle }}">{{ t.nav.contact }}</span>
@@ -279,6 +280,29 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
           <h2 style="margin:14px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(30px,3.6vw,52px);letter-spacing:-.025em;line-height:1.05;color:#17140f">{{ story.title }}</h2>
           <p style="margin:22px 0 0;font-size:17px;line-height:1.85;color:#5d564b;max-width:560px">{{ story.text }}</p>
           <button onClick="{{ story.onBtn }}" style="margin-top:32px;display:inline-flex;align-items:center;gap:12px;background:#17140f;color:#fff;border:none;cursor:pointer;padding:16px 32px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase">{{ story.btnText }}<svg width="20" height="9" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.5"/></svg></button>
+        </div>
+      </div>
+    </section>
+    </sc-if>
+
+    {{-- İlham Veren Projeler --}}
+    <sc-if value="{{ hasShowcases }}" hint-placeholder-val="{{ true }}">
+    <section style="background:#f6f3ed">
+      <div style="max-width:1560px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,72px)">
+        <div style="text-align:center;margin-bottom:clamp(36px,4vw,56px)">
+          <span style="font-family:'Space Mono';font-size:12px;letter-spacing:.2em;color:{{ accent }};text-transform:uppercase">{{ t.nav.projects }}</span>
+          <h2 style="margin:14px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(30px,3.6vw,52px);letter-spacing:-.025em;color:#17140f">İlham Veren Projeler</h2>
+          <div style="margin-top:22px"><span onClick="{{ goShowcases }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:10px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#17140f;border:1px solid #17140f;padding:13px 26px;border-radius:8px" style-hover="background:#17140f;color:#fff">Hepsini gör</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px">
+          <sc-for list="{{ showcaseFeatured }}" as="sc" hint-placeholder-count="4">
+            <div onClick="{{ sc.onClick }}" style="cursor:pointer">
+              <div style="border-radius:14px;aspect-ratio:4/3;{{ sc.bg }};overflow:hidden"></div>
+              <h3 style="margin:18px 0 0;font-family:Archivo;font-weight:700;font-size:20px;line-height:1.25;color:#17140f">{{ sc.title }}</h3>
+              <div style="margin-top:10px;font-family:'Space Mono';font-size:12px;letter-spacing:.06em;color:#9a8f7e;text-transform:uppercase">{{ sc.location }}</div>
+              <span style="display:inline-block;margin-top:12px;font-size:14px;font-weight:600;color:#17140f;border-bottom:1px solid #17140f">Devamını oku</span>
+            </div>
+          </sc-for>
         </div>
       </div>
     </section>
@@ -751,6 +775,71 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
       <aside><div style="font-family:'Space Mono';font-size:12px;letter-spacing:.16em;color:#9a8f7e;text-transform:uppercase;margin-bottom:18px">{{ t.legalPage.label }}</div><div style="display:flex;flex-direction:column;gap:4px"><sc-for list="{{ legalNav }}" as="l" hint-placeholder-count="3"><span onClick="{{ l.onClick }}" style="{{ l.style }}">{{ l.label }}</span></sc-for></div></aside>
       <article style="background:#fff;border:1px solid #ece6da;border-radius:18px;padding:clamp(32px,4vw,64px)"><h1 style="margin:0;font-family:Archivo;font-weight:800;font-size:clamp(30px,3.6vw,48px);letter-spacing:-.025em">{{ legalDoc.title }}</h1><div style="margin:14px 0 36px;font-family:'Space Mono';font-size:13px;color:#9a8f7e">{{ legalDoc.updated }}</div><sc-for list="{{ legalDoc.sections }}" as="s" hint-placeholder-count="4"><div style="margin-top:30px;padding-top:28px;border-top:1px solid #efe9dd"><h2 style="{{ s.hStyle }};margin:0 0 12px;font-family:Archivo;font-weight:700;font-size:21px;letter-spacing:-.01em">{{ s.h }}</h2><p style="margin:0;font-size:16px;line-height:1.85;color:#4d473e">{{ s.p }}</p></div></sc-for></article>
     </div>
+  </div>
+  </sc-if>
+
+  {{-- PROJELER (liste) --}}
+  <sc-if value="{{ isShowcaseList }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#f6f3ed">
+    <section style="background:#f6f3ed;border-bottom:1px solid #ece6da">
+      <div style="max-width:1000px;margin:0 auto;padding:clamp(110px,13vh,150px) clamp(20px,4vw,40px) clamp(36px,4vw,52px);text-align:center">
+        <span style="{{ kickerStyle }}">{{ t.nav.projects }}</span>
+        <h1 style="margin:16px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(38px,5vw,68px);letter-spacing:-.03em">İlham Veren Projeler</h1>
+        <p style="margin:18px auto 0;font-size:18px;line-height:1.6;color:#5d564b;max-width:600px">AWA Mobilya koleksiyonlarının hayata geçtiği seçkin yaşam alanları ve uygulama projeleri.</p>
+      </div>
+    </section>
+    <section style="background:#f6f3ed">
+      <div style="max-width:1560px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(20px,4vw,72px) clamp(70px,9vw,120px)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px">
+          <sc-for list="{{ showcaseList }}" as="sc" hint-placeholder-count="6">
+            <div onClick="{{ sc.onClick }}" style="cursor:pointer">
+              <div style="border-radius:14px;aspect-ratio:4/3;{{ sc.bg }};overflow:hidden"></div>
+              <h3 style="margin:18px 0 0;font-family:Archivo;font-weight:700;font-size:21px;line-height:1.25;color:#17140f">{{ sc.title }}</h3>
+              <div style="margin-top:10px;font-family:'Space Mono';font-size:12px;letter-spacing:.06em;color:#9a8f7e;text-transform:uppercase">{{ sc.location }}</div>
+              <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#5d564b">{{ sc.excerpt }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  {{-- PROJE DETAY --}}
+  <sc-if value="{{ isShowcaseDetail }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <section style="position:relative;height:74vh;min-height:520px;overflow:hidden;display:flex;align-items:flex-end">
+      <div style="position:absolute;inset:0;{{ showcase.bg }}"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,12,.45),rgba(20,17,12,0) 40%,rgba(20,17,12,.82))"></div>
+      <div style="position:relative;max-width:1100px;width:100%;margin:0 auto;padding:0 clamp(20px,4vw,72px) clamp(40px,5vw,56px)">
+        <span onClick="{{ goShowcases }}" style="cursor:pointer;font-family:'Space Mono';font-size:13px;color:rgba(255,255,255,.8)" style-hover="color:#fff">‹ {{ t.nav.projects }}</span>
+        <h1 style="margin:14px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(36px,5vw,72px);letter-spacing:-.03em;color:#fff;line-height:1.02">{{ showcase.title }}</h1>
+        <div style="margin-top:14px;display:flex;gap:20px;flex-wrap:wrap;font-family:'Space Mono';font-size:13px;letter-spacing:.08em;color:rgba(255,255,255,.85);text-transform:uppercase"><span>{{ showcase.location }}</span><span>{{ showcase.year }}</span></div>
+      </div>
+    </section>
+    <section style="background:#fff">
+      <div style="max-width:860px;margin:0 auto;padding:clamp(48px,6vw,86px) clamp(20px,4vw,40px)">
+        <p style="margin:0 0 28px;font-size:20px;line-height:1.7;color:#2c241b;font-weight:500">{{ showcase.excerpt }}</p>
+        <sc-for list="{{ showcase.body }}" as="b" hint-placeholder-count="3"><p style="margin:0 0 20px;font-size:17px;line-height:1.9;color:#4d473e">{{ b.p }}</p></sc-for>
+      </div>
+      <sc-if value="{{ showcase.gallery.length }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:1560px;margin:0 auto;padding:0 clamp(20px,4vw,72px) clamp(48px,6vw,80px);display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px">
+        <sc-for list="{{ showcase.gallery }}" as="g" hint-placeholder-count="3"><div style="border-radius:14px;aspect-ratio:4/3;{{ g.bg }}"></div></sc-for>
+      </div>
+      </sc-if>
+    </section>
+    <sc-if value="{{ showcaseRelated.length }}" hint-placeholder-val="{{ false }}">
+    <section style="background:#f6f3ed;border-top:1px solid #ece6da">
+      <div style="max-width:1560px;margin:0 auto;padding:clamp(56px,6vw,90px) clamp(20px,4vw,72px)">
+        <h2 style="margin:0 0 36px;font-family:Archivo;font-weight:800;font-size:clamp(26px,3vw,40px);letter-spacing:-.02em">Diğer Projeler</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px">
+          <sc-for list="{{ showcaseRelated }}" as="sc" hint-placeholder-count="3">
+            <div onClick="{{ sc.onClick }}" style="cursor:pointer"><div style="border-radius:14px;aspect-ratio:4/3;{{ sc.bg }}"></div><h3 style="margin:16px 0 0;font-family:Archivo;font-weight:700;font-size:20px">{{ sc.title }}</h3><div style="margin-top:8px;font-family:'Space Mono';font-size:12px;color:#9a8f7e;text-transform:uppercase">{{ sc.location }}</div></div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+    </sc-if>
   </div>
   </sc-if>
 
@@ -1243,7 +1332,7 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#9c8463&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;defaultLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;tr&quot;,&quot;en&quot;],&quot;default&quot;:&quot;tr&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;adminPassword&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;0000&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { page:'home', lang:null, hero:0, cat:'koltuk', product:'exence', dropdown:null, scrolled:false, legal:'mesafeli', sent:false, subscribed:false, searchOpen:false, query:'', data:null, adminTab:'dashboard', ready:false, gi:0, article:null, mobileOpen:false, isMobile:false, sort:'default', dealerIl:'', dealerIlce:'', faqOpen:null, adminAuthed:false, adminPwd:'', adminErr:false, adminEditId:null, lightboxOpen:false, cookieSeen:true };
+  state = { page:'home', lang:null, hero:0, cat:'koltuk', product:'exence', dropdown:null, scrolled:false, legal:'mesafeli', sent:false, subscribed:false, searchOpen:false, query:'', data:null, adminTab:'dashboard', ready:false, gi:0, article:null, showcase:null, mobileOpen:false, isMobile:false, sort:'default', dealerIl:'', dealerIlce:'', faqOpen:null, adminAuthed:false, adminPwd:'', adminErr:false, adminEditId:null, lightboxOpen:false, cookieSeen:true };
 
   componentDidMount(){
     try{ var cc=localStorage.getItem('awa_cookie'); if(!cc) this.setState({cookieSeen:false}); }catch(e){ this.setState({cookieSeen:false}); }
@@ -1305,6 +1394,8 @@ class Component extends DCLogic {
       case 'product': return '/urunler/'+(st.product||'');
       case 'news': return '/haberler';
       case 'article': return '/haberler/'+(st.article||'');
+      case 'showcases': return '/projeler';
+      case 'showcase': return '/projeler/'+(st.showcase||'');
       case 'dealers': return '/bayiler';
       case 'contact': return '/iletisim';
       case 'faq': return '/sss';
@@ -1312,9 +1403,10 @@ class Component extends DCLogic {
       default: return '/'; } }
   _pushUrl(st){ try{ if(st.page==='admin') return; var p=this._pathFor(st); if(p!==location.pathname){ history.pushState({dc:{page:st.page,product:st.product,cat:st.cat,article:st.article,legal:st.legal}},'',p); } }catch(e){} }
   _stateFromPath(path){ path=(path||'/').replace(/\/+$/,'')||'/'; if(path==='/') return {page:'home'};
-      var seg=path.split('/').filter(Boolean); var m={kurumsal:'corporate',haberler:'news',bayiler:'dealers',iletisim:'contact',sss:'faq',urunler:'collection'};
+      var seg=path.split('/').filter(Boolean); var m={kurumsal:'corporate',haberler:'news',bayiler:'dealers',iletisim:'contact',sss:'faq',urunler:'collection',projeler:'showcases'};
       if(seg.length===1){ if(m[seg[0]]) return {page:m[seg[0]]}; if(['mesafeli','kvkk','gizlilik'].indexOf(seg[0])>=0) return {page:'legal',legal:seg[0]}; }
       if(seg[0]==='urunler'){ var pr=(this.getData().products||[]).find(function(x){return x.id===seg[1];}); if(pr) return {page:'product',product:seg[1],cat:pr.cat}; return {page:'collection',cat:seg[1]}; }
+      if(seg[0]==='projeler') return {page:'showcase',showcase:seg[1]};
       if(seg[0]==='haberler') return {page:'article',article:seg[1]};
       return {page:'home'}; }
   goHome=()=>this.nav({page:'home'});
@@ -1353,6 +1445,8 @@ class Component extends DCLogic {
   subscribe=()=>{ var email=this._field('nemail'); if(email){ this._post('/abone',{email:email}); } this.setState({subscribed:true}); };
   resetData=()=>{ this.commit(window.AWA.defaultData()); };
   goArticle=(id)=>this.nav({page:'article',article:id});
+  goShowcases=()=>this.nav({page:'showcases'});
+  goShowcase=(id)=>this.nav({page:'showcase',showcase:id});
   acceptCookies=()=>{ try{ localStorage.setItem('awa_cookie','accepted'); }catch(e){} this.setState({cookieSeen:true}); };
   rejectCookies=()=>{ try{ localStorage.setItem('awa_cookie','rejected'); }catch(e){} this.setState({cookieSeen:true}); };
   setGi=(i)=>this.setState({gi:i});

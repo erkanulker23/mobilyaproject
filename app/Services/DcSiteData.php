@@ -29,6 +29,7 @@ class DcSiteData
             'dealers' => $this->dealers(),
             'pages' => $this->pages(),
             'faqs' => $this->faqs(),
+            'showcases' => $this->showcases(),
         ];
     }
 
@@ -202,6 +203,25 @@ class DcSiteData
                 'district' => $b->county ?: '',
                 'addr' => $b->address ?: '',
                 'tel' => $b->phone ?: '',
+            ];
+        })->values()->all();
+    }
+
+    private function showcases(): array
+    {
+        return \App\Models\Showcase::query()->where('published', true)->orderBy('order_column')->get()->map(function ($s) {
+            $body = trim(strip_tags(preg_replace('/<\/p>|<br\s*\/?>/i', "\n", (string) $s->content)));
+            $gallery = $s->getMedia('gallery')->map(fn ($m) => $m->getUrl())->values()->all();
+            return [
+                'id' => $s->slug,
+                'title' => $s->title,
+                'location' => $s->location ?: '',
+                'year' => $s->year ?: '',
+                'excerpt' => $s->short_description ?: '',
+                'body' => $body,
+                'img' => $s->cover_url,
+                'gallery' => $gallery,
+                'featured' => (bool) $s->is_featured,
             ];
         })->values()->all();
     }

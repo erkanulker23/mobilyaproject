@@ -113,7 +113,7 @@ window.AWA = (function () {
 
   var STR = {
     tr:{
-      nav:{home:'ANA SAYFA',corporate:'KURUMSAL',collection:'KOLEKSİYON',news:'HABERLER',dealers:'BAYİLER',contact:'İLETİŞİM'},
+      nav:{home:'ANA SAYFA',corporate:'KURUMSAL',collection:'KOLEKSİYON',projects:'PROJELER',news:'HABERLER',dealers:'BAYİLER',contact:'İLETİŞİM'},
       searchPh:'Ürün ara...', searchEmpty:'Sonuç bulunamadı.', thanks:'Teşekkürler! En kısa sürede dönüş yapacağız.',
       cta:{discover:'KEŞFET',explore:'KEŞFET',exploreProducts:'ÜRÜNLERİ KEŞFET',download:'KATALOĞU İNDİR',allCollections:'TÜM KOLEKSİYON',viewAll:'TÜMÜNÜ GÖR',requestInfo:'BİLGİ İSTE',send:'GÖNDER',onlineCatalog:'ONLINE KATALOG'},
       featured:{kicker:'KOLEKSİYON',title:'Koltuk Takımları',desc:'En yeni tasarımlarımızı siz değerli müşterilerimizin beğenisine sunuyoruz. En son koleksiyonlarımızı keşfedin.'},
@@ -144,7 +144,7 @@ window.AWA = (function () {
       admin:{reset:'Varsayılana Sıfırla',viewSite:'Siteyi Görüntüle',dashboard:'Kontrol Paneli',slides:'Slider',products:'Ürünler',categories:'Kategoriler',news:'Haberler / Blog',dealers:'Bayiler',pages:'Sayfalar',seo:'SEO Ayarları',general:'Genel Ayarlar',email:'E-posta / Sunucu',settings:'Site Ayarları',addProduct:'Ürün Ekle',addCategory:'Kategori Ekle',addNews:'Haber Ekle',addSlide:'Slayt Ekle',addDealer:'Bayi Ekle',note:'Değişiklikler tarayıcınıza otomatik kaydedilir ve sitede anında görünür.',body:'İçerik / Blog Metni',welcome:'Hoş geldiniz',welcomeSub:'Sitenizin tüm içeriğini buradan yönetebilirsiniz.',recent:'Son Haberler',shortcuts:'Hızlı İşlemler',brandT:'Marka & Logo',logoT:'Logo',faviconT:'Favicon (sekme simgesi)',upload:'Görsel Yükle',remove:'Kaldır',mailT:'E-posta Bildirimleri',smtpT:'SMTP Sunucu Ayarları',mailNote:'Form gönderimleri bu adrese iletilir. SMTP ayarları gerçek gönderim için bir sunucu entegrasyonu gerektirir.'}
     },
     en:{
-      nav:{home:'HOME',corporate:'CORPORATE',collection:'COLLECTION',news:'NEWS',dealers:'DEALERS',contact:'CONTACT'},
+      nav:{home:'HOME',corporate:'CORPORATE',collection:'COLLECTION',projects:'PROJECTS',news:'NEWS',dealers:'DEALERS',contact:'CONTACT'},
       searchPh:'Search products...', searchEmpty:'No results found.', thanks:'Thank you! We will get back to you shortly.',
       cta:{discover:'DISCOVER',explore:'EXPLORE',exploreProducts:'EXPLORE PRODUCTS',download:'DOWNLOAD CATALOG',allCollections:'ALL COLLECTION',viewAll:'VIEW ALL',requestInfo:'REQUEST INFO',send:'SEND',onlineCatalog:'ONLINE CATALOG'},
       featured:{kicker:'COLLECTION',title:'Sofa Sets',desc:'We present our newest designs for your appreciation. Discover our latest collections.'},
@@ -338,6 +338,23 @@ window.AWA = (function () {
       body: (lang==='tr'?curN.bodyTr:curN.bodyEn || '').split('\n').filter(function(x){return x.trim();}).map(function(p){return {p:p};})
     } : {title:'',date:'',cat:'',bg:'',body:[]};
     var relatedArticles = data.news.filter(function(n){return n.id!==(curN&&curN.id);}).slice(0,3).map(function(n,i){ return locN(n, i+1); });
+
+    // Projeler (showcase)
+    var showcases = data.showcases || [];
+    var locSc = function(sc){ return { id:sc.id, title:sc.title, location:sc.location, excerpt:sc.excerpt, bg:IMG(sc.img), onClick:(function(id){return function(){c.goShowcase(id);};})(sc.id) }; };
+    var showcaseList = showcases.map(locSc);
+    var showcaseFeatured = showcases.filter(function(x){return x.featured;}).map(locSc);
+    if (!showcaseFeatured.length) showcaseFeatured = showcaseList.slice(0,4);
+    showcaseFeatured = showcaseFeatured.slice(0,4);
+    var curScIndex = Math.max(0, showcases.map(function(x){return x.id;}).indexOf(s.showcase));
+    var curSc = showcases[curScIndex] || showcases[0];
+    var showcase = curSc ? {
+      title:curSc.title, location:curSc.location, year:curSc.year, excerpt:curSc.excerpt, bg:IMG(curSc.img),
+      body: (curSc.body || '').split('\n').filter(function(x){return x.trim();}).map(function(p){return {p:p};}),
+      gallery: (curSc.gallery || []).map(function(g){ return { bg:IMG(g) }; })
+    } : {title:'',location:'',year:'',excerpt:'',bg:'',body:[],gallery:[]};
+    var showcaseRelated = showcases.filter(function(x){return x.id!==(curSc&&curSc.id);}).slice(0,3).map(locSc);
+    var hasShowcases = showcaseList.length>0;
 
     // testimonials (müşteri yorumları)
     var testimonials = (data.testimonials || []).map(function (tm) {
@@ -594,6 +611,9 @@ window.AWA = (function () {
       navNewsStyle:link(page==='news'||page==='article'), navDealersStyle:link(page==='dealers'), navContactStyle:link(page==='contact'),
       isHome:page==='home', isCorporate:page==='corporate', isCollection:page==='collection', isProduct:page==='product',
       isNews:page==='news', isArticle:page==='article', isContact:page==='contact', isDealers:page==='dealers', isLegal:page==='legal', isAdmin:page==='admin', isFaq:page==='faq',
+      isShowcaseList:page==='showcases', isShowcaseDetail:page==='showcase',
+      showcaseList:showcaseList, showcaseFeatured:showcaseFeatured, showcase:showcase, showcaseRelated:showcaseRelated, hasShowcases:hasShowcases,
+      goShowcases:c.goShowcases, navProjStyle:link(page==='showcases'||page==='showcase'),
       adminAuthed:s.adminAuthed, adminLocked: page==='admin' && !s.adminAuthed, adminPwd:s.adminPwd, adminErr:s.adminErr, setAdminPwd:c.setAdminPwd, submitAdminPwd:c.submitAdminPwd, adminLogout:c.adminLogout,
       goFaq:c.goFaq, faqItems:faqItems, faqKicker:t.faqPage.kicker, faqTitle:t.faqPage.title, faqIntro:t.faqPage.intro,
       lightboxOpen:s.lightboxOpen, lightboxBg:IMG(galArr[gi]), lightboxImg:galArr[gi], closeLightbox:c.closeLightbox, downloadImg:c.downloadImg, lbHasMany:galArr.length>1, lbNext:c.lbNext, lbPrev:c.lbPrev, lbIndex:(gi+1)+' / '+galArr.length,
