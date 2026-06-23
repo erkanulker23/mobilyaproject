@@ -87,6 +87,13 @@ class ProjectResource extends Resource
                         ->schema([
                             Forms\Components\TextInput::make('label')->label('Parça Adı')->placeholder('Üçlü Kanepe')->required(),
                             Forms\Components\TextInput::make('value')->label('Ölçü / Detay')->placeholder('G 240 · D 95 · Y 85 cm'),
+                            Forms\Components\FileUpload::make('image')
+                                ->label('Parça Görseli')
+                                ->image()
+                                ->imageEditor()
+                                ->disk('public')
+                                ->directory('product-pieces')
+                                ->columnSpanFull(),
                         ])
                         ->columns(2)
                         ->defaultItems(0)

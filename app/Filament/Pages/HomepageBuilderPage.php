@@ -42,13 +42,6 @@ class HomepageBuilderPage extends Page implements HasForms
 
     protected static ?string $navigationLabel = 'Anasayfa Düzenleyici';
 
-    // Frontend = DC tasarımı (kendi sabit düzeni); bu builder DC tarafından
-    // kullanılmıyor → kafa karışıklığını önlemek için menüde gizli.
-    public static function shouldRegisterNavigation(): bool
-    {
-        return false;
-    }
-
     public ?array $data = [];
 
     public function mount(): void

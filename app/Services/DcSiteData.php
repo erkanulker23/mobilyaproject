@@ -110,6 +110,7 @@ class DcSiteData
                 $pieces = collect($p->specs ?: [])->map(fn ($s) => [
                     'name' => $s['label'] ?? '',
                     'dims' => $s['value'] ?? '',
+                    'img' => ! empty($s['image']) ? \Storage::disk('public')->url($s['image']) : '',
                 ])->filter(fn ($x) => $x['name'] !== '')->values()->all();
 
                 return [

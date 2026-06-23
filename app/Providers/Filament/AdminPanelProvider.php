@@ -77,6 +77,7 @@ class AdminPanelProvider extends PanelProvider
                 return $builder
                     ->items([
                         ...\App\Filament\Pages\Dashboard::getNavigationItems(),
+                        ...\App\Filament\Pages\HomepageBuilderPage::getNavigationItems(),
                     ])
                     ->groups([
                         \Filament\Navigation\NavigationGroup::make('İçerik Yönetimi')->items([
@@ -95,6 +96,13 @@ class AdminPanelProvider extends PanelProvider
                             ...\App\Filament\Pages\ManageSettings::getNavigationItems(),
                             ...\App\Filament\Pages\ManageImage::getNavigationItems(),
                             ...\App\Filament\Pages\ManageSeo::getNavigationItems(),
+                            ...\App\Filament\Pages\ManageEmail::getNavigationItems(),
+                            ...\App\Filament\Pages\ManageCookieConsent::getNavigationItems(),
+                            ...\App\Filament\Pages\StyleScriptSettings::getNavigationItems(),
+                            ...\App\Filament\Pages\ManageTopbar::getNavigationItems(),
+                            ...\App\Filament\Pages\PopupSettings::getNavigationItems(),
+                            ...\App\Filament\Pages\ManageThirdParty::getNavigationItems(),
+                            ...\App\Filament\Pages\ManageAdministrator::getNavigationItems(),
                         ]),
                         \Filament\Navigation\NavigationGroup::make('Sistem')->items([
                             ...\App\Filament\Resources\UserResource::getNavigationItems(),

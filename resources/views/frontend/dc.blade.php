@@ -394,60 +394,40 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
   <!-- PRODUCT -->
   <sc-if value="{{ isProduct }}" hint-placeholder-val="{{ false }}">
   <div>
-    <section style="position:relative;height:90vh;min-height:620px;overflow:hidden">
-      <div style="{{ galTrackStyle }}">
-        <sc-for list="{{ galSlides }}" as="gs" hint-placeholder-count="3">
-          <div onClick="{{ product.onMainClick }}" style="cursor:zoom-in;position:relative;flex:none;width:100%;height:100%;{{ gs.bg }}"></div>
-        </sc-for>
-      </div>
-      <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(20,17,12,.5) 0%,rgba(20,17,12,0) 26%,rgba(20,17,12,0) 52%,rgba(20,17,12,.78) 100%)"></div>
-      <div style="position:absolute;left:0;top:0;width:100%;padding:clamp(96px,11vh,120px) clamp(20px,4vw,72px) 0">
-        <div style="display:flex;align-items:center;gap:10px;font-family:'Space Mono';font-size:12px;color:rgba(255,255,255,.75);flex-wrap:wrap">
-          <span onClick="{{ goCollectionDefault }}" style="cursor:pointer" style-hover="color:#fff">{{ t.nav.collection }}</span><span>/</span>
-          <span onClick="{{ product.onBack }}" style="cursor:pointer" style-hover="color:#fff">{{ product.catName }}</span>
-        </div>
-      </div>
-      <div style="position:absolute;left:0;bottom:42px;width:100%;padding:0 clamp(20px,4vw,72px);display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
-        <div>
-          <span style="display:block;font-family:'Space Mono';font-size:12px;letter-spacing:.2em;color:rgba(255,255,255,.7);text-transform:uppercase;margin-bottom:14px">{{ product.catName }}</span>
-          <h1 style="margin:0;font-family:Archivo;font-weight:800;font-size:clamp(40px,5.6vw,82px);letter-spacing:-.03em;color:#fff;line-height:.98">{{ product.name }}</h1>
-        </div>
-        <div style="display:flex;align-items:center;gap:22px">
-          <div style="display:flex;align-items:center;gap:10px"><sc-for list="{{ galDots }}" as="d" hint-placeholder-count="3"><span onClick="{{ d.onClick }}" style="{{ d.style }}"></span></sc-for></div>
-          <span onClick="{{ product.onMainClick }}" style="display:inline-flex;align-items:center;gap:9px;background:rgba(246,243,237,.92);color:#17140f;padding:11px 20px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4M11 8v6M8 11h6"/></svg>Büyüt</span>
-        </div>
-      </div>
-    </section>
     <section style="background:#f6f3ed">
-      <div style="max-width:1560px;margin:0 auto;padding:clamp(40px,5vw,64px) clamp(20px,4vw,72px) clamp(50px,6vw,80px)">
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="4"><div onClick="{{ g.onClick }}" style="width:130px;max-width:23%;{{ g.style }}"></div></sc-for>
+      <div style="max-width:1480px;margin:0 auto;padding:clamp(94px,12vh,128px) clamp(20px,4vw,72px) clamp(54px,6vw,86px)">
+        <div style="display:flex;align-items:center;gap:10px;font-family:'Space Mono';font-size:12px;color:#9a8f7e;flex-wrap:wrap;margin-bottom:clamp(26px,3vw,40px)">
+          <span onClick="{{ goCollectionDefault }}" style="cursor:pointer" style-hover="color:#17140f">{{ t.nav.collection }}</span><span>/</span>
+          <span onClick="{{ product.onBack }}" style="cursor:pointer" style-hover="color:#17140f">{{ product.catName }}</span><span>/</span>
+          <span style="color:#17140f">{{ product.name }}</span>
         </div>
-        <div style="display:grid;grid-template-columns:{{ gProduct }};gap:clamp(32px,5vw,72px);align-items:start;margin-top:clamp(44px,5vw,68px)">
+        <div style="display:grid;grid-template-columns:{{ gProduct }};gap:clamp(38px,5vw,72px);align-items:start">
           <div>
-            <span style="{{ kickerStyle }}">{{ product.catName }}</span>
-            <h2 style="margin:14px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(30px,3.6vw,46px);letter-spacing:-.02em;line-height:1.04">{{ product.name }}</h2>
-            <p style="margin:24px 0 0;font-size:19px;line-height:1.8;color:#39342c;max-width:560px">{{ product.longDesc }}</p>
-            <p style="margin:18px 0 0;font-size:16px;line-height:1.8;color:#6b6356;max-width:560px">{{ product.desc }}</p>
-            <div style="margin-top:34px;font-family:'Space Mono';font-size:12px;letter-spacing:.14em;color:#9a8f7e;text-transform:uppercase">{{ t.productPage.featuresT }}</div>
-            <div style="display:flex;flex-direction:column;gap:13px;margin-top:18px">
-              <sc-for list="{{ productFeatures }}" as="f" hint-placeholder-count="5">
-                <div style="display:flex;align-items:center;gap:14px;font-size:17px;color:#2c241b"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:{{ accent }};color:#fff;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>{{ f.txt }}</div>
-              </sc-for>
+            <div onClick="{{ product.onMainClick }}" style="cursor:zoom-in;position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/3.05;{{ product.mainBg }};border:1px solid #e7e0d2;box-shadow:0 30px 70px -45px rgba(23,20,15,.45)">
+              <span style="position:absolute;right:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;background:rgba(246,243,237,.93);color:#17140f;padding:9px 16px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4M11 8v6M8 11h6"/></svg>Büyüt</span>
+            </div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px">
+              <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="4"><div onClick="{{ g.onClick }}" style="width:104px;max-width:22%;{{ g.style }}"></div></sc-for>
             </div>
           </div>
           <div style="position:sticky;top:100px">
-            <div style="background:#fff;border:1px solid #ece6da;border-radius:18px;padding:clamp(24px,3vw,34px)">
-              <div style="display:grid;grid-template-columns:{{ g3 }};gap:12px">
-                <sc-for list="{{ t.specs }}" as="sp" hint-placeholder-count="3"><div style="background:#f6f3ed;border:1px solid #ece6da;border-radius:12px;padding:16px"><div style="font-family:'Space Mono';font-size:10px;letter-spacing:.1em;color:#9a8f7e;text-transform:uppercase">{{ sp.l }}</div><div style="margin-top:6px;font-family:Archivo;font-weight:700;font-size:17px">{{ sp.v }}</div></div></sc-for>
-              </div>
-              <p style="margin:22px 0 0;font-size:15px;line-height:1.7;color:#5d564b">{{ t.productPage.formDesc }}</p>
-              <div style="display:flex;flex-direction:column;gap:12px;margin-top:22px">
-                <button onClick="{{ goContact }}" style="display:inline-flex;align-items:center;justify-content:center;gap:12px;background:#17140f;color:#fff;border:none;cursor:pointer;padding:16px 30px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase">{{ t.cta.requestInfo }}<svg width="20" height="9" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.5"/></svg></button>
-                <button onClick="{{ goCatalog }}" style="display:inline-flex;align-items:center;justify-content:center;gap:12px;background:transparent;color:#17140f;border:1px solid #d3cabb;cursor:pointer;padding:16px 28px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase">{{ t.cta.download }}</button>
-              </div>
-              <div style="margin-top:22px;padding-top:20px;border-top:1px solid #e4ddce"><div style="font-family:Archivo;font-weight:800;font-size:24px">{{ phone }}</div><div style="font-size:14px;color:#6b6356">{{ email }}</div></div>
+            <span style="{{ kickerStyle }}">{{ product.catName }}</span>
+            <h1 style="margin:12px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(32px,4vw,54px);letter-spacing:-.025em;line-height:1.02">{{ product.name }}</h1>
+            <p style="margin:22px 0 0;font-size:17px;line-height:1.8;color:#39342c">{{ product.longDesc }}</p>
+            <div style="display:grid;grid-template-columns:{{ g3 }};gap:12px;margin-top:30px">
+              <sc-for list="{{ t.specs }}" as="sp" hint-placeholder-count="3"><div style="background:#fff;border:1px solid #ece6da;border-radius:13px;padding:15px"><div style="font-family:'Space Mono';font-size:10px;letter-spacing:.1em;color:#9a8f7e;text-transform:uppercase">{{ sp.l }}</div><div style="margin-top:6px;font-family:Archivo;font-weight:700;font-size:16px">{{ sp.v }}</div></div></sc-for>
             </div>
+            <div style="margin-top:30px;font-family:'Space Mono';font-size:12px;letter-spacing:.14em;color:#9a8f7e;text-transform:uppercase">{{ t.productPage.featuresT }}</div>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px">
+              <sc-for list="{{ productFeatures }}" as="f" hint-placeholder-count="5">
+                <div style="display:flex;align-items:center;gap:14px;font-size:16px;color:#2c241b"><span style="flex:none;width:22px;height:22px;border-radius:50%;background:{{ accent }};color:#fff;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>{{ f.txt }}</div>
+              </sc-for>
+            </div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:32px">
+              <button onClick="{{ goContact }}" style="flex:1;min-width:210px;display:inline-flex;align-items:center;justify-content:center;gap:12px;background:#17140f;color:#fff;border:none;cursor:pointer;padding:16px 30px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase">{{ t.cta.requestInfo }}<svg width="20" height="9" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.5"/></svg></button>
+              <button onClick="{{ goCatalog }}" style="flex:none;display:inline-flex;align-items:center;justify-content:center;gap:12px;background:transparent;color:#17140f;border:1px solid #d3cabb;cursor:pointer;padding:16px 26px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase">{{ t.cta.download }}</button>
+            </div>
+            <div style="margin-top:24px;padding-top:22px;border-top:1px solid #e4ddce;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap"><div style="font-family:Archivo;font-weight:800;font-size:22px">{{ phone }}</div><div style="font-size:14px;color:#6b6356">{{ email }}</div></div>
           </div>
         </div>
       </div>

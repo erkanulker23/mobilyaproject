@@ -281,7 +281,7 @@ window.AWA = (function () {
     // Parçalar (Takım İçeriği) — admin "Ürünü Oluşturan Parçalar" (DB) varsa onu kullan
     var productPieces;
     if (curP.pieces && curP.pieces.length) {
-      productPieces = curP.pieces.map(function (pc, i) { return { name:pc.name, dims:pc.dims, bg:IMG(pcImgs[i % pcImgs.length]) }; });
+      productPieces = curP.pieces.map(function (pc, i) { return { name:pc.name, dims:pc.dims, bg:IMG(pc.img ? pc.img : pcImgs[i % pcImgs.length]) }; });
     } else {
       productPieces = (PIECES[curP.cat] || PIECES.koltuk).map(function (pc, i) { return { name:pc[lang], dims:pc.d, bg:IMG(pcImgs[i % pcImgs.length]) }; });
     }
