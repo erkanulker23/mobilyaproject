@@ -168,4 +168,32 @@ Route::localized(function () use ($dc) {
     })->name('projects.show');
 });
 
+// DC frontend form gönderimleri → DB (admin'de görünür)
+Route::post('lead', function (\Illuminate\Http\Request $request) {
+    $data = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'phone' => 'nullable|string|max:255',
+        'message' => 'nullable|string|max:5000',
+    ]);
+    \App\Models\ContactFormSubmission::create([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'phone' => $data['phone'] ?? '',
+        'message' => $data['message'] ?? '',
+    ]);
+
+    return response()->json(['ok' => true]);
+})->middleware('throttle:5,1')->name('dc.lead');
+
+Route::post('abone', function (\Illuminate\Http\Request $request) {
+    $data = $request->validate(['email' => 'required|email|max:255']);
+    \Modules\Newsletter\Entities\NewsletterSubscriber::firstOrCreate(
+        ['email' => $data['email']],
+        ['token' => \Illuminate\Support\Str::random(40), 'is_active' => true]
+    );
+
+    return response()->json(['ok' => true]);
+})->middleware('throttle:5,1')->name('dc.subscribe');
+
 require __DIR__.'/auth.php';

@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <title>{{ $seoTitle ?? 'AWA Mobilya' }}</title>
 <meta name="description" content="{{ $seoDescription ?? '' }}">
 <meta property="og:type" content="website">
@@ -566,10 +567,10 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
           <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}"><div style="padding:30px 4px"><div style="font-family:Archivo;font-weight:800;font-size:24px">{{ t.thanks }}</div></div></sc-if>
           <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
             <div style="display:grid;grid-template-columns:{{ g2 }};gap:14px">
-              <input placeholder="{{ t.form.name }}" style="grid-column:1/-1;border:1px solid #d8cfc0;background:#fff;border-radius:10px;padding:16px 18px;font-size:15px;outline:none"/>
-              <input placeholder="{{ t.form.email }}" style="border:1px solid #d8cfc0;background:#fff;border-radius:10px;padding:16px 18px;font-size:15px;outline:none"/>
-              <input placeholder="{{ t.form.phone }}" style="border:1px solid #d8cfc0;background:#fff;border-radius:10px;padding:16px 18px;font-size:15px;outline:none"/>
-              <textarea placeholder="{{ t.form.msg }}" rows="5" style="grid-column:1/-1;border:1px solid #d8cfc0;background:#fff;border-radius:10px;padding:16px 18px;font-size:15px;outline:none;resize:none"></textarea>
+              <input data-field="cname" placeholder="{{ t.form.name }}" style="grid-column:1/-1;border:1px solid #d8cfc0;background:#fff;border-radius:10px;padding:16px 18px;font-size:15px;outline:none"/>
+              <input data-field="cemail" placeholder="{{ t.form.email }}" style="border:1px solid #d8cfc0;background:#fff;border-radius:10px;padding:16px 18px;font-size:15px;outline:none"/>
+              <input data-field="cphone" placeholder="{{ t.form.phone }}" style="border:1px solid #d8cfc0;background:#fff;border-radius:10px;padding:16px 18px;font-size:15px;outline:none"/>
+              <textarea data-field="cmsg" placeholder="{{ t.form.msg }}" rows="5" style="grid-column:1/-1;border:1px solid #d8cfc0;background:#fff;border-radius:10px;padding:16px 18px;font-size:15px;outline:none;resize:none"></textarea>
               <button onClick="{{ sendForm }}" style="grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;gap:12px;background:#17140f;color:#fff;border:none;cursor:pointer;padding:16px 32px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase">{{ t.cta.send }}<svg width="20" height="9" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.5"/></svg></button>
             </div>
           </sc-if>
@@ -1156,7 +1157,7 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
         <div style="font-family:Archivo;font-weight:700;font-size:20px;color:#fff">{{ t.newsletter.title }}</div>
         <p style="margin:12px 0 18px;font-size:14px;line-height:1.6;color:#9a8f7e">{{ t.newsletter.desc }}</p>
         <sc-if value="{{ subscribed }}" hint-placeholder-val="{{ false }}"><div style="background:rgba(255,255,255,.06);border:1px solid #34302a;border-radius:999px;padding:15px 24px;font-size:14px;color:#e9e2d5">{{ t.newsletter.thanks }}</div></sc-if>
-        <sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}"><div style="background:rgba(255,255,255,.06);border:1px solid #34302a;border-radius:999px;padding:6px 6px 6px 22px;display:flex;align-items:center;gap:10px"><input placeholder="{{ t.newsletter.placeholder }}" style="flex:1;border:none;outline:none;background:transparent;font-size:15px;color:#fff"/><button onClick="{{ subscribe }}" style="flex:none;width:46px;height:46px;border-radius:50%;background:{{ accent }};border:none;cursor:pointer;color:#1a1610;display:flex;align-items:center;justify-content:center"><svg width="20" height="10" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.7"/></svg></button></div></sc-if>
+        <sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}"><div style="background:rgba(255,255,255,.06);border:1px solid #34302a;border-radius:999px;padding:6px 6px 6px 22px;display:flex;align-items:center;gap:10px"><input data-field="nemail" placeholder="{{ t.newsletter.placeholder }}" style="flex:1;border:none;outline:none;background:transparent;font-size:15px;color:#fff"/><button onClick="{{ subscribe }}" style="flex:none;width:46px;height:46px;border-radius:50%;background:{{ accent }};border:none;cursor:pointer;color:#1a1610;display:flex;align-items:center;justify-content:center"><svg width="20" height="10" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.7"/></svg></button></div></sc-if>
         <div style="margin-top:24px"><div style="font-family:Archivo;font-weight:800;font-size:24px;color:#fff">{{ phone }}</div><div style="font-size:14px;color:#9a8f7e">{{ email }}</div></div>
       </div>
     </div>
@@ -1276,8 +1277,11 @@ class Component extends DCLogic {
   setTR=()=>this.setState({lang:'tr'});
   setEN=()=>this.setState({lang:'en'});
   goHero=(i)=>this.setState({hero:i});
-  sendForm=()=>this.setState({sent:true});
-  subscribe=()=>this.setState({subscribed:true});
+  _csrf(){ try{ var m=document.querySelector('meta[name=csrf-token]'); return m?m.getAttribute('content'):''; }catch(e){ return ''; } }
+  _post(url,payload){ try{ fetch(url,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json','X-CSRF-TOKEN':this._csrf()},body:JSON.stringify(payload)}).catch(function(){}); }catch(e){} }
+  _field(f){ try{ var el=document.querySelector('[data-field="'+f+'"]'); return el?(el.value||'').trim():''; }catch(e){ return ''; } }
+  sendForm=()=>{ var p={name:this._field('cname'),email:this._field('cemail'),phone:this._field('cphone'),message:this._field('cmsg')}; if(p.name && p.email){ this._post('/lead',p); } this.setState({sent:true}); };
+  subscribe=()=>{ var email=this._field('nemail'); if(email){ this._post('/abone',{email:email}); } this.setState({subscribed:true}); };
   resetData=()=>{ this.commit(window.AWA.defaultData()); };
   goArticle=(id)=>this.nav({page:'article',article:id});
   acceptCookies=()=>{ try{ localStorage.setItem('awa_cookie','accepted'); }catch(e){} this.setState({cookieSeen:true}); };

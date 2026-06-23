@@ -92,6 +92,10 @@ class AdminPanelProvider extends PanelProvider
                             ...\Modules\Faq\Filament\Resources\FaqItemResource::getNavigationItems(),
                             ...\App\Filament\Resources\PageResource::getNavigationItems(),
                         ]),
+                        \Filament\Navigation\NavigationGroup::make('Talepler')->items([
+                            ...\App\Filament\Resources\ContactFormSubmissionResource::getNavigationItems(),
+                            ...\Modules\Newsletter\Filament\Resources\NewsletterSubscriberResource::getNavigationItems(),
+                        ]),
                         \Filament\Navigation\NavigationGroup::make('Ayarlar')->items([
                             ...\App\Filament\Pages\ManageSettings::getNavigationItems(),
                             ...\App\Filament\Pages\ManageImage::getNavigationItems(),
