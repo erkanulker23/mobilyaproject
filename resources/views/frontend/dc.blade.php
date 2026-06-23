@@ -401,33 +401,39 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
           <span onClick="{{ product.onBack }}" style="cursor:pointer" style-hover="color:#17140f">{{ product.catName }}</span><span>/</span>
           <span style="color:#17140f">{{ product.name }}</span>
         </div>
-        <div style="display:grid;grid-template-columns:{{ gProduct }};gap:clamp(38px,5vw,72px);align-items:start">
+        {{-- Tam genişlik büyük galeri --}}
+        <div onClick="{{ product.onMainClick }}" style="cursor:zoom-in;position:relative;border-radius:24px;overflow:hidden;width:100%;aspect-ratio:16/9;{{ product.mainBg }};border:1px solid #e7e0d2;box-shadow:0 45px 100px -55px rgba(23,20,15,.55)">
+          <span style="position:absolute;right:20px;bottom:20px;display:inline-flex;align-items:center;gap:8px;background:rgba(246,243,237,.93);color:#17140f;padding:11px 18px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4M11 8v6M8 11h6"/></svg>Büyüt</span>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:18px">
+          <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="4"><div onClick="{{ g.onClick }}" style="width:170px;max-width:30%;{{ g.style }}"></div></sc-for>
+        </div>
+
+        {{-- Bilgi: 2 kolon --}}
+        <div style="display:grid;grid-template-columns:{{ gProduct }};gap:clamp(38px,5vw,72px);align-items:start;margin-top:clamp(52px,6vw,86px)">
           <div>
-            <div onClick="{{ product.onMainClick }}" style="cursor:zoom-in;position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/3.05;{{ product.mainBg }};border:1px solid #e7e0d2;box-shadow:0 30px 70px -45px rgba(23,20,15,.45)">
-              <span style="position:absolute;right:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;background:rgba(246,243,237,.93);color:#17140f;padding:9px 16px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4M11 8v6M8 11h6"/></svg>Büyüt</span>
-            </div>
-            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px">
-              <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="4"><div onClick="{{ g.onClick }}" style="width:104px;max-width:22%;{{ g.style }}"></div></sc-for>
+            <span style="{{ kickerStyle }}">{{ product.catName }}</span>
+            <h1 style="margin:12px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(34px,4.2vw,58px);letter-spacing:-.025em;line-height:1.02">{{ product.name }}</h1>
+            <p style="margin:24px 0 0;font-size:18px;line-height:1.85;color:#39342c;max-width:620px">{{ product.longDesc }}</p>
+            <div style="margin-top:34px;font-family:'Space Mono';font-size:12px;letter-spacing:.14em;color:#9a8f7e;text-transform:uppercase">{{ t.productPage.featuresT }}</div>
+            <div style="display:flex;flex-direction:column;gap:13px;margin-top:18px">
+              <sc-for list="{{ productFeatures }}" as="f" hint-placeholder-count="5">
+                <div style="display:flex;align-items:center;gap:14px;font-size:17px;color:#2c241b"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:{{ accent }};color:#fff;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>{{ f.txt }}</div>
+              </sc-for>
             </div>
           </div>
           <div style="position:sticky;top:100px">
-            <span style="{{ kickerStyle }}">{{ product.catName }}</span>
-            <h1 style="margin:12px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(32px,4vw,54px);letter-spacing:-.025em;line-height:1.02">{{ product.name }}</h1>
-            <p style="margin:22px 0 0;font-size:17px;line-height:1.8;color:#39342c">{{ product.longDesc }}</p>
-            <div style="display:grid;grid-template-columns:{{ g3 }};gap:12px;margin-top:30px">
-              <sc-for list="{{ t.specs }}" as="sp" hint-placeholder-count="3"><div style="background:#fff;border:1px solid #ece6da;border-radius:13px;padding:15px"><div style="font-family:'Space Mono';font-size:10px;letter-spacing:.1em;color:#9a8f7e;text-transform:uppercase">{{ sp.l }}</div><div style="margin-top:6px;font-family:Archivo;font-weight:700;font-size:16px">{{ sp.v }}</div></div></sc-for>
+            <div style="background:#fff;border:1px solid #ece6da;border-radius:18px;padding:clamp(24px,3vw,34px)">
+              <div style="display:grid;grid-template-columns:{{ g3 }};gap:12px">
+                <sc-for list="{{ t.specs }}" as="sp" hint-placeholder-count="3"><div style="background:#f6f3ed;border:1px solid #ece6da;border-radius:12px;padding:16px"><div style="font-family:'Space Mono';font-size:10px;letter-spacing:.1em;color:#9a8f7e;text-transform:uppercase">{{ sp.l }}</div><div style="margin-top:6px;font-family:Archivo;font-weight:700;font-size:17px">{{ sp.v }}</div></div></sc-for>
+              </div>
+              <p style="margin:22px 0 0;font-size:15px;line-height:1.7;color:#5d564b">{{ t.productPage.formDesc }}</p>
+              <div style="display:flex;flex-direction:column;gap:12px;margin-top:22px">
+                <button onClick="{{ goContact }}" style="display:inline-flex;align-items:center;justify-content:center;gap:12px;background:#17140f;color:#fff;border:none;cursor:pointer;padding:16px 30px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase">{{ t.cta.requestInfo }}<svg width="20" height="9" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.5"/></svg></button>
+                <button onClick="{{ goCatalog }}" style="display:inline-flex;align-items:center;justify-content:center;gap:12px;background:transparent;color:#17140f;border:1px solid #d3cabb;cursor:pointer;padding:16px 28px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase">{{ t.cta.download }}</button>
+              </div>
+              <div style="margin-top:22px;padding-top:20px;border-top:1px solid #e4ddce"><div style="font-family:Archivo;font-weight:800;font-size:24px">{{ phone }}</div><div style="font-size:14px;color:#6b6356">{{ email }}</div></div>
             </div>
-            <div style="margin-top:30px;font-family:'Space Mono';font-size:12px;letter-spacing:.14em;color:#9a8f7e;text-transform:uppercase">{{ t.productPage.featuresT }}</div>
-            <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px">
-              <sc-for list="{{ productFeatures }}" as="f" hint-placeholder-count="5">
-                <div style="display:flex;align-items:center;gap:14px;font-size:16px;color:#2c241b"><span style="flex:none;width:22px;height:22px;border-radius:50%;background:{{ accent }};color:#fff;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>{{ f.txt }}</div>
-              </sc-for>
-            </div>
-            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:32px">
-              <button onClick="{{ goContact }}" style="flex:1;min-width:210px;display:inline-flex;align-items:center;justify-content:center;gap:12px;background:#17140f;color:#fff;border:none;cursor:pointer;padding:16px 30px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase">{{ t.cta.requestInfo }}<svg width="20" height="9" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.5"/></svg></button>
-              <button onClick="{{ goCatalog }}" style="flex:none;display:inline-flex;align-items:center;justify-content:center;gap:12px;background:transparent;color:#17140f;border:1px solid #d3cabb;cursor:pointer;padding:16px 26px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase">{{ t.cta.download }}</button>
-            </div>
-            <div style="margin-top:24px;padding-top:22px;border-top:1px solid #e4ddce;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap"><div style="font-family:Archivo;font-weight:800;font-size:22px">{{ phone }}</div><div style="font-size:14px;color:#6b6356">{{ email }}</div></div>
           </div>
         </div>
       </div>
