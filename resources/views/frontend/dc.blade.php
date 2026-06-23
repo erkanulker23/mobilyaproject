@@ -395,23 +395,40 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
   <!-- PRODUCT -->
   <sc-if value="{{ isProduct }}" hint-placeholder-val="{{ false }}">
   <div>
+    {{-- Tam ekran (full-bleed) ürün görseli + galeri --}}
+    <section style="position:relative;height:88vh;min-height:600px;overflow:hidden">
+      <div style="{{ galTrackStyle }}">
+        <sc-for list="{{ galSlides }}" as="gs" hint-placeholder-count="3">
+          <div onClick="{{ product.onMainClick }}" style="cursor:zoom-in;position:relative;flex:none;width:100%;height:100%;{{ gs.bg }}"></div>
+        </sc-for>
+      </div>
+      <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(20,17,12,.5) 0%,rgba(20,17,12,0) 26%,rgba(20,17,12,0) 52%,rgba(20,17,12,.8) 100%)"></div>
+      <div style="position:absolute;left:0;top:0;width:100%;padding:clamp(96px,11vh,120px) clamp(20px,4vw,72px) 0">
+        <div style="display:flex;align-items:center;gap:10px;font-family:'Space Mono';font-size:12px;color:rgba(255,255,255,.78);flex-wrap:wrap">
+          <span onClick="{{ goCollectionDefault }}" style="cursor:pointer" style-hover="color:#fff">{{ t.nav.collection }}</span><span>/</span>
+          <span onClick="{{ product.onBack }}" style="cursor:pointer" style-hover="color:#fff">{{ product.catName }}</span>
+        </div>
+      </div>
+      <div style="position:absolute;left:0;bottom:44px;width:100%;padding:0 clamp(20px,4vw,72px);display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+        <div>
+          <span style="display:block;font-family:'Space Mono';font-size:12px;letter-spacing:.2em;color:rgba(255,255,255,.72);text-transform:uppercase;margin-bottom:14px">{{ product.catName }}</span>
+          <h1 style="margin:0;font-family:Archivo;font-weight:800;font-size:clamp(40px,5.6vw,84px);letter-spacing:-.03em;color:#fff;line-height:.98">{{ product.name }}</h1>
+        </div>
+        <div style="display:flex;align-items:center;gap:22px">
+          <div style="display:flex;align-items:center;gap:10px"><sc-for list="{{ galDots }}" as="d" hint-placeholder-count="3"><span onClick="{{ d.onClick }}" style="{{ d.style }}"></span></sc-for></div>
+          <span onClick="{{ product.onMainClick }}" style="display:inline-flex;align-items:center;gap:9px;background:rgba(246,243,237,.93);color:#17140f;padding:11px 20px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4M11 8v6M8 11h6"/></svg>Büyüt</span>
+        </div>
+      </div>
+    </section>
     <section style="background:#f6f3ed">
-      <div style="max-width:1480px;margin:0 auto;padding:clamp(94px,12vh,128px) clamp(20px,4vw,72px) clamp(54px,6vw,86px)">
-        <div style="display:flex;align-items:center;gap:10px;font-family:'Space Mono';font-size:12px;color:#9a8f7e;flex-wrap:wrap;margin-bottom:clamp(26px,3vw,40px)">
-          <span onClick="{{ goCollectionDefault }}" style="cursor:pointer" style-hover="color:#17140f">{{ t.nav.collection }}</span><span>/</span>
-          <span onClick="{{ product.onBack }}" style="cursor:pointer" style-hover="color:#17140f">{{ product.catName }}</span><span>/</span>
-          <span style="color:#17140f">{{ product.name }}</span>
-        </div>
-        {{-- Tam genişlik büyük galeri --}}
-        <div onClick="{{ product.onMainClick }}" style="cursor:zoom-in;position:relative;border-radius:24px;overflow:hidden;width:100%;aspect-ratio:16/9;{{ product.mainBg }};border:1px solid #e7e0d2;box-shadow:0 45px 100px -55px rgba(23,20,15,.55)">
-          <span style="position:absolute;right:20px;bottom:20px;display:inline-flex;align-items:center;gap:8px;background:rgba(246,243,237,.93);color:#17140f;padding:11px 18px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4M11 8v6M8 11h6"/></svg>Büyüt</span>
-        </div>
-        <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:18px">
-          <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="4"><div onClick="{{ g.onClick }}" style="width:170px;max-width:30%;{{ g.style }}"></div></sc-for>
+      <div style="max-width:1480px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(20px,4vw,72px) clamp(54px,6vw,86px)">
+        {{-- galeri küçük görselleri --}}
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:clamp(40px,5vw,64px)">
+          <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="4"><div onClick="{{ g.onClick }}" style="width:150px;max-width:22%;{{ g.style }}"></div></sc-for>
         </div>
 
         {{-- Bilgi: 2 kolon --}}
-        <div style="display:grid;grid-template-columns:{{ gProduct }};gap:clamp(38px,5vw,72px);align-items:start;margin-top:clamp(52px,6vw,86px)">
+        <div style="display:grid;grid-template-columns:{{ gProduct }};gap:clamp(38px,5vw,72px);align-items:start">
           <div>
             <span style="{{ kickerStyle }}">{{ product.catName }}</span>
             <h1 style="margin:12px 0 0;font-family:Archivo;font-weight:800;font-size:clamp(34px,4.2vw,58px);letter-spacing:-.025em;line-height:1.02">{{ product.name }}</h1>
