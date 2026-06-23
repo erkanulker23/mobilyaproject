@@ -326,7 +326,14 @@ window.AWA = (function () {
     var hasTestimonials = testimonials.length > 0;
 
     // dealers
-    var dealers = data.dealers.map(function (d) { return { city:d.city, addr:d.addr, tel:d.tel }; });
+    // Bayiler — il/ilçe filtresi
+    var allDealers = data.dealers || [];
+    var dIl = s.dealerIl || '', dIlce = s.dealerIlce || '';
+    var provSet = {}; allDealers.forEach(function(d){ if(d.province) provSet[d.province]=1; });
+    var dealerProvinces = [{v:'',label:(lang==='tr'?'Tüm İller':'All Provinces')}].concat(Object.keys(provSet).sort().map(function(p){return {v:p,label:p};}));
+    var distSet = {}; allDealers.forEach(function(d){ if((!dIl || d.province===dIl) && d.district) distSet[d.district]=1; });
+    var dealerDistricts = [{v:'',label:(lang==='tr'?'Tüm İlçeler':'All Districts')}].concat(Object.keys(distSet).sort().map(function(p){return {v:p,label:p};}));
+    var dealers = allDealers.filter(function(d){ return (!dIl || d.province===dIl) && (!dIlce || d.district===dIlce); }).map(function (d) { return { city:d.city, addr:d.addr, tel:d.tel }; });
 
     // contact cards
     var contactCards = [
@@ -588,6 +595,7 @@ window.AWA = (function () {
       galSlides:galSlides, galTrackStyle:galTrackStyle, galDots:galDots,
       article:article, relatedArticles:relatedArticles,
       dealers:dealers, contactCards:contactCards,
+      dealerProvinces:dealerProvinces, dealerDistricts:dealerDistricts, dealerIl:dIl, dealerIlce:dIlce, setDealerIl:c.setDealerIl, setDealerIlce:c.setDealerIlce,
       legalDoc:legalDoc, legalNav:legalNav,
       phone:set.phone, email:set.email, address: lang==='tr'?set.addressTr:set.addressEn, hours: lang==='tr'?set.hoursTr:set.hoursEn,
       footerCats:footerCats, footerCorp:footerCorp, headerMenu:headerMenu, footerMenu:footerMenu, hasHeaderMenu:headerMenu.length>0,

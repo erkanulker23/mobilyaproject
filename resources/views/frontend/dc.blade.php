@@ -623,7 +623,11 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
     </section>
     <section style="background:#f6f3ed">
       <div style="max-width:1560px;margin:0 auto;padding:0 clamp(20px,4vw,72px) clamp(70px,9vw,120px)">
-        <h2 style="margin:0 0 30px;font-family:Archivo;font-weight:800;font-size:clamp(24px,2.8vw,38px);letter-spacing:-.02em">{{ t.dealersPage.allT }}</h2>
+        <h2 style="margin:0 0 22px;font-family:Archivo;font-weight:800;font-size:clamp(24px,2.8vw,38px);letter-spacing:-.02em">{{ t.dealersPage.allT }}</h2>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px">
+          <select value="{{ dealerIl }}" onChange="{{ setDealerIl }}" style="min-width:200px;border:1px solid #d8cfc0;background:#fff;border-radius:999px;padding:13px 22px;font-size:14px;font-weight:600;color:#2c241b;cursor:pointer;outline:none"><sc-for list="{{ dealerProvinces }}" as="o" hint-placeholder-count="5"><option value="{{ o.v }}">{{ o.label }}</option></sc-for></select>
+          <select value="{{ dealerIlce }}" onChange="{{ setDealerIlce }}" style="min-width:200px;border:1px solid #d8cfc0;background:#fff;border-radius:999px;padding:13px 22px;font-size:14px;font-weight:600;color:#2c241b;cursor:pointer;outline:none"><sc-for list="{{ dealerDistricts }}" as="o" hint-placeholder-count="5"><option value="{{ o.v }}">{{ o.label }}</option></sc-for></select>
+        </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px">
           <sc-for list="{{ dealers }}" as="d" hint-placeholder-count="6">
             <div style="background:#fff;border:1px solid #ece6da;border-radius:16px;padding:26px 28px">
@@ -1152,7 +1156,7 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#9c8463&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;defaultLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;tr&quot;,&quot;en&quot;],&quot;default&quot;:&quot;tr&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;adminPassword&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;0000&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { page:'home', lang:null, hero:0, cat:'koltuk', product:'exence', dropdown:null, scrolled:false, legal:'mesafeli', sent:false, subscribed:false, searchOpen:false, query:'', data:null, adminTab:'dashboard', ready:false, gi:0, article:null, mobileOpen:false, isMobile:false, sort:'default', faqOpen:null, adminAuthed:false, adminPwd:'', adminErr:false, adminEditId:null, lightboxOpen:false, cookieSeen:true };
+  state = { page:'home', lang:null, hero:0, cat:'koltuk', product:'exence', dropdown:null, scrolled:false, legal:'mesafeli', sent:false, subscribed:false, searchOpen:false, query:'', data:null, adminTab:'dashboard', ready:false, gi:0, article:null, mobileOpen:false, isMobile:false, sort:'default', dealerIl:'', dealerIlce:'', faqOpen:null, adminAuthed:false, adminPwd:'', adminErr:false, adminEditId:null, lightboxOpen:false, cookieSeen:true };
 
   componentDidMount(){
     try{ var cc=localStorage.getItem('awa_cookie'); if(!cc) this.setState({cookieSeen:false}); }catch(e){ this.setState({cookieSeen:false}); }
@@ -1279,6 +1283,8 @@ class Component extends DCLogic {
   delCategory(id){ const d=this.getData(); const cats=this._cats(); this.commit(Object.assign({},d,{categories:cats.filter(x=>x.id!==id)})); }
   goFaq=()=>this.nav({page:'faq'});
   setSort=(e)=>this.setState({sort:e.target.value});
+  setDealerIl=(e)=>this.setState({dealerIl:e.target.value, dealerIlce:''});
+  setDealerIlce=(e)=>this.setState({dealerIlce:e.target.value});
   toggleFaq=(i)=>this.setState(s=>({faqOpen:s.faqOpen===i?null:i}));
   heroNext=()=>this.setState(st=>{ const n=((this.getData().slides)||[]).length||1; return {hero:(st.hero+1)%n}; });
   heroPrev=()=>this.setState(st=>{ const n=((this.getData().slides)||[]).length||1; return {hero:(st.hero-1+n)%n}; });

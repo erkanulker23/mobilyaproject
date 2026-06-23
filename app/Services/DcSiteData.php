@@ -167,9 +167,12 @@ class DcSiteData
             return [];
         }
         return $branches->map(function (Branch $b) {
+            $display = $b->city ? ($b->city.($b->county ? ' — '.$b->county : '')) : $b->name;
             return [
                 'id' => 'd'.$b->id,
-                'city' => $b->city ?: $b->name,
+                'city' => $display,
+                'province' => $b->city ?: '',
+                'district' => $b->county ?: '',
                 'addr' => $b->address ?: '',
                 'tel' => $b->phone ?: '',
             ];

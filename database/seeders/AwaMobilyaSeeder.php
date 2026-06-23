@@ -303,17 +303,18 @@ class AwaMobilyaSeeder extends Seeder
     private function seedDealers(): void
     {
         $dealers = [
-            ['city' => 'İstanbul — Merkez', 'addr' => 'Masko Mobilya Kenti, Başakşehir / İstanbul', 'tel' => '444 96 16'],
-            ['city' => 'Ankara', 'addr' => 'Siteler Karacakaya Cad. No:121, Altındağ / Ankara', 'tel' => '+90 312 000 00 00'],
-            ['city' => 'İzmir', 'addr' => 'Karabağlar Mobilyacılar Sitesi, İzmir', 'tel' => '+90 232 000 00 00'],
-            ['city' => 'Bursa', 'addr' => 'Nilüfer Organize Sanayi Bölgesi, Bursa', 'tel' => '+90 224 000 00 00'],
-            ['city' => 'Antalya', 'addr' => 'Döşemealtı Mobilya OSB, Antalya', 'tel' => '+90 242 000 00 00'],
-            ['city' => 'Adana', 'addr' => 'Yeni Mobilyacılar Sitesi, Seyhan / Adana', 'tel' => '+90 322 000 00 00'],
+            ['name' => 'İstanbul — Masko', 'il' => 'İstanbul', 'ilce' => 'Başakşehir', 'addr' => 'Masko Mobilya Kenti 5. Cadde No:12, Başakşehir', 'tel' => '444 96 16'],
+            ['name' => 'İstanbul — Modoko', 'il' => 'İstanbul', 'ilce' => 'Ümraniye', 'addr' => 'Modoko Mobilyacılar Sitesi, Ümraniye', 'tel' => '+90 216 000 00 00'],
+            ['name' => 'Ankara — Siteler', 'il' => 'Ankara', 'ilce' => 'Altındağ', 'addr' => 'Siteler Karacakaya Cad. No:121, Altındağ', 'tel' => '+90 312 000 00 00'],
+            ['name' => 'İzmir — Karabağlar', 'il' => 'İzmir', 'ilce' => 'Karabağlar', 'addr' => 'Karabağlar Mobilyacılar Sitesi', 'tel' => '+90 232 000 00 00'],
+            ['name' => 'Bursa — Nilüfer', 'il' => 'Bursa', 'ilce' => 'Nilüfer', 'addr' => 'Nilüfer Organize Sanayi Bölgesi', 'tel' => '+90 224 000 00 00'],
+            ['name' => 'Antalya — Döşemealtı', 'il' => 'Antalya', 'ilce' => 'Döşemealtı', 'addr' => 'Döşemealtı Mobilya OSB', 'tel' => '+90 242 000 00 00'],
+            ['name' => 'Adana — Seyhan', 'il' => 'Adana', 'ilce' => 'Seyhan', 'addr' => 'Yeni Mobilyacılar Sitesi, Seyhan', 'tel' => '+90 322 000 00 00'],
         ];
+        \App\Models\Branch::query()->delete(); // temiz başla (eski demo bayileri kaldır)
         foreach ($dealers as $d) {
-            \App\Models\Branch::updateOrCreate(
-                ['name' => $d['city']],
-                ['city' => $d['city'], 'address' => $d['addr'], 'phone' => $d['tel']]
+            \App\Models\Branch::create(
+                ['name' => $d['name'], 'city' => $d['il'], 'county' => $d['ilce'], 'address' => $d['addr'], 'phone' => $d['tel']]
             );
         }
     }
