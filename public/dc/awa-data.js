@@ -241,21 +241,28 @@ window.AWA = (function () {
     var hs = slides[hi];
     var hp = data.products.filter(function(p){return p.id===hs.productId;})[0] || data.products[0];
     var heroDots = slides.map(function (sl, i) { return { num:('0'+(i+1)).slice(-2), onClick:(function(idx){return function(){c.goHero(idx);};})(i), style:"cursor:pointer;font-family:'Space Mono';font-size:14px;color:#fff;opacity:" + (i===hi?1:.45) + ";border-bottom:2px solid " + (i===hi?'#fff':'transparent') + ";padding-bottom:3px" }; });
-    var heroSlidesAll = slides.map(function (sl, i) { var pp = data.products.filter(function(x){return x.id===sl.productId;})[0] || data.products[0]; return { bg:IMG(sl.img), sub: lang==='tr'?sl.subTr:sl.subEn, title: pp?pp[lang]:'', onCta:(function(id){return function(){c.goProduct(id);};})(sl.productId), kb: i===hi?'animation:awaKen 7s ease-out forwards':'' }; });
+    var heroSlidesAll = slides.map(function (sl, i) { var pp = data.products.filter(function(x){return x.id===sl.productId;})[0] || data.products[0]; var stitle = (lang==='tr'?sl.titleTr:sl.titleEn); return { bg:IMG(sl.img), sub: lang==='tr'?sl.subTr:sl.subEn, title: stitle || (pp?pp[lang]:''), desc: (lang==='tr'?sl.descTr:sl.descEn) || '', onCta:(function(id){return function(){c.goProduct(id);};})(sl.productId), kb: i===hi?'animation:awaKen 7s ease-out forwards':'' }; });
     var heroTrackStyle = 'display:flex;height:100%;transition:transform .85s cubic-bezier(.7,0,.2,1);transform:translateX(-'+(hi*100)+'%)';
 
-    // collection
-    var filtered = data.products.filter(function(p){return p.cat===s.cat;}).map(locP);
+    // collection — geçerli kategori (yoksa ilk kategoriye düş)
+    var curCat = (CATS.filter(function(k){return k.id===s.cat;})[0] ? s.cat : (CATS[0] ? CATS[0].id : s.cat));
+    var filtered = data.products.filter(function(p){return p.cat===curCat;}).map(locP);
     if (sortMode==='az') filtered = filtered.slice().sort(function(a,b){return a.name.localeCompare(b.name);});
     else if (sortMode==='za') filtered = filtered.slice().sort(function(a,b){return b.name.localeCompare(a.name);});
     var sortOptions = [{v:'default',label:t.sortDefault},{v:'az',label:t.sortAZ},{v:'za',label:t.sortZA}];
-    var catTabs = CATS.map(function (k) { return { label:k[lang], onClick:(function(id){return function(){c.goCollection(id);};})(k.id), style:'cursor:pointer;padding:11px 22px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;' + (s.cat===k.id?'background:#17140f;color:#fff':'background:#fff;color:#5d564b;border:1px solid #e0d8c9') }; });
+    var catTabs = CATS.map(function (k) { return { label:k[lang], onClick:(function(id){return function(){c.goCollection(id);};})(k.id), style:'cursor:pointer;padding:11px 22px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;' + (curCat===k.id?'background:#17140f;color:#fff':'background:#fff;color:#5d564b;border:1px solid #e0d8c9') }; });
 
     // product detail
     var curP = data.products.filter(function(p){return p.id===s.product;})[0] || data.products[0];
     var pcImgs = PIECEIMG[curP.cat] || PIECEIMG.koltuk;
-    var galArr = [curP.img]; pcImgs.forEach(function(g){ if (galArr.indexOf(g)<0) galArr.push(g); });
-    galArr = galArr.slice(0,5);
+    var galArr;
+    if (curP.gallery && curP.gallery.length) {
+      // Üründen gelen birden fazla görsel (DB galerisi)
+      galArr = [curP.img]; curP.gallery.forEach(function(g){ if (g && galArr.indexOf(g)<0) galArr.push(g); });
+    } else {
+      galArr = [curP.img]; pcImgs.forEach(function(g){ if (galArr.indexOf(g)<0) galArr.push(g); });
+    }
+    galArr = galArr.filter(Boolean).slice(0,6);
     var gi = (s.gi || 0) % galArr.length;
     var gallery = galArr.map(function (g, i) { return { bg:IMG(g), onClick:(function(idx){return function(){c.setGi(idx);};})(i), style:'cursor:pointer;border-radius:10px;aspect-ratio:1/1;'+IMG(g)+';border:2px solid '+(i===gi?'#17140f':'transparent')+';opacity:'+(i===gi?1:.8) }; });
     var galSlides = galArr.map(function (g) { return { bg:IMG(g) }; });
@@ -427,7 +434,7 @@ window.AWA = (function () {
     var ttlBase = lang==='tr'?set.seoTitleTr:set.seoTitleEn;
     var titleMap = {
       home:ttlBase, corporate:t.nav.corporate.charAt(0)+t.nav.corporate.slice(1).toLowerCase()+' — AWA Mobilya',
-      collection:catName(s.cat)+' — AWA Mobilya', product:curP[lang]+' — AWA Mobilya',
+      collection:catName(curCat)+' — AWA Mobilya', product:curP[lang]+' — AWA Mobilya',
       news:(lang==='tr'?'Haberler':'News')+' — AWA Mobilya', article:(article.title||'')+' — AWA Mobilya',
       contact:(lang==='tr'?'İletişim':'Contact')+' — AWA Mobilya', dealers:t.dealersPage.title+' — AWA Mobilya',
       legal:legalDoc.title+' — AWA Mobilya', faq:t.faqPage.title+' — AWA Mobilya', admin:'Yönetim Paneli — AWA Mobilya'
@@ -576,7 +583,7 @@ window.AWA = (function () {
       showTestimonials: hasTestimonials && set.homeTestimonials !== '0',
       showCollections: set.homeCollections !== '0',
       showNews: set.homeNews !== '0',
-      collectionTitle:catName(s.cat), collectionDesc:catDesc(s.cat), collectionCount:filtered.length, catTabs:catTabs, filteredProducts:filtered, collectionHeroBg:IMG((CATS.filter(function(k){return k.id===s.cat;})[0]||CATS[0]).img),
+      collectionTitle:catName(curCat), collectionDesc:catDesc(curCat), collectionCount:filtered.length, catTabs:catTabs, filteredProducts:filtered, collectionHeroBg:IMG((CATS.filter(function(k){return k.id===curCat;})[0]||CATS[0]).img),
       product:product, productFeatures:productFeatures, productPieces:productPieces, relatedProducts:related, gallery:gallery,
       galSlides:galSlides, galTrackStyle:galTrackStyle, galDots:galDots,
       article:article, relatedArticles:relatedArticles,

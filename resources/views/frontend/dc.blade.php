@@ -3,7 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>window.__SERVER_DATA__ = {!! $serverData !!};</script>
+<title>{{ $seoTitle ?? 'AWA Mobilya' }}</title>
+<meta name="description" content="{{ $seoDescription ?? '' }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ $seoTitle ?? 'AWA Mobilya' }}">
+<meta property="og:description" content="{{ $seoDescription ?? '' }}">
+@if(!empty($ogImage))<meta property="og:image" content="{{ $ogImage }}">@endif
+<link rel="canonical" href="{{ url()->current() }}">
+<script>window.__SERVER_DATA__ = {!! $serverData !!};
+window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
 <script src="{{ asset('dc/awa-data.js') }}?v={{ $v }}"></script>
 <script src="{{ asset('dc/awa-bridge.js') }}?v={{ $v }}"></script>
 <script src="{{ asset('dc/support.js') }}?v={{ $v }}"></script>
@@ -15,15 +23,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Dancing+Script:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<title>AWA Mobilya — Kurumsal Mobilya & Koltuk Üreticisi</title>
-<meta name="description" content="AWA Mobilya; koltuk takımları, köşe takımları, yatak ve yemek odası koleksiyonları üreten kurumsal mobilya markası. 35+ yıllık tecrübe, 40+ ülkeye ihracat.">
 <meta name="keywords" content="AWA Mobilya, koltuk takımı, köşe takımı, yatak odası, yemek odası, kurumsal mobilya, mobilya üreticisi">
 <meta name="robots" content="index,follow">
 <meta name="author" content="AWA Mobilya">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AWA Mobilya">
-<meta property="og:title" content="AWA Mobilya — Kurumsal Mobilya & Koltuk Üreticisi">
-<meta property="og:description" content="Koltuk, köşe, yatak ve yemek odası koleksiyonları üreten kurumsal mobilya markası.">
 <meta property="og:image" content="uploads/1.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://www.awamobilya.com/">
@@ -171,6 +175,9 @@
             <div style="position:absolute;left:0;bottom:56px;width:100%;padding:0 clamp(20px,4vw,72px)">
               <span style="display:block;font-family:'Space Mono';font-size:12px;letter-spacing:.22em;color:rgba(255,255,255,.75);text-transform:uppercase;margin-bottom:18px">{{ hsl.sub }}</span>
               <h1 style="margin:0;font-family:Archivo;font-weight:800;font-size:clamp(42px,6.4vw,92px);line-height:.96;letter-spacing:-.03em;color:#fff;text-wrap:balance">{{ hsl.title }}</h1>
+              <sc-if value="{{ hsl.desc }}" hint-placeholder-val="{{ true }}">
+              <p style="margin:20px 0 0;max-width:520px;font-family:Montserrat,sans-serif;font-size:clamp(15px,1.4vw,18px);line-height:1.65;color:rgba(255,255,255,.86)">{{ hsl.desc }}</p>
+              </sc-if>
               <button onClick="{{ hsl.onCta }}" style="margin-top:30px;display:inline-flex;align-items:center;gap:14px;background:#f6f3ed;color:#17140f;border:none;cursor:pointer;padding:16px 30px;border-radius:999px;font-family:Archivo;font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase">{{ t.cta.discover }}<svg width="22" height="10" viewBox="0 0 22 10" fill="none"><path d="M0 5h20M16 1l5 4-5 4" stroke="currentColor" stroke-width="1.5"/></svg></button>
             </div>
           </div>
@@ -1157,6 +1164,10 @@ class Component extends DCLogic {
       } else { setTimeout(init, 40); }
     };
     init();
+    // Sunucudan gelen başlangıç durumu (derin link / her sayfanın kendi URL'si)
+    try{ var is=window.__INITIAL_STATE__; if(is && is.page){ this.setState(is); history.replaceState({dc:is},'',location.pathname); } }catch(e){}
+    this._onPop=(e)=>{ var st=(e.state&&e.state.dc)?e.state.dc:this._stateFromPath(location.pathname); this.setState(Object.assign({dropdown:null,searchOpen:false,mobileOpen:false,gi:0},st)); window.scrollTo(0,0); };
+    window.addEventListener('popstate', this._onPop);
     try{ if((location.hash||'').toLowerCase().indexOf('admin')>=0) this.setState({page:'admin'}); }catch(e){}
     this._onHash = () => { try{ if((location.hash||'').toLowerCase().indexOf('admin')>=0){ this.setState({page:'admin'}); window.scrollTo(0,0); } }catch(e){} };
     window.addEventListener('hashchange', this._onHash);
@@ -1195,7 +1206,26 @@ class Component extends DCLogic {
   _save(d){ try{ localStorage.setItem('awa_cms_v4', JSON.stringify(d)); }catch(e){} }
   commit(d){ this._save(d); this.setState({data:d}); }
 
-  nav(o){ this.setState(Object.assign({dropdown:null,searchOpen:false,sent:false,mobileOpen:false,gi:0}, o)); window.scrollTo(0,0); }
+  nav(o){ var merged=Object.assign({},this.state,o); this.setState(Object.assign({dropdown:null,searchOpen:false,sent:false,mobileOpen:false,gi:0}, o)); window.scrollTo(0,0); this._pushUrl(merged); }
+  _pathFor(st){ switch(st.page){
+      case 'home': return '/';
+      case 'corporate': return '/kurumsal';
+      case 'collection': return '/projeler';
+      case 'product': return '/projeler/'+(st.product||'');
+      case 'news': return '/haberler';
+      case 'article': return '/haberler/'+(st.article||'');
+      case 'dealers': return '/bayiler';
+      case 'contact': return '/iletisim';
+      case 'faq': return '/sss';
+      case 'legal': return '/'+(st.legal||'mesafeli');
+      default: return '/'; } }
+  _pushUrl(st){ try{ if(st.page==='admin') return; var p=this._pathFor(st); if(p!==location.pathname){ history.pushState({dc:{page:st.page,product:st.product,cat:st.cat,article:st.article,legal:st.legal}},'',p); } }catch(e){} }
+  _stateFromPath(path){ path=(path||'/').replace(/\/+$/,'')||'/'; if(path==='/') return {page:'home'};
+      var seg=path.split('/').filter(Boolean); var m={kurumsal:'corporate',haberler:'news',bayiler:'dealers',iletisim:'contact',sss:'faq',projeler:'collection'};
+      if(seg.length===1){ if(m[seg[0]]) return {page:m[seg[0]]}; if(['mesafeli','kvkk','gizlilik'].indexOf(seg[0])>=0) return {page:'legal',legal:seg[0]}; }
+      if(seg[0]==='projeler'){ var pr=(this.getData().products||[]).find(function(x){return x.id===seg[1];}); if(pr) return {page:'product',product:seg[1],cat:pr.cat}; return {page:'collection',cat:seg[1]}; }
+      if(seg[0]==='haberler') return {page:'article',article:seg[1]};
+      return {page:'home'}; }
   goHome=()=>this.nav({page:'home'});
   goCorporate=()=>this.nav({page:'corporate'});
   goNews=()=>this.nav({page:'news'});
@@ -1217,9 +1247,9 @@ class Component extends DCLogic {
   submitAdminPwd=()=>{ const ok = (this.state.adminPwd||'') === ((this.props && this.props.adminPassword) || '0000'); this.setState({adminAuthed:ok, adminErr:!ok, adminPwd: ok?'':this.state.adminPwd}); };
   adminLogout=()=>{ try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} this.setState({adminAuthed:false, adminPwd:''}); this.nav({page:'home'}); };
 
-  openCorp=()=>this.setState({dropdown:'corp'});
-  openCol=()=>this.setState({dropdown:'col'});
-  closeDrop=()=>this.setState({dropdown:null});
+  openCorp=()=>{ clearTimeout(this._dropT); this.setState({dropdown:'corp'}); };
+  openCol=()=>{ clearTimeout(this._dropT); this.setState({dropdown:'col'}); };
+  closeDrop=()=>{ clearTimeout(this._dropT); this._dropT=setTimeout(()=>this.setState({dropdown:null}),260); };
   toggleSearch=()=>this.setState(s=>({searchOpen:!s.searchOpen,query:''}));
   setQuery=(e)=>this.setState({query:e.target.value});
   setTR=()=>this.setState({lang:'tr'});

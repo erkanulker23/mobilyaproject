@@ -104,12 +104,16 @@ class DcSiteData
         return Project::query()->where('published', true)->orderBy('order_column')
             ->with('projectCategory')->get()->map(function (Project $p) {
                 $cat = optional($p->projectCategory)->slug ?: ($p->category ?: 'koltuk');
+                $gallery = $p->getMedia('gallery')->map(fn ($m) => $m->getUrl())->values()->all();
                 return [
                     'id' => $p->slug,
                     'cat' => $cat,
                     'tr' => $p->title,
                     'en' => $p->title,
                     'img' => $p->cover_url,
+                    'gallery' => $gallery,
+                    'descTr' => $p->short_description ?: '',
+                    'descEn' => $p->short_description ?: '',
                 ];
             })->values()->all();
     }
@@ -126,6 +130,10 @@ class DcSiteData
                 'img' => $img,
                 'subTr' => $sl->getTranslation('subtitle', 'tr') ?: '',
                 'subEn' => $sl->getTranslation('subtitle', 'en') ?: '',
+                'descTr' => $sl->getTranslation('content', 'tr') ?: '',
+                'descEn' => $sl->getTranslation('content', 'en') ?: '',
+                'titleTr' => $sl->getTranslation('title', 'tr') ?: '',
+                'titleEn' => $sl->getTranslation('title', 'en') ?: '',
                 'productId' => $featured[$i] ?? $featured->first(),
             ];
         })->values()->all();
@@ -170,11 +178,13 @@ class DcSiteData
 
     private function pages(): array
     {
+        $titles = ['mesafeli' => 'Mesafeli Satış Sözleşmesi', 'kvkk' => 'KVKK Aydınlatma Metni', 'gizlilik' => 'Gizlilik Politikası'];
         $out = [];
         foreach (['mesafeli' => 'mesafeli-satis', 'kvkk' => 'kvkk', 'gizlilik' => 'gizlilik'] as $key => $slug) {
             $page = Page::where('slug->tr', $slug)->first();
             $body = $page ? trim(strip_tags(preg_replace('/<\/p>|<br\s*\/?>/i', "\n", $page->getTranslation('content', 'tr')))) : '';
-            $out[$key] = ['bTr' => $body, 'bEn' => $body];
+            $title = $page ? $page->getTranslation('title', 'tr') : $titles[$key];
+            $out[$key] = ['tTr' => $title, 'tEn' => $title, 'bTr' => $body, 'bEn' => $body];
         }
         return $out;
     }

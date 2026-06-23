@@ -136,6 +136,12 @@ class AwaMobilyaSeeder extends Seeder
             'yatak' => [['label' => 'Karyola', 'value' => 'G 180 · D 210 · Y 120 cm'], ['label' => 'Komodin', 'value' => 'G 55 · D 42 · Y 50 cm'], ['label' => 'Gardırop', 'value' => 'G 260 · D 62 · Y 220 cm']],
             'yemek' => [['label' => 'Yemek Masası', 'value' => 'G 200 · D 100 · Y 76 cm'], ['label' => 'Sandalye (6)', 'value' => 'G 48 · D 56 · Y 95 cm'], ['label' => 'Konsol', 'value' => 'G 180 · D 45 · Y 85 cm']],
         ];
+        $galleryImages = [
+            'koltuk' => ['9.png', '4.png', '2.png', '6.png'],
+            'kose' => ['8.png', '1.png', '9.png', '7.png'],
+            'yatak' => ['3.png', '4.png', '6.png', '1.png'],
+            'yemek' => ['7.png', '3.png', '9.png', '5.png'],
+        ];
         $desc = [
             'koltuk' => 'Modern çizgileri ve yumuşak oturum konforuyla yaşam alanınıza karakter katan koltuk takımı.',
             'kose' => 'Geniş aileler ve sosyal yaşam için tasarlanan, mekânı verimli kullanan köşe takımı.',
@@ -178,6 +184,14 @@ class AwaMobilyaSeeder extends Seeder
             if (! $project->getFirstMedia('cover')) {
                 $this->addImage($project, 'cover', $p['img']);
             }
+            // Ürün galerisi (çoklu görsel) — kapak + kategoriye uygun ek kareler
+            if ($project->getMedia('gallery')->isEmpty()) {
+                $gallery = $galleryImages[$p['cat']] ?? ['1.png', '2.png', '3.png'];
+                $set = array_values(array_unique(array_merge([$p['img']], $gallery)));
+                foreach (array_slice($set, 0, 4) as $g) {
+                    $this->addImage($project, 'gallery', $g);
+                }
+            }
         }
     }
 
@@ -188,9 +202,9 @@ class AwaMobilyaSeeder extends Seeder
         $slider->slides()->each(fn ($s) => $s->delete());
 
         $slides = [
-            ['img' => '1.png', 'sub' => 'KÖŞE TAKIMLARI', 'title' => 'Yaşam alanınıza karakter katın', 'cta' => 'Koleksiyonu Keşfet'],
-            ['img' => '3.png', 'sub' => 'KOLTUK TAKIMLARI', 'title' => 'Konforun zarif hali', 'cta' => 'Ürünleri İncele'],
-            ['img' => '7.png', 'sub' => 'YENİ KOLEKSİYON', 'title' => '2026 İlkbahar Koleksiyonu', 'cta' => 'Hemen Bak'],
+            ['img' => '1.png', 'sub' => 'KÖŞE TAKIMLARI', 'title' => 'Yaşam alanınıza karakter katın', 'cta' => 'Koleksiyonu Keşfet', 'desc' => 'Geniş aileler ve sosyal yaşam için tasarlanan, mekânı verimli kullanan köşe takımları.'],
+            ['img' => '3.png', 'sub' => 'KOLTUK TAKIMLARI', 'title' => 'Konforun zarif hali', 'cta' => 'Ürünleri İncele', 'desc' => 'Modern çizgileri ve yumuşak oturum konforuyla yaşam alanınıza değer katan koltuk takımları.'],
+            ['img' => '7.png', 'sub' => 'YENİ KOLEKSİYON', 'title' => '2026 İlkbahar Koleksiyonu', 'cta' => 'Hemen Bak', 'desc' => 'Doğal kumaşlar ve sıcak tonlarla tasarlanan yeni serimiz şimdi yetkili bayilerimizde.'],
         ];
 
         $order = 1;
@@ -199,6 +213,7 @@ class AwaMobilyaSeeder extends Seeder
                 'slider_id' => $slider->id,
                 'title' => ['tr' => $sl['title'], 'en' => $sl['title']],
                 'subtitle' => ['tr' => $sl['sub'], 'en' => $sl['sub']],
+                'content' => ['tr' => $sl['desc'], 'en' => $sl['desc']],
                 'cta_text' => ['tr' => $sl['cta'], 'en' => $sl['cta']],
                 'link_url' => ['tr' => '/projeler', 'en' => '/projeler'],
                 'title_color' => '#ffffff',
