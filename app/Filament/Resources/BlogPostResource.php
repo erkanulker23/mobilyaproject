@@ -37,12 +37,12 @@ class BlogPostResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return 'Blog Yazısı';
+        return 'Haber';
     }
 
     public static function getPluralModelLabel(): string
     {
-        return 'Blog Yazıları';
+        return 'Haberler';
     }
 
     public static function form(Form $form): Form

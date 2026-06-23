@@ -26,12 +26,12 @@ class BlogCategoryResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return 'Blog Kategorisi';
+        return 'Haber Kategorisi';
     }
 
     public static function getPluralModelLabel(): string
     {
-        return 'Blog Kategorileri';
+        return 'Haber Kategorileri';
     }
 
     public static function form(Form $form): Form

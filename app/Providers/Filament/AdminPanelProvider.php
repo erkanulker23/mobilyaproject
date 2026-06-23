@@ -71,6 +71,36 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Dashboard::class,
             ])
+            // Sadeleştirilmiş menü: yalnızca AWA Mobilya (DC frontend) için kullanılan
+            // kaynaklar gösterilir. Diğer AWA-CMS modülleri/sayfaları gizli kalır.
+            ->navigation(function (\Filament\Navigation\NavigationBuilder $builder): \Filament\Navigation\NavigationBuilder {
+                return $builder
+                    ->items([
+                        ...\App\Filament\Pages\Dashboard::getNavigationItems(),
+                    ])
+                    ->groups([
+                        \Filament\Navigation\NavigationGroup::make('İçerik Yönetimi')->items([
+                            ...\App\Filament\Resources\ProjectResource::getNavigationItems(),
+                            ...\App\Filament\Resources\ProjectCategoryResource::getNavigationItems(),
+                            ...\Modules\Slide\Filament\Resources\SliderResource::getNavigationItems(),
+                            ...\Modules\Slide\Filament\Resources\SlideResource::getNavigationItems(),
+                            ...\App\Filament\Resources\BlogPostResource::getNavigationItems(),
+                            ...\App\Filament\Resources\BlogCategoryResource::getNavigationItems(),
+                            ...\App\Filament\Resources\BranchResource::getNavigationItems(),
+                            ...\Modules\Faq\Filament\Resources\FaqResource::getNavigationItems(),
+                            ...\Modules\Faq\Filament\Resources\FaqItemResource::getNavigationItems(),
+                            ...\App\Filament\Resources\PageResource::getNavigationItems(),
+                        ]),
+                        \Filament\Navigation\NavigationGroup::make('Ayarlar')->items([
+                            ...\App\Filament\Pages\ManageSettings::getNavigationItems(),
+                            ...\App\Filament\Pages\ManageImage::getNavigationItems(),
+                            ...\App\Filament\Pages\ManageSeo::getNavigationItems(),
+                        ]),
+                        \Filament\Navigation\NavigationGroup::make('Sistem')->items([
+                            ...\App\Filament\Resources\UserResource::getNavigationItems(),
+                        ]),
+                    ]);
+            })
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
