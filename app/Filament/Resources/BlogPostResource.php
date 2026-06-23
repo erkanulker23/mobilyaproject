@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\BlogPostResource\Pages;
-use App\Filament\Resources\BlogPostResource\Widgets\SeoScoreWidget;
 use App\Models\BlogPost;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
@@ -130,11 +129,6 @@ class BlogPostResource extends Resource
                     ->label('Kaldırma Tarihi'),
                 Section::make('SEO')
                     ->schema([
-                        Forms\Components\TextInput::make('focus_keyword')
-                            ->label('Odaklanan Anahtar Kelime')
-                            ->maxLength(255)
-                            ->helperText('Bu anahtar kelime üzerinden SEO analizi yapılacak. Örnek: "evden eve nakliyat", "uluslararası taşımacılık"')
-                            ->placeholder('Anahtar kelime girin...'),
                         Forms\Components\TextInput::make('seo_title')
                             ->label('SEO Başlık')
                             ->maxLength(255),
@@ -195,22 +189,6 @@ class BlogPostResource extends Resource
                     })
                     ->badge()
                     ->color(fn (int $state): string => $state > 0 ? 'success' : 'gray'),
-                Tables\Columns\TextColumn::make('seo_score')
-                    ->label('SEO Skoru')
-                    ->formatStateUsing(function (BlogPost $record) {
-                        $score = $record->seo_score ?? 0;
-                        $grade = $record->getSeoGrade();
-                        return "{$score}/100 ({$grade})";
-                    })
-                    ->badge()
-                    ->color(function (BlogPost $record): string {
-                        $score = $record->seo_score ?? 0;
-                        if ($score >= 80) return 'success';
-                        if ($score >= 60) return 'warning';
-                        if ($score >= 40) return 'danger';
-                        return 'gray';
-                    })
-                    ->sortable(),
             ])
             ->filters([
                 //
@@ -237,9 +215,7 @@ class BlogPostResource extends Resource
 
     public static function getWidgets(): array
     {
-        return [
-            SeoScoreWidget::class,
-        ];
+        return [];
     }
 
     public static function getPages(): array
