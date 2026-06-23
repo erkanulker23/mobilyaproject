@@ -531,9 +531,15 @@ window.__INITIAL_STATE__ = {!! $initialState ?? '{"page":"home"}' !!};</script>
     </section>
     <section style="background:#f6f3ed">
       <div style="max-width:1560px;margin:0 auto;padding:clamp(56px,6vw,90px) clamp(20px,4vw,72px) clamp(70px,9vw,120px)">
-        <h2 style="margin:0 0 36px;font-family:Archivo;font-weight:800;font-size:clamp(26px,3vw,40px);letter-spacing:-.02em">{{ t.productPage.related }}</h2>
-        <div style="display:flex;gap:24px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory">
-          <sc-for list="{{ relatedProducts }}" as="p" hint-placeholder-count="3"><div onClick="{{ p.onClick }}" style="cursor:pointer;flex:none;width:min(440px,82vw);scroll-snap-align:start"><div style="border-radius:16px;aspect-ratio:16/11;{{ p.bg }}"></div><h3 style="margin:16px 0 0;font-family:Archivo;font-weight:700;font-size:20px">{{ p.name }}</h3><div style="font-size:13px;color:#9a8f7e;margin-top:3px">{{ p.catName }}</div></div></sc-for>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:36px">
+          <h2 style="margin:0;font-family:Archivo;font-weight:800;font-size:clamp(26px,3vw,40px);letter-spacing:-.02em">{{ t.productPage.related }}</h2>
+          <div style="display:flex;gap:10px">
+            <span onClick="{{ relPrev }}" style="width:46px;height:46px;border-radius:50%;border:1px solid #d3cabb;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#17140f" style-hover="background:#17140f;color:#fff"><svg width="18" height="12" viewBox="0 0 22 12" fill="none"><path d="M22 6H2M6 1L1 6l5 5" stroke="currentColor" stroke-width="1.5"/></svg></span>
+            <span onClick="{{ relNext }}" style="width:46px;height:46px;border-radius:50%;border:1px solid #d3cabb;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#17140f" style-hover="background:#17140f;color:#fff"><svg width="18" height="12" viewBox="0 0 22 12" fill="none"><path d="M0 6h20M16 1l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg></span>
+          </div>
+        </div>
+        <div id="awa-related-row" style="display:flex;gap:24px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory;scrollbar-width:none">
+          <sc-for list="{{ relatedProducts }}" as="p" hint-placeholder-count="3"><div onClick="{{ p.onClick }}" style="cursor:pointer;flex:none;width:min(380px,80vw);scroll-snap-align:start"><div style="border-radius:16px;aspect-ratio:16/11;{{ p.bg }}"></div><h3 style="margin:16px 0 0;font-family:Archivo;font-weight:700;font-size:20px">{{ p.name }}</h3><div style="font-size:13px;color:#9a8f7e;margin-top:3px">{{ p.catName }}</div></div></sc-for>
         </div>
       </div>
     </section>
@@ -1447,6 +1453,9 @@ class Component extends DCLogic {
   goArticle=(id)=>this.nav({page:'article',article:id});
   goShowcases=()=>this.nav({page:'showcases'});
   goShowcase=(id)=>this.nav({page:'showcase',showcase:id});
+  _scrollRow=(id,dir)=>{ try{ var el=document.getElementById(id); if(el) el.scrollBy({left:dir*Math.min(el.clientWidth*0.85,520),behavior:'smooth'}); }catch(e){} };
+  relPrev=()=>this._scrollRow('awa-related-row',-1);
+  relNext=()=>this._scrollRow('awa-related-row',1);
   acceptCookies=()=>{ try{ localStorage.setItem('awa_cookie','accepted'); }catch(e){} this.setState({cookieSeen:true}); };
   rejectCookies=()=>{ try{ localStorage.setItem('awa_cookie','rejected'); }catch(e){} this.setState({cookieSeen:true}); };
   setGi=(i)=>this.setState({gi:i});
