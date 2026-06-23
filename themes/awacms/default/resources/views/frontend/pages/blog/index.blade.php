@@ -1,8 +1,8 @@
 @extends('frontend.layouts.app')
 
 @push('metas')
-    <meta name="description" content="Kalyon İnşaat haberleri, sektörel gelişmeler ve uzman görüşleri. Gündemden son gelişmeleri buradan takip edin.">
-    <meta name="keywords" content="haberler, blog, inşaat haberleri, sektörel gelişmeler">
+    <meta name="description" content="AWA Mobilya haberleri, yeni koleksiyonlar ve sektörel gelişmeler.">
+    <meta name="keywords" content="haberler, blog, mobilya, koleksiyon">
     <link rel="canonical" href="{{ url()->current() }}">
     <meta property="og:title" content="Haberler">
     <meta property="og:description" content="Gündemden son gelişmeler, sektörel içgörüler ve uzman görüşleri.">
@@ -16,7 +16,7 @@
     @include('frontend.partials.page-hero', [
         'eyebrow' => 'Haberler',
         'title' => 'Gündemden son gelişmeler',
-        'subtitle' => 'Sektörel içgörüler, uzman görüşleri ve Kalyon İnşaat dünyasından güncel haberler.',
+        'subtitle' => 'Yeni koleksiyonlar, fuarlar ve AWA Mobilya dünyasından güncel haberler.',
         'breadcrumbs' => ['Haberler' => null],
         'bg' => optional($posts->first())->listingImage ?? null,
     ])

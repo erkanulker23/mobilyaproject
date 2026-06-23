@@ -3,7 +3,7 @@
 @push('metas')
     <!-- SEO Meta Tags -->
     <meta name="description" content="Bizimle iletişime geçin. Sorularınız, önerileriniz ve teklif talepleriniz için en kısa sürede size dönüş yapıyoruz.">
-    <meta name="keywords" content="iletişim, contact, adres, telefon, e-posta, Kalyon İnşaat">
+    <meta name="keywords" content="iletişim, contact, adres, telefon, e-posta, AWA Mobilya">
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="İletişim">
@@ -15,7 +15,7 @@
 @section('content')
 @php
     $phone         = kalyon_setting('phone', '+90 212 000 00 00');
-    $email         = kalyon_setting('email', 'info@kalyoninsaat.com');
+    $email         = kalyon_setting('email', 'info@awamobilya.com');
     $address       = kalyon_setting('address', 'Maslak, Sarıyer, İstanbul, Türkiye');
     $whatsapp      = kalyon_setting('whatsapp');
     $workingHours  = kalyon_setting('working_hours', 'Pzt – Cuma · 09:00 – 18:00');

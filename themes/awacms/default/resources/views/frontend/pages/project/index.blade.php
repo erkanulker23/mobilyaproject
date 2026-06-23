@@ -3,9 +3,9 @@
 @section('content')
 <div style="font-family:'Manrope',system-ui,sans-serif;color:#1F1C18;background:#fff">
     @include('frontend.partials.page-hero', [
-        'eyebrow' => 'Projelerimiz',
+        'eyebrow' => 'Ürünlerimiz',
         'title' => 'Hayata geçirdiğimiz eserler',
-        'subtitle' => 'Konut, villa, rezidans ve ticari projelerde yarım asırlık tecrübemizi yansıtan çalışmalarımız.',
+        'subtitle' => 'Koltuk, köşe, yatak ve yemek odası koleksiyonlarımızı keşfedin.',
         'breadcrumbs' => ['Projeler' => null],
         'bg' => $projects->first()->cover_url ?? null,
     ])

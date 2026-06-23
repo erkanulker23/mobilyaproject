@@ -22,17 +22,17 @@ class ProjectCategoryResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return 'Proje Kategorisi';
+        return 'Ürün Kategorisi';
     }
 
     public static function getPluralLabel(): ?string
     {
-        return 'Proje Kategorileri';
+        return 'Ürün Kategorileri';
     }
 
     public static function getNavigationLabel(): string
     {
-        return 'Proje Kategorileri';
+        return 'Ürün Kategorileri';
     }
 
     public static function form(Form $form): Form

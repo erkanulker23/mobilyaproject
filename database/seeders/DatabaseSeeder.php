@@ -51,5 +51,9 @@ class DatabaseSeeder extends Seeder
 
             $administratorSettings->save();
         }
+
+        // AWA Mobilya marka içeriği (ayarlar, ürünler, kategoriler, slaytlar,
+        // haberler, SSS, sayfalar, menüler, anasayfa blokları)
+        $this->call(AwaMobilyaSeeder::class);
     }
 }

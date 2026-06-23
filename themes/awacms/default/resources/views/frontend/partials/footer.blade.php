@@ -1,9 +1,15 @@
 @php
     $phone = kalyon_setting('phone', '+90 212 000 00 00');
     $address = kalyon_setting('address', 'Maslak, Sarıyer, İstanbul, Türkiye');
-    $email = kalyon_setting('email', 'info@kalyoninsaat.com');
-    $copyright = kalyon_setting('footer_copyright', '© ' . date('Y') . ' Kalyon İnşaat. Tüm hakları saklıdır.');
+    $email = kalyon_setting('email', 'info@awamobilya.com');
+    $siteName = kalyon_setting('site_name', 'AWA Mobilya');
+    $copyright = kalyon_setting('footer_copyright', '© ' . date('Y') . ' ' . $siteName . '. Tüm hakları saklıdır.');
     $social = kalyon_setting('social_media_links', []);
+    $brandParts = explode(' ', trim($siteName), 2);
+    $brandMain = mb_strtoupper($brandParts[0]);
+    $brandSub = mb_strtoupper($brandParts[1] ?? '');
+    $brandInitial = mb_strtoupper(mb_substr($siteName, 0, 1));
+    $footerDesc = kalyon_setting('footer_description', 'Teknoloji ile el emeğini birleştiren, markalaşmaya önem veren AWA Mobilya; koltuk, köşe, yatak ve yemek odası koleksiyonlarıyla yaşam alanlarınıza değer katar.');
 
     // Footer linkleri admin → Menüler'deki "Footer Menü"den gelir (fallback'li)
     $footerLinks = [];
@@ -23,10 +29,9 @@
     }
     if (empty($footerLinks)) {
         $footerLinks = [
-            ['label' => 'Hakkımızda', 'url' => route('page.show', 'hakkimizda')],
-            ['label' => 'Hizmetler', 'url' => route('services.index')],
-            ['label' => 'Projeler', 'url' => route('projects.index')],
-            ['label' => 'Kataloglar', 'url' => route('catalogs.index')],
+            ['label' => 'Anasayfa', 'url' => route('home')],
+            ['label' => 'Kurumsal', 'url' => route('page.show', 'hakkimizda')],
+            ['label' => 'Ürünler', 'url' => route('projects.index')],
             ['label' => 'Haberler', 'url' => route('blog.index')],
             ['label' => 'İletişim', 'url' => route('contact.index')],
         ];
@@ -38,8 +43,8 @@
     <div class="kal-pad" style="max-width:1340px;margin:0 auto;padding:0 52px">
         <div class="kal-footer-grid kal-grid-4" style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:44px;padding-bottom:50px;border-bottom:1px solid rgba(255,255,255,.1)">
             <div>
-                <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><span style="display:inline-flex;width:36px;height:36px;align-items:center;justify-content:center;background:#D97757;color:#fff;font-family:'Plus Jakarta Sans';font-weight:800;font-size:16px">K</span><span style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:16px;letter-spacing:2px">KALYON <span style="color:#E0A488">İNŞAAT</span></span></div>
-                <p style="font-size:14px;line-height:1.7;color:rgba(255,255,255,.55);max-width:42ch">1976'dan bu yana mühendislik gücü, dijital teknoloji ve sürdürülebilir vizyonla geleceğin yaşam alanlarını inşa ediyoruz.</p>
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><span style="display:inline-flex;width:36px;height:36px;align-items:center;justify-content:center;background:#D97757;color:#fff;font-family:'Plus Jakarta Sans';font-weight:800;font-size:16px">{{ $brandInitial }}</span><span style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:16px;letter-spacing:2px">{{ $brandMain }} <span style="color:#E0A488">{{ $brandSub }}</span></span></div>
+                <p style="font-size:14px;line-height:1.7;color:rgba(255,255,255,.55);max-width:42ch">{{ $footerDesc }}</p>
             </div>
             <div>
                 <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#E0A488;margin-bottom:16px">Kurumsal</div>

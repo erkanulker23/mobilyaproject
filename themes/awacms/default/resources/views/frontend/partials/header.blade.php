@@ -22,16 +22,19 @@
     }
     if (empty($navLinks)) {
         $navLinks = [
-            ['label' => 'Ana Sayfa', 'url' => route('home'), 'target' => '_self'],
-            ['label' => 'Hakkımızda', 'url' => route('page.show', 'hakkimizda'), 'target' => '_self'],
-            ['label' => 'Hizmetler', 'url' => route('services.index'), 'target' => '_self'],
-            ['label' => 'Projeler', 'url' => route('projects.index'), 'target' => '_self'],
-            ['label' => 'Kataloglar', 'url' => route('catalogs.index'), 'target' => '_self'],
+            ['label' => 'Anasayfa', 'url' => route('home'), 'target' => '_self'],
+            ['label' => 'Kurumsal', 'url' => route('page.show', 'hakkimizda'), 'target' => '_self'],
+            ['label' => 'Ürünler', 'url' => route('projects.index'), 'target' => '_self'],
             ['label' => 'Haberler', 'url' => route('blog.index'), 'target' => '_self'],
+            ['label' => 'İletişim', 'url' => route('contact.index'), 'target' => '_self'],
         ];
     }
-    $siteName = kalyon_setting('site_name', 'KALYON İNŞAAT');
+    $siteName = kalyon_setting('site_name', 'AWA Mobilya');
     $logo = kalyon_setting('header_logo');
+    $brandParts = explode(' ', trim($siteName), 2);
+    $brandMain = mb_strtoupper($brandParts[0]);
+    $brandSub = mb_strtoupper($brandParts[1] ?? '');
+    $brandInitial = mb_strtoupper(mb_substr($siteName, 0, 1));
 @endphp
 
 <header class="kal-header" data-header style="z-index:100">
@@ -40,8 +43,8 @@
         @if($logo)
             <img src="{{ \Illuminate\Support\Facades\Storage::url($logo) }}" alt="{{ $siteName }}" style="height:40px;width:auto">
         @else
-            <span class="kal-logo-box" style="display:inline-flex;width:42px;height:42px;align-items:center;justify-content:center;border:1.5px solid #fff;font-family:'Plus Jakarta Sans';font-weight:800;font-size:20px">K</span>
-            <span class="kal-logo-text" style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:18px;letter-spacing:2px">KALYON <span class="kal-logo-accent">İNŞAAT</span></span>
+            <span class="kal-logo-box" style="display:inline-flex;width:42px;height:42px;align-items:center;justify-content:center;border:1.5px solid #fff;font-family:'Plus Jakarta Sans';font-weight:800;font-size:20px">{{ $brandInitial }}</span>
+            <span class="kal-logo-text" style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:18px;letter-spacing:2px">{{ $brandMain }} <span class="kal-logo-accent">{{ $brandSub }}</span></span>
         @endif
     </a>
 
@@ -67,13 +70,13 @@
 {{-- mobil menü — tam ekran overlay --}}
 @php
     $mmPhone = kalyon_setting('phone', '+90 212 000 00 00');
-    $mmEmail = kalyon_setting('email', 'info@kalyoninsaat.com');
+    $mmEmail = kalyon_setting('email', 'info@awamobilya.com');
     $mmSocial = kalyon_setting('social_media_links', []);
 @endphp
 <div data-mobile-menu class="kal-mobile-menu" aria-hidden="true">
     <div class="kal-mm-inner">
         <div class="kal-mm-head">
-            <span class="kal-mm-logo"><span class="kal-mm-logo-box">K</span> KALYON <span style="color:#E0A488">İNŞAAT</span></span>
+            <span class="kal-mm-logo"><span class="kal-mm-logo-box">{{ $brandInitial }}</span> {{ $brandMain }} <span style="color:#E0A488">{{ $brandSub }}</span></span>
             <button data-menu-toggle class="kal-mm-close" aria-label="Menüyü kapat"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <nav class="kal-mm-nav">
